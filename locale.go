@@ -1,17 +1,31 @@
 package cldr
 
-// @xerox
+import "golang.org/x/text/feature/plural"
+
 type Locale struct {
-	Locale     string
-	Number     Number
-	Calendar   Calendar
-	PluralRule string
+	Locale   string
+	Number   Number
+	Calendar Calendar
+	Plural   Plural
 }
+
+type Plural struct {
+	Cardinal PluralData
+	Ordinal  PluralData
+}
+
+type PluralData struct {
+	Forms []plural.Form
+	Func  func(ops *PluralOperands) plural.Form
+}
+
+//maps a currency code (e.g. "USD") to a Currency
+type Currencies map[string]Currency
 
 type Number struct {
 	Symbols    Symbols
 	Formats    NumberFormats
-	Currencies []Currency
+	Currencies Currencies
 }
 
 type Symbols struct {
@@ -29,7 +43,6 @@ type NumberFormats struct {
 }
 
 type Currency struct {
-	Currency    string
 	DisplayName string
 	Symbol      string
 }
@@ -43,6 +56,7 @@ type CalendarFormats struct {
 	Date     CalendarDateFormat
 	Time     CalendarDateFormat
 	DateTime CalendarDateFormat
+	GMT      string
 }
 
 type CalendarDateFormat struct{ Full, Long, Medium, Short string }
@@ -84,39 +98,4 @@ type CalendarPeriodFormatNames struct {
 
 type CalendarPeriodFormatNameValue struct {
 	AM, PM string
-}
-
-var locales = map[string]*Locale{}
-
-// TODO: can override paritally instead of replace it as a whole for existed locales
-func RegisterLocale(loc *Locale) {
-	old, ok := locales[loc.Locale]
-	if ok {
-		Copy(loc, old)
-	} else {
-		locales[loc.Locale] = loc
-	}
-}
-
-// RegisterLocales registers multiple locales in one go.
-func RegisterLocales(locs ...*Locale) {
-	for _, loc := range locs {
-		RegisterLocale(loc)
-	}
-}
-
-// GetLocale returns a pointer to an existing locale object and a boolean whether the locale exists.
-func GetLocale(locale string) (*Locale, bool) {
-	l, ok := locales[locale]
-	return l, ok
-}
-
-func (n Number) findCurrency(currency string) (c Currency) {
-	for _, cur := range n.Currencies {
-		if cur.Currency == currency {
-			c = cur
-			break
-		}
-	}
-	return
 }

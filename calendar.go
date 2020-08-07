@@ -59,7 +59,7 @@ const (
 	datetimeFormatLengthNarrow      = 5
 )
 
-// datetime formats are a sequences off datetime components and string literals
+// datetime formats are a sequences of datetime components and string literals
 const (
 	datetimePatternComponentUnit = iota
 	datetimePatternComponentLiteral
@@ -71,7 +71,6 @@ var (
 	datetimeFormatUnitCutset = []rune{
 		datetimeFormatUnitEra,
 		datetimeForamtUnitQuarter,
-		datetimeFormatUnitTimeZone1,
 		datetimeFormatUnitTimeZone2,
 	}
 )
@@ -191,9 +190,10 @@ func (c Calendar) formatDateTimeComponent(datetime time.Time, pattern string) (s
 	case string(datetimeForamtUnitQuarter):
 		return c.formatDateTimeComponentQuarter(datetime, len(pattern))
 	case string(datetimeFormatUnitTimeZone1):
-		fallthrough
-	case string(datetimeFormatUnitTimeZone2):
 		return c.formatDateTimeComponentTimeZone(datetime, len(pattern))
+	case string(datetimeFormatUnitTimeZone2):
+		// not implemented
+		return "", nil
 	}
 
 	return "", errors.New("unknown datetime format unit: " + pattern[0:1])
@@ -628,10 +628,13 @@ func (c Calendar) formatDateTimeComponentQuarter(datetime time.Time, length int)
 	return "", nil
 }
 
-// formatDateTimeComponentTimeZone renders a time zone component.
-// TODO: this has not yet been implemented
+// formatDateTimeComponentTimeZone renders a time zone component. It uses the GMT format exclusively and does not
+// currently support all the styles described at http://userguide.icu-project.org/formatparse/datetime (e.g. "PST")
 func (c Calendar) formatDateTimeComponentTimeZone(datetime time.Time, length int) (string, error) {
-	return "", nil
+	_, offset := datetime.Zone()
+	// convert offset seconds to HH:MM
+	gmtOffset := fmt.Sprintf("%+03d:%02d", offset/3600, offset%3600/60)
+	return strings.Replace(c.Formats.GMT, "{0}", gmtOffset, 1), nil
 }
 
 // parseDateTimeFormat takes a format pattern string and returns a sequence of
