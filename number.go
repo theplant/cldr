@@ -309,8 +309,15 @@ func numberRound(number float64, decimals int) string {
 		}
 	}
 
-	str = strings.TrimRight(str, "0")
-	str = strings.TrimRight(str, ".")
+	str = strings.TrimRight(str, "0.")
 
 	return str
+}
+
+func (n Number) findCurrency(currency string) (c Currency) {
+	if cur, ok := n.Currencies[currency]; ok {
+		c = cur
+	}
+
+	return
 }
