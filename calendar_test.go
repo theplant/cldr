@@ -3,15 +3,17 @@ package cldr_test
 import (
 	"time"
 
-	_ "github.com/theplant/cldr/resources/locales"
+	"golang.org/x/text/language"
 	. "gopkg.in/check.v1"
 
-	"github.com/theplant/cldr"
+	"github.com/razor-1/cldr/resources/locales"
+	//"github.com/razor-1/cldr"
 )
 
+const dateTimeString = "Jan 2, 2006 at 3:04:05pm"
+
 var (
-	dateTimeString = "Jan 2, 2006 at 3:04:05pm"
-	enLocale, _    = cldr.GetLocale("en")
+	enLocale = locales.LocaleData[language.Make("en")]()
 )
 
 type CalendarSuite struct {

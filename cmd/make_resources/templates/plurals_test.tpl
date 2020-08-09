@@ -2,18 +2,27 @@
 
 package locales
 
-import "testing"
+import (
+    "testing"
 
-{{range .PluralRules}}
-    func Test{{$.PluralType}}{{.Name}}(t *testing.T) {
+    "golang.org/x/text/feature/plural"
+    "golang.org/x/text/language"
+)
+
+{{range $i, $pg := .PluralGroups}}
+    func Test{{$.PluralType}}_{{$i}}(t *testing.T) {
     var tests []pluralFormTest
-    {{range .PluralRules}}
-        {{if .IntegerExamples}}tests = appendIntegerTests(tests, {{.CountTitle}}, {{printf "%#v" .IntegerExamples}}){{end}}
-        {{if .DecimalExamples}}tests = appendDecimalTests(tests, {{.CountTitle}}, {{printf "%#v" .DecimalExamples}}){{end}}
+    {{range $pg.PluralRules}}
+        {{if .IntegerExamples}}tests = appendIntegerTests(tests, plural.{{.CountTitle}}, {{printf "%#v" .IntegerExamples}}){{end}}
+        {{if .DecimalExamples}}tests = appendDecimalTests(tests, plural.{{.CountTitle}}, {{printf "%#v" .DecimalExamples}}){{end}}
     {{end}}
-    locales := {{printf "%#v" .SplitLocales}}
-    for _, locale := range locales {
-    runTests(t, locale, tests)
+    tags := []language.Tag{
+        {{ range $pg.SplitLocales -}}
+            tag_{{.}},
+        {{- end}}
+        }
+    for _, tag := range tags {
+        runTests(t, tag, tests)
     }
     }
 {{end}}
