@@ -3,7 +3,7 @@ package locales
 
 import (
 	"github.com/razor-1/cldr"
-	"github.com/razor-1/localizer/resources/currency"
+	"github.com/razor-1/cldr/resources/currency"
 )
 
 func getLocale_ff_Adlm_LR() *cldr.Locale {

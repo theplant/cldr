@@ -3,7 +3,7 @@ package locales
 
 import (
     "{{.CLDRPackage}}"
-    "github.com/razor-1/localizer/resources/currency"
+    "{{.CLDRPackage}}/resources/currency"
 )
 
 func getLocale_{{.LocaleCode}}() *cldr.Locale {

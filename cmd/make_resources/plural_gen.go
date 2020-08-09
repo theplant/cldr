@@ -50,7 +50,7 @@ func pluralRules(data *cldr.SupplementalData) map[string]bool {
 	}
 
 	pluralTemplate := filepath.Join(templatesDir, "pluralfuncs.tpl")
-	//pluralTestTemplate := filepath.Join(templatesDir, "plurals_test.tpl")
+	pluralTestTemplate := filepath.Join(templatesDir, "plurals_test.tpl")
 
 	type pluralTemplateData struct {
 		CLDRPackage  string
@@ -62,12 +62,12 @@ func pluralRules(data *cldr.SupplementalData) map[string]bool {
 	//	PluralType:   strings.Title(pluralTypeOrdinal),
 	//	PluralGroups: pluralGroupsOrdinal,
 	//}
-	//ordinalsFile := filepath.Join(resourcesDir, "plural_ordinals.go")
+	//ordinalsFile := filepath.Join(resourcesDir, "aaa_plural_ordinals.go")
 	//err := executeAndWrite(pluralTemplate, ordinalData, ordinalsFile)
 	//if err != nil {
 	//	panic(err)
 	//}
-	//ordinalsTestFile := filepath.Join(resourcesDir, "plural_ordinals_test.go")
+	//ordinalsTestFile := filepath.Join(resourcesDir, "aaa_plural_ordinals_test.go")
 	//err = executeAndWrite(pluralTestTemplate, ordinalData, ordinalsTestFile)
 	//if err != nil {
 	//	panic(err)
@@ -90,11 +90,11 @@ func pluralRules(data *cldr.SupplementalData) map[string]bool {
 	if err != nil {
 		panic(err)
 	}
-	//cardinalsTestFile := filepath.Join(resourcesDir, "plural_cardinals_test.go")
-	//err = executeAndWrite(pluralTestTemplate, cardinalData, cardinalsTestFile)
-	//if err != nil {
-	//	panic(err)
-	//}
+	cardinalsTestFile := filepath.Join(resourcesDir, localesDir, "aaa_plural_cardinals_test.go")
+	err = executeAndWrite(pluralTestTemplate, cardinalData, cardinalsTestFile)
+	if err != nil {
+		panic(err)
+	}
 
 	return pluralLocales
 }

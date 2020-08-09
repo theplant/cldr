@@ -3,10 +3,10 @@ package cldr_test
 import (
 	"testing"
 
-	"github.com/theplant/cldr/resources/locales/en"
-	"github.com/theplant/cldr/resources/locales/hi"
-	"github.com/theplant/cldr/resources/locales/uz"
+	"golang.org/x/text/language"
 	. "gopkg.in/check.v1"
+
+	"github.com/razor-1/cldr/resources/locales"
 )
 
 // passes control of tests off to go-check
@@ -22,25 +22,26 @@ type NumberSuite struct {
 var _ = Suite(&NumberSuite{})
 
 func (s *NumberSuite) TestFmtCurrency(c *C) {
-	cur, err := en.Locale.Number.FmtCurrency("USD", 12345.6789)
+	en := locales.LocaleData[language.Make("en")]()
+	cur, err := en.Number.FmtCurrency("USD", 12345.6789)
 	c.Check(err, IsNil)
 	c.Check(cur, Equals, "$12,345.68")
 
-	cur, err = en.Locale.Number.FmtCurrency("USD", -12345.6789)
+	cur, err = en.Number.FmtCurrency("USD", -12345.6789)
 	c.Check(err, IsNil)
 	c.Check(cur, Equals, "($12,345.68)")
 
-	cur, err = en.Locale.Number.FmtCurrency("WHAT???", 12345.6789)
+	cur, err = en.Number.FmtCurrency("WHAT???", 12345.6789)
 	// c.Check(err, NotNil)
 	c.Check(cur, Equals, "12,345.68")
 
 	// try some really big numbers to make sure weird floaty stuff doesn't
 	// happen
-	cur, err = en.Locale.Number.FmtCurrency("USD", 12345000000000.6789)
+	cur, err = en.Number.FmtCurrency("USD", 12345000000000.6789)
 	c.Check(err, IsNil)
 	c.Check(cur, Equals, "$12,345,000,000,000.68")
 
-	cur, err = en.Locale.Number.FmtCurrency("USD", -12345000000000.6789)
+	cur, err = en.Number.FmtCurrency("USD", -12345000000000.6789)
 	c.Check(err, IsNil)
 	c.Check(cur, Equals, "($12,345,000,000,000.68)")
 
@@ -56,64 +57,70 @@ func (s *NumberSuite) TestFmtCurrency(c *C) {
 	// c.Check(cur, Equals, "US$ 12,345.68-")
 
 	// And one more for with some unusual symbols for good measure
-	cur, err = en.Locale.Number.FmtCurrency("USD", 0.0084)
+	cur, err = en.Number.FmtCurrency("USD", 0.0084)
 	c.Check(err, IsNil)
 	c.Check(cur, Equals, "$0.01")
 }
 
 func (s *NumberSuite) TestFmtCurrencyWhole(c *C) {
-	cur, err := en.Locale.Number.FmtCurrencyWhole("USD", 12345.6789)
+	en := locales.LocaleData[language.Make("en")]()
+	cur, err := en.Number.FmtCurrencyWhole("USD", 12345.6789)
 	c.Check(err, IsNil)
 	c.Check(cur, Equals, "$12,346")
 
-	cur, err = en.Locale.Number.FmtCurrencyWhole("USD", -12345.6789)
+	cur, err = en.Number.FmtCurrencyWhole("USD", -12345.6789)
 	c.Check(err, IsNil)
 	c.Check(cur, Equals, "($12,346)")
 
-	cur, err = en.Locale.Number.FmtCurrencyWhole("WHAT???", 12345.6789)
+	cur, err = en.Number.FmtCurrencyWhole("WHAT???", 12345.6789)
 	// c.Check(err, NotNil)
 	c.Check(cur, Equals, "12,346")
 
 	// try some really big numbers to make sure weird floaty stuff doesn't
 	// happen
-	cur, err = en.Locale.Number.FmtCurrencyWhole("USD", 12345000000000.6789)
+	cur, err = en.Number.FmtCurrencyWhole("USD", 12345000000000.6789)
 	c.Check(err, IsNil)
 	c.Check(cur, Equals, "$12,345,000,000,001")
 
-	cur, err = en.Locale.Number.FmtCurrencyWhole("USD", -12345000000000.6789)
+	cur, err = en.Number.FmtCurrencyWhole("USD", -12345000000000.6789)
 	c.Check(err, IsNil)
 	c.Check(cur, Equals, "($12,345,000,000,001)")
 }
 
 func (s *NumberSuite) TestFmtNumber(c *C) {
 	// check basic english
-	num := en.Locale.Number.FmtNumber(12345.6789)
+	en := locales.LocaleData[language.Make("en")]()
+	num := en.Number.FmtNumber(12345.6789)
 	c.Check(num, Equals, "12,345.679")
 
-	num = en.Locale.Number.FmtNumber(-12345.6789)
+	num = en.Number.FmtNumber(-12345.6789)
 	c.Check(num, Equals, "-12,345.679")
 
-	num = en.Locale.Number.FmtNumber(123456789)
+	num = en.Number.FmtNumber(123456789)
 	c.Check(num, Equals, "123,456,789")
 
+	hi := locales.LocaleData[language.Make("hi")]()
+
 	// check Hindi - different group sizes
-	num = hi.Locale.Number.FmtNumber(12345.6789)
+	num = hi.Number.FmtNumber(12345.6789)
 	c.Check(num, Equals, "12,345.679")
 
-	num = hi.Locale.Number.FmtNumber(-12345.6789)
+	num = hi.Number.FmtNumber(-12345.6789)
 	c.Check(num, Equals, "-12,345.679")
 
-	num = hi.Locale.Number.FmtNumber(123456789)
+	num = hi.Number.FmtNumber(123456789)
 	c.Check(num, Equals, "12,34,56,789")
 
+	uz := locales.LocaleData[language.Make("uz")]()
+
 	// check Uzbek - something with a partial fallback
-	num = uz.Locale.Number.FmtNumber(12345.6789)
+	num = uz.Number.FmtNumber(12345.6789)
 	c.Check(num, Equals, "12٬345٫679")
 
-	num = uz.Locale.Number.FmtNumber(-12345.6789)
+	num = uz.Number.FmtNumber(-12345.6789)
 	c.Check(num, Equals, "-12٬345٫679")
 
-	num = uz.Locale.Number.FmtNumber(123456789)
+	num = uz.Number.FmtNumber(123456789)
 	c.Check(num, Equals, "123٬456٬789")
 
 	// format := &(numberFormat{
@@ -149,24 +156,26 @@ func (s *NumberSuite) TestFmtNumber(c *C) {
 }
 
 func (s *NumberSuite) TestFmtNumberWhole(c *C) {
-	num := en.Locale.Number.FmtNumberWhole(12345.6789)
+	en := locales.LocaleData[language.Make("en")]()
+	num := en.Number.FmtNumberWhole(12345.6789)
 	c.Check(num, Equals, "12,346")
 
-	num = en.Locale.Number.FmtNumberWhole(-12345.6789)
+	num = en.Number.FmtNumberWhole(-12345.6789)
 	c.Check(num, Equals, "-12,346")
 }
 
 func (s *NumberSuite) TestFmtPercent(c *C) {
-	cur := en.Locale.Number.FmtPercent(0.01234)
+	en := locales.LocaleData[language.Make("en")]()
+	cur := en.Number.FmtPercent(0.01234)
 	c.Check(cur, Equals, "1%")
 
-	cur = en.Locale.Number.FmtPercent(0.1234)
+	cur = en.Number.FmtPercent(0.1234)
 	c.Check(cur, Equals, "12%")
 
-	cur = en.Locale.Number.FmtPercent(1.234)
+	cur = en.Number.FmtPercent(1.234)
 	c.Check(cur, Equals, "123%")
 
-	cur = en.Locale.Number.FmtPercent(12.34)
+	cur = en.Number.FmtPercent(12.34)
 	c.Check(cur, Equals, "1,234%")
 }
 

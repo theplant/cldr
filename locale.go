@@ -1,3 +1,5 @@
+//go:generate go run ./cmd/make_resources
+
 package cldr
 
 import "golang.org/x/text/feature/plural"

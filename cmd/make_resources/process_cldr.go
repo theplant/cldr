@@ -4,9 +4,10 @@ import (
 	"fmt"
 
 	"github.com/imdario/mergo"
-	i18n "github.com/razor-1/cldr"
 	"golang.org/x/text/language"
 	"golang.org/x/text/unicode/cldr"
+
+	i18n "github.com/razor-1/cldr"
 )
 
 const (
@@ -27,7 +28,7 @@ func processCLDR(unicodeCLDR *cldr.CLDR) (Numbers, Calendars, map[string]bool) {
 		allLocales[loc] = true
 	}
 
-	for loc, _ := range allLocales {
+	for loc := range allLocales {
 		numbers[loc], calendars[loc] = getCLDRData(allLocales, unicodeCLDR, loc)
 	}
 
