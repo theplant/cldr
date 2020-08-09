@@ -12,7 +12,7 @@ func getLocale_to_TO() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_to]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "٫", Group: "٬", Negative: "\u200f-", Percent: "٪\u061c", PerMille: "؉"},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00\u00a0¤", Percent: "#,##0\u00a0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00\u00a0¤", CurrencyAccounting: "#,##0.00\u00a0¤", Percent: "#,##0\u00a0%"},
 			Currencies: cldr.Currencies{
 				currency.AOA: cldr.Currency{DisplayName: "", Symbol: "Kz"},
 				currency.ARS: cldr.Currency{DisplayName: "", Symbol: "$"},

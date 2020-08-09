@@ -12,7 +12,7 @@ func getLocale_sbp_TZ() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_root]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ".", Group: ",", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00¤", Percent: "#,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00¤", CurrencyAccounting: "", Percent: "#,##0%"},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "Ihela ya Shitwa sha Shiyalabu", Symbol: ""},
 				currency.AOA: cldr.Currency{DisplayName: "Ihela ya Angola", Symbol: "Kz"},

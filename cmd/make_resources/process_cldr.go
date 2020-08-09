@@ -123,8 +123,18 @@ func processNumbers(ldmlNumbers *cldr.Numbers) (number i18n.Number) {
 		number.Formats.Decimal = ldmlNumbers.DecimalFormats[0].DecimalFormatLength[0].DecimalFormat[0].Pattern[0].Data()
 	}
 	if len(ldmlNumbers.CurrencyFormats) > 0 && len(ldmlNumbers.CurrencyFormats[0].CurrencyFormatLength) > 0 {
-		number.Formats.Currency = ldmlNumbers.CurrencyFormats[0].CurrencyFormatLength[0].CurrencyFormat[0].Pattern[0].Data()
+		for _, currencyFormat := range ldmlNumbers.CurrencyFormats[0].CurrencyFormatLength[0].CurrencyFormat {
+			switch currencyFormat.Type {
+			case "standard":
+				number.Formats.Currency = currencyFormat.Pattern[0].Data()
+			case "accounting":
+				number.Formats.CurrencyAccounting = currencyFormat.Pattern[0].Data()
+			}
+		}
 	}
+	//if len(ldmlNumbers.CurrencyFormats) > 0 && len(ldmlNumbers.CurrencyFormats[0].CurrencyFormatLength) > 0 {
+	//	number.Formats.Currency = ldmlNumbers.CurrencyFormats[0].CurrencyFormatLength[0].CurrencyFormat[0].Pattern[0].Data()
+	//}
 	if len(ldmlNumbers.PercentFormats) > 0 && len(ldmlNumbers.PercentFormats[0].PercentFormatLength) > 0 {
 		number.Formats.Percent = ldmlNumbers.PercentFormats[0].PercentFormatLength[0].PercentFormat[0].Pattern[0].Data()
 	}

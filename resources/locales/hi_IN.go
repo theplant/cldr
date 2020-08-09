@@ -12,7 +12,7 @@ func getLocale_hi_IN() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_hi]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ".", Group: ",", Negative: "-", Percent: "%", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "#,##,##0.###", Currency: "¤#,##,##0.00", Percent: "#,##,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##,##0.###", Currency: "¤#,##,##0.00", CurrencyAccounting: "", Percent: "#,##,##0%"},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "संयुक्त अरब अमीरात दिरहाम", Symbol: "AED"},
 				currency.AFA: cldr.Currency{DisplayName: "अफगानी (1927–2002)", Symbol: ""},

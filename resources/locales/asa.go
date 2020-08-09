@@ -12,7 +12,7 @@ func getLocale_asa() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_asa]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "", Group: "", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "", Currency: "#,##0.00\u00a0¤", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "", Currency: "#,##0.00\u00a0¤", CurrencyAccounting: "", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "dirham ya Falme dha Kiarabu", Symbol: ""},
 				currency.AOA: cldr.Currency{DisplayName: "kwandha ya Angola", Symbol: "Kz"},

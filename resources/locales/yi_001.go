@@ -12,7 +12,7 @@ func getLocale_yi_001() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_yi]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ".", Group: ",", Negative: "-", Percent: "%", PerMille: "‰"},
-			Formats: cldr.NumberFormats{Decimal: "", Currency: "¤\u00a00K", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "", Currency: "¤\u00a00K", CurrencyAccounting: "", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AOA: cldr.Currency{DisplayName: "", Symbol: "Kz"},
 				currency.ARS: cldr.Currency{DisplayName: "", Symbol: "$"},

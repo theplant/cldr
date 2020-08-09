@@ -12,7 +12,7 @@ func getLocale_ig() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_ig]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "٫", Group: "٬", Negative: "\u200f-", Percent: "٪\u200f", PerMille: "؉"},
-			Formats: cldr.NumberFormats{Decimal: "", Currency: "¤#,##0.00", Percent: "#,##0\u00a0%"},
+			Formats: cldr.NumberFormats{Decimal: "", Currency: "¤#,##0.00", CurrencyAccounting: "", Percent: "#,##0\u00a0%"},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "Ego Dirham obodo United Arab Emirates", Symbol: ""},
 				currency.AFN: cldr.Currency{DisplayName: "Ego Afghani Obodo Afghanistan", Symbol: ""},

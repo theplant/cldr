@@ -12,7 +12,7 @@ func getLocale_ksh_DE() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_ksh]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ",", Group: "\u00a0", Negative: "−", Percent: "%", PerMille: "‰"},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00\u00a0¤", Percent: "#,##0\u00a0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00\u00a0¤", CurrencyAccounting: "", Percent: "#,##0\u00a0%"},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "de vereineschte arraabesche Emiraate ier Dirham", Symbol: ""},
 				currency.AFN: cldr.Currency{DisplayName: "Afjahni", Symbol: ""},

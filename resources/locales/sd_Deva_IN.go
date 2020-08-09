@@ -12,7 +12,7 @@ func getLocale_sd_Deva_IN() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_root]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "", Group: "", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "", Currency: "", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "", Currency: "", CurrencyAccounting: "", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AOA: cldr.Currency{DisplayName: "", Symbol: "Kz"},
 				currency.ARS: cldr.Currency{DisplayName: "", Symbol: "$"},

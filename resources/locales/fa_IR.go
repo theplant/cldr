@@ -12,7 +12,7 @@ func getLocale_fa_IR() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_fa]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "٫", Group: "٬", Negative: "", Percent: "٪", PerMille: "؉"},
-			Formats: cldr.NumberFormats{Decimal: "0 هزار", Currency: "\u200e¤#,##0.00", Percent: "#,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "0 هزار", Currency: "\u200e¤#,##0.00", CurrencyAccounting: "", Percent: "#,##0%"},
 			Currencies: cldr.Currencies{
 				currency.ADP: cldr.Currency{DisplayName: "پزتای آندورا", Symbol: ""},
 				currency.AED: cldr.Currency{DisplayName: "درهم امارات متحدهٔ عربی", Symbol: "AED"},

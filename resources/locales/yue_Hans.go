@@ -12,7 +12,7 @@ func getLocale_yue_Hans() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_root]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ".", Group: ",", Negative: "-", Percent: "%", PerMille: "‰"},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤#,##0.00", Percent: "#,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤#,##0.00", CurrencyAccounting: "", Percent: "#,##0%"},
 			Currencies: cldr.Currencies{
 				currency.ADP: cldr.Currency{DisplayName: "安道尔陪士特", Symbol: "ADP"},
 				currency.AED: cldr.Currency{DisplayName: "阿拉伯联合大公国迪尔汗", Symbol: "AED"},

@@ -12,7 +12,7 @@ func getLocale_ee_TG() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_ee]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ".", Group: ",", Negative: "-", Percent: "%", PerMille: "‰"},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤#,##0.00", Percent: "#,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤#,##0.00", CurrencyAccounting: "¤#,##0.00;(¤#,##0.00)", Percent: "#,##0%"},
 			Currencies: cldr.Currencies{
 				currency.ADP: cldr.Currency{DisplayName: "andorraga peseta", Symbol: ""},
 				currency.AED: cldr.Currency{DisplayName: "united arab emiratesga dirham", Symbol: ""},

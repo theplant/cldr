@@ -12,7 +12,7 @@ func getLocale_jv() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_jv]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ",", Group: ".", Negative: "", Percent: "%", PerMille: "‰"},
-			Formats: cldr.NumberFormats{Decimal: "0 èwu", Currency: "¤\u00a0#,##0.00", Percent: "#,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "0 èwu", Currency: "¤\u00a0#,##0.00", CurrencyAccounting: "¤\u00a0#,##0.00", Percent: "#,##0%"},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "Dirham Uni Emirat Arab", Symbol: ""},
 				currency.AFN: cldr.Currency{DisplayName: "Afghani Afganistan", Symbol: ""},

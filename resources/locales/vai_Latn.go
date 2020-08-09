@@ -12,7 +12,7 @@ func getLocale_vai_Latn() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_root]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ".", Group: ",", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤#,##0.00", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤#,##0.00", CurrencyAccounting: "¤#,##0.00;(¤#,##0.00)", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "Yunaitɛ Arabhi Ɛmire Dihami", Symbol: ""},
 				currency.AOA: cldr.Currency{DisplayName: "Angola Kuwaŋza", Symbol: "Kz"},

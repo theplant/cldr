@@ -1,4 +1,4 @@
-package cldr
+package cldr_test
 
 import (
 	"testing"
@@ -27,7 +27,7 @@ func (s *NumberSuite) TestFmtCurrency(c *C) {
 	c.Check(err, IsNil)
 	c.Check(cur, Equals, "$12,345.68")
 
-	cur, err = en.Number.FmtCurrency("USD", -12345.6789)
+	cur, err = en.Number.FmtCurrencyAccounting("USD", -12345.6789)
 	c.Check(err, IsNil)
 	c.Check(cur, Equals, "($12,345.68)")
 
@@ -41,7 +41,7 @@ func (s *NumberSuite) TestFmtCurrency(c *C) {
 	c.Check(err, IsNil)
 	c.Check(cur, Equals, "$12,345,000,000,000.68")
 
-	cur, err = en.Number.FmtCurrency("USD", -12345000000000.6789)
+	cur, err = en.Number.FmtCurrencyAccounting("USD", -12345000000000.6789)
 	c.Check(err, IsNil)
 	c.Check(cur, Equals, "($12,345,000,000,000.68)")
 

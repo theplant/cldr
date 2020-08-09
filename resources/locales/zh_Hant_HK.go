@@ -12,7 +12,7 @@ func getLocale_zh_Hant_HK() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_root]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "", Group: "", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "0K", Currency: "¤0K", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "0K", Currency: "¤0K", CurrencyAccounting: "", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "阿拉伯聯合酋長國迪爾汗", Symbol: ""},
 				currency.AOA: cldr.Currency{DisplayName: "", Symbol: "Kz"},

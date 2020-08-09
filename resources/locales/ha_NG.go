@@ -12,7 +12,7 @@ func getLocale_ha_NG() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_ha]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "", Group: "", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "Dubu 0", Currency: "¤\u00a00D", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "Dubu 0", Currency: "¤\u00a00D", CurrencyAccounting: "", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "Kuɗin Haɗaɗɗiyar Daular Larabawa", Symbol: ""},
 				currency.AFN: cldr.Currency{DisplayName: "Afghani na kasar Afghanistan", Symbol: ""},

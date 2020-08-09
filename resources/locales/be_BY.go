@@ -12,7 +12,7 @@ func getLocale_be_BY() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_be]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ",", Group: "\u00a0", Negative: "-", Percent: "%", PerMille: "‰"},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00\u00a0¤", Percent: "#,##0\u00a0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00\u00a0¤", CurrencyAccounting: "#,##0.00\u00a0¤", Percent: "#,##0\u00a0%"},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "дырхам ААЭ", Symbol: "AED"},
 				currency.AFN: cldr.Currency{DisplayName: "афганскі афгані", Symbol: "AFN"},

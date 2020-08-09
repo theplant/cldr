@@ -12,7 +12,7 @@ func getLocale_ar_SA() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_ar]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "٫", Group: "٬", Negative: "\u061c-", Percent: "٪", PerMille: "؉"},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00\u00a0¤", Percent: "#,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00\u00a0¤", CurrencyAccounting: "", Percent: "#,##0%"},
 			Currencies: cldr.Currencies{
 				currency.ADP: cldr.Currency{DisplayName: "بيستا أندوري", Symbol: ""},
 				currency.AED: cldr.Currency{DisplayName: "درهم إماراتي", Symbol: "د.إ.\u200f"},

@@ -12,7 +12,7 @@ func getLocale_shi_Tfng() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_shi]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ",", Group: "\u00a0", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "", Currency: "#,##0.00¤", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "", Currency: "#,##0.00¤", CurrencyAccounting: "", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "ⴰⴷⵔⵉⵎ ⵏ ⵍⵉⵎⴰⵔⴰⵜ", Symbol: ""},
 				currency.AOA: cldr.Currency{DisplayName: "ⴽⵡⴰⵏⵣⴰ ⵏ ⴰⵏⴳⵓⵍⴰ", Symbol: "Kz"},

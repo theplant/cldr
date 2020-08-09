@@ -12,7 +12,7 @@ func getLocale_sw_KE() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_sw]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ".", Group: ",", Negative: "-", Percent: "%", PerMille: "‰"},
-			Formats: cldr.NumberFormats{Decimal: "elfu 0;elfu -0", Currency: "¤\u00a0M0;¤-M0", Percent: "#,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "elfu 0;elfu -0", Currency: "¤\u00a0M0;¤-M0", CurrencyAccounting: "¤\u00a0#,##0.00", Percent: "#,##0%"},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "Diramu ya Falme za Kiarabu", Symbol: "AED"},
 				currency.AFN: cldr.Currency{DisplayName: "Afghani ya Afghanistani", Symbol: "AFN"},

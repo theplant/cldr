@@ -8,6 +8,10 @@ import (
 	"strings"
 )
 
+const (
+	currencyPlaceholder = "¤"
+)
+
 // numberFormat is a struct that contains all the information about number
 // formatting for a specific locale that we need to do number, currency, and
 // percentage formatting
@@ -30,7 +34,7 @@ var (
 	prefixSuffixRegex = regexp.MustCompile(`(.*?)[#,\.0]+(.*)`)
 )
 
-// FormatCurrency takes a float number and a currency key and returns a string
+// FmtCurrency takes a float number and a currency key and returns a string
 // with a properly formatted currency amount with the correct currency symbol.
 // If a symbol cannot be found for the reqested currency, the the key is used
 // instead. If the currency key requested is not recognized, it is used as the
@@ -38,28 +42,46 @@ var (
 func (n Number) FmtCurrency(currency string, number float64) (formatted string, err error) {
 	format := n.parseFormat(n.Formats.Currency, true)
 	result := n.formatNumber(format, number)
-	// symbol := currency
-	// if c, ok := t.rules.Currencies[currency]; ok {
-	// 	symbol = c.Symbol
-	// } else {
-	// 	err = translatorError{translator: t, message: "unknown currency: " + currency}
-	// }
-	formatted = strings.Replace(result, "¤", n.findCurrency(currency).Symbol, -1)
+	formatted = strings.Replace(result, currencyPlaceholder, n.findCurrency(currency).Symbol, -1)
 	return
 }
 
-// FormatCurrencyWhole does exactly what FormatCurrency does, but it leaves off
-// any decimal places. AKA, it would return $100 rather than $100.00.
+//FmtCurrencyAccounting is the same as FmtCurrency, but using the accounting format in the CLDR. If the accounting
+//format is missing, it falls back on the standard format (the same one used in FmtCurrency).
+func (n Number) FmtCurrencyAccounting(currency string, number float64) (formatted string, err error) {
+	var formatToUse string
+	if n.Formats.CurrencyAccounting != "" {
+		formatToUse = n.Formats.CurrencyAccounting
+	} else {
+		formatToUse = n.Formats.Currency
+	}
+	format := n.parseFormat(formatToUse, true)
+	result := n.formatNumber(format, number)
+	formatted = strings.Replace(result, currencyPlaceholder, n.findCurrency(currency).Symbol, -1)
+	return
+}
+
+//FmtCurrencyWhole does exactly what FmtCurrency does, but it leaves off
+//any decimal places. AKA, it would return $100 rather than $100.00.
 func (n Number) FmtCurrencyWhole(currency string, number float64) (formatted string, err error) {
 	format := n.parseFormat(n.Formats.Currency, false)
 	result := n.formatNumber(format, number)
-	// symbol := currency
-	// if c, ok := t.rules.Currencies[currency]; ok {
-	// 	symbol = c.Symbol
-	// } else {
-	// 	err = translatorError{translator: t, message: "unknown currency: " + currency}
-	// }
-	formatted = strings.Replace(result, "¤", n.findCurrency(currency).Symbol, -1)
+	formatted = strings.Replace(result, currencyPlaceholder, n.findCurrency(currency).Symbol, -1)
+	return
+}
+
+//FmtCurrencyAccountingWhole is the accounting equivalent of FmtCurrencyWhole. It falls back on the standard format
+//if the accounting format is missing.
+func (n Number) FmtCurrencyAccountingWhole(currency string, number float64) (formatted string, err error) {
+	var formatToUse string
+	if n.Formats.CurrencyAccounting != "" {
+		formatToUse = n.Formats.CurrencyAccounting
+	} else {
+		formatToUse = n.Formats.Currency
+	}
+	format := n.parseFormat(formatToUse, false)
+	result := n.formatNumber(format, number)
+	formatted = strings.Replace(result, currencyPlaceholder, n.findCurrency(currency).Symbol, -1)
 	return
 }
 

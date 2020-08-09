@@ -12,7 +12,7 @@ func getLocale_cy() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_cy]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "", Group: "", Negative: "\u061c-", Percent: "٪\u061c", PerMille: "؉"},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤#,##0.00", Percent: "#,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤#,##0.00", CurrencyAccounting: "¤#,##0.00;(¤#,##0.00)", Percent: "#,##0%"},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "Dirham Yr Emiradau Arabaidd Unedig", Symbol: "AED"},
 				currency.AFA: cldr.Currency{DisplayName: "Afghani Afghanistan (1927–2002)", Symbol: "AFA"},

@@ -12,7 +12,7 @@ func getLocale_lo() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_lo]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ",", Group: ".", Negative: "", Percent: "%", PerMille: "‰"},
-			Formats: cldr.NumberFormats{Decimal: "0ພັນ", Currency: "¤#,##0.00;¤-#,##0.00", Percent: "#,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "0ພັນ", Currency: "¤#,##0.00;¤-#,##0.00", CurrencyAccounting: "¤#,##0.00;¤-#,##0.00", Percent: "#,##0%"},
 			Currencies: cldr.Currencies{
 				currency.ADP: cldr.Currency{DisplayName: "ເປເຊຕາ ອັນໂດລາ", Symbol: ""},
 				currency.AED: cldr.Currency{DisplayName: "ສະ\u200bຫະ\u200bລັດ\u200bອາ\u200bຣັບ\u200bອາ\u200bມິ\u200bເຣດ ເດີ\u200bແຮມ", Symbol: "AED"},

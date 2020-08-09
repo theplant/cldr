@@ -12,7 +12,7 @@ func getLocale_seh_MZ() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_seh]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ",", Group: ".", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "", Currency: "#,##0.00¤", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "", Currency: "#,##0.00¤", CurrencyAccounting: "", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "Dirém dos Emirados Árabes Unidos", Symbol: ""},
 				currency.AOA: cldr.Currency{DisplayName: "Cuanza angolano", Symbol: "Kz"},

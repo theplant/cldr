@@ -12,7 +12,7 @@ func getLocale_tzm_MA() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_tzm]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ",", Group: "\u00a0", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "", Currency: "#,##0.00\u00a0¤", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "", Currency: "#,##0.00\u00a0¤", CurrencyAccounting: "", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "Derhem Uymarati", Symbol: ""},
 				currency.AOA: cldr.Currency{DisplayName: "Kwanza Unguli", Symbol: "Kz"},

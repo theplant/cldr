@@ -12,7 +12,7 @@ func getLocale_ckb_IR() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_ckb]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "٫", Group: "٬", Negative: "\u200f-", Percent: "٪", PerMille: "؉"},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00\u00a0¤", Percent: "#,##0\u00a0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00\u00a0¤", CurrencyAccounting: "", Percent: "#,##0\u00a0%"},
 			Currencies: cldr.Currencies{
 				currency.AFN: cldr.Currency{DisplayName: "ئەفغانیی ئەفغانستان", Symbol: ""},
 				currency.AOA: cldr.Currency{DisplayName: "", Symbol: "Kz"},

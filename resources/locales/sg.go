@@ -12,7 +12,7 @@ func getLocale_sg() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_sg]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ",", Group: ".", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "", Currency: "¤#,##0.00;¤-#,##0.00", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "", Currency: "¤#,##0.00;¤-#,##0.00", CurrencyAccounting: "", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "dirâm tî âEmirâti tî Arâbo Ôko", Symbol: ""},
 				currency.AOA: cldr.Currency{DisplayName: "kwânza tî Angoläa", Symbol: "Kz"},

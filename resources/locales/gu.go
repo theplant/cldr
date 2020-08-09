@@ -12,7 +12,7 @@ func getLocale_gu() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_gu]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "٫", Group: "", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "#,##,##0.###", Currency: "¤#,##0.00", Percent: "#,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##,##0.###", Currency: "¤#,##0.00", CurrencyAccounting: "", Percent: "#,##0%"},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "યુનાઈટેડ આરબ અમિરાત દિરહામ", Symbol: "AED"},
 				currency.AFN: cldr.Currency{DisplayName: "અફ્ગાન અફ્ગાની", Symbol: "AFN"},

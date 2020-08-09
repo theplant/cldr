@@ -12,7 +12,7 @@ func getLocale_he_IL() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_he]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "", Group: "", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "\u200f#,##0.00\u00a0¤;\u200f-#,##0.00\u00a0¤", Percent: "#,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "\u200f#,##0.00\u00a0¤;\u200f-#,##0.00\u00a0¤", CurrencyAccounting: "#,##0.00\u00a0¤", Percent: "#,##0%"},
 			Currencies: cldr.Currencies{
 				currency.ADP: cldr.Currency{DisplayName: "פזטה אנדורית", Symbol: ""},
 				currency.AED: cldr.Currency{DisplayName: "דירהם של איחוד הנסיכויות הערביות", Symbol: "AED"},

@@ -12,7 +12,7 @@ func getLocale_pt_ST() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_pt]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ",", Group: ".", Negative: "-", Percent: "%", PerMille: "‰"},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤\u00a0#,##0.00", Percent: "#,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤\u00a0#,##0.00", CurrencyAccounting: "¤\u00a0#,##0.00", Percent: "#,##0%"},
 			Currencies: cldr.Currencies{
 				currency.ADP: cldr.Currency{DisplayName: "Peseta de Andorra", Symbol: ""},
 				currency.AED: cldr.Currency{DisplayName: "Dirham dos Emirados Árabes Unidos", Symbol: "AED"},

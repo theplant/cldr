@@ -12,7 +12,7 @@ func getLocale_uz_Cyrl() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_root]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "٫", Group: "٬", Negative: "-", Percent: "٪", PerMille: "؉"},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00\u00a0¤", Percent: "#,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00\u00a0¤", CurrencyAccounting: "", Percent: "#,##0%"},
 			Currencies: cldr.Currencies{
 				currency.ANG: cldr.Currency{DisplayName: "Голланд Антил гульдени", Symbol: ""},
 				currency.AOA: cldr.Currency{DisplayName: "", Symbol: "Kz"},

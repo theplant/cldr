@@ -12,7 +12,7 @@ func getLocale_saq_KE() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_saq]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "", Group: "", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "", Currency: "¤#,##0.00", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "", Currency: "¤#,##0.00", CurrencyAccounting: "¤#,##0.00;(¤#,##0.00)", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "Njilingi eel Falme za Kiarabu", Symbol: ""},
 				currency.AOA: cldr.Currency{DisplayName: "Njilingi eel Angola", Symbol: "Kz"},

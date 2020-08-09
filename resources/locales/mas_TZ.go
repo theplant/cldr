@@ -12,7 +12,7 @@ func getLocale_mas_TZ() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_mas]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "", Group: "", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "", Currency: "¤#,##0.00", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "", Currency: "¤#,##0.00", CurrencyAccounting: "¤#,##0.00;(¤#,##0.00)", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "Iropiyianí ɔ́ɔ̄ lmarabu", Symbol: ""},
 				currency.AOA: cldr.Currency{DisplayName: "Iropiyianí e Angola", Symbol: "Kz"},

@@ -12,7 +12,7 @@ func getLocale_lb() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_lb]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ",", Group: ".", Negative: "-", Percent: "%", PerMille: "‰"},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00\u00a0¤", Percent: "#,##0\u00a0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00\u00a0¤", CurrencyAccounting: "#,##0.00\u00a0¤", Percent: "#,##0\u00a0%"},
 			Currencies: cldr.Currencies{
 				currency.ADP: cldr.Currency{DisplayName: "Andorranesch Peseta", Symbol: ""},
 				currency.AED: cldr.Currency{DisplayName: "VAE-Dirham", Symbol: ""},

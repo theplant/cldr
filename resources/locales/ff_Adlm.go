@@ -12,7 +12,7 @@ func getLocale_ff_Adlm() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_root]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "", Group: "", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤\u00a00\u00a0𞤘𞤵𞤤", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤\u00a00\u00a0𞤘𞤵𞤤", CurrencyAccounting: "", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "𞤁𞤭𞤪𞤸𞤢𞤥𞤵 𞤋𞤥𞤢𞥄𞤪𞤢𞤼𞤭𞤲𞤳𞤮", Symbol: ""},
 				currency.AFN: cldr.Currency{DisplayName: "𞤀𞤬𞤿𞤢𞤲𞤭 𞤀𞤬𞤿𞤢𞤲𞤭𞤴𞤢𞤲𞤳𞤮", Symbol: ""},

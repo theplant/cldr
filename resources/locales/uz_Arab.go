@@ -12,7 +12,7 @@ func getLocale_uz_Arab() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_root]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "٫", Group: "٬", Negative: "", Percent: "٪", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "", Currency: "#,##0.00\u00a0¤", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "", Currency: "#,##0.00\u00a0¤", CurrencyAccounting: "", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AFN: cldr.Currency{DisplayName: "افغانی", Symbol: "؋"},
 				currency.AOA: cldr.Currency{DisplayName: "", Symbol: "Kz"},

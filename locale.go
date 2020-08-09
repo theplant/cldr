@@ -39,9 +39,10 @@ type Symbols struct {
 }
 
 type NumberFormats struct {
-	Decimal  string
-	Currency string
-	Percent  string
+	Decimal            string
+	Currency           string
+	CurrencyAccounting string
+	Percent            string
 }
 
 type Currency struct {

@@ -12,7 +12,7 @@ func getLocale_su_Latn() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_su]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ",", Group: ".", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "", CurrencyAccounting: "", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AOA: cldr.Currency{DisplayName: "", Symbol: "Kz"},
 				currency.ARS: cldr.Currency{DisplayName: "", Symbol: "$"},

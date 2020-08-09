@@ -12,7 +12,7 @@ func getLocale_mfe_MU() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_root]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "", Group: "\u00a0", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "", Currency: "¤\u00a00K", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "", Currency: "¤\u00a00K", CurrencyAccounting: "", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "dirham Emira arab ini", Symbol: ""},
 				currency.AOA: cldr.Currency{DisplayName: "kwanza angole", Symbol: "Kz"},

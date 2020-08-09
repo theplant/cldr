@@ -12,7 +12,7 @@ func getLocale_lu() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_root]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ",", Group: ".", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00¤", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00¤", CurrencyAccounting: "", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "Ndiriha wa Lemila alabu", Symbol: ""},
 				currency.AOA: cldr.Currency{DisplayName: "Kwanza wa Angola", Symbol: "Kz"},

@@ -12,7 +12,7 @@ func getLocale_ks_Arab_IN() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_ks]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "", Group: "", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "#,##,##0.###", Currency: "¤\u00a0#,##,##0.00", Percent: "#,##,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##,##0.###", Currency: "¤\u00a0#,##,##0.00", CurrencyAccounting: "", Percent: "#,##,##0%"},
 			Currencies: cldr.Currencies{
 				currency.ADP: cldr.Currency{DisplayName: "اؠڑورَن پیسِٹا", Symbol: ""},
 				currency.AED: cldr.Currency{DisplayName: "مُتحدہ عرب اِمارات دِرہم", Symbol: ""},

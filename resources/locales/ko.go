@@ -12,7 +12,7 @@ func getLocale_ko() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_ko]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "", Group: "", Negative: "\u200f-", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤#,##0.00", Percent: "#,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤#,##0.00", CurrencyAccounting: "¤#,##0.00;(¤#,##0.00)", Percent: "#,##0%"},
 			Currencies: cldr.Currencies{
 				currency.ADP: cldr.Currency{DisplayName: "안도라 페세타", Symbol: ""},
 				currency.AED: cldr.Currency{DisplayName: "아랍에미리트 디르함", Symbol: "AED"},

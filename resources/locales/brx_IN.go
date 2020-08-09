@@ -12,7 +12,7 @@ func getLocale_brx_IN() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_brx]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ".", Group: ",", Negative: "-", Percent: "%", PerMille: "‰"},
-			Formats: cldr.NumberFormats{Decimal: "#,##,##0.###", Currency: "¤\u00a0#,##,##0.00", Percent: "#,##,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##,##0.###", Currency: "¤\u00a0#,##,##0.00", CurrencyAccounting: "", Percent: "#,##,##0%"},
 			Currencies: cldr.Currencies{
 				currency.ADP: cldr.Currency{DisplayName: "ऐन्डोरा का पेसेता", Symbol: ""},
 				currency.AED: cldr.Currency{DisplayName: "संयुक्त अरब अमीरात का दिर्हाम", Symbol: ""},

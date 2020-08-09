@@ -1,4 +1,4 @@
-package cldr
+package cldr_test
 
 import (
 	"time"
@@ -69,12 +69,12 @@ func (s *CalendarSuite) TestFormatDateTime(c *C) {
 	c.Check(dLong, Equals, "January 2, 2006")
 	c.Check(dMedium, Equals, "Jan 2, 2006")
 	c.Check(dShort, Equals, "1/2/06")
-	c.Check(tFull, Equals, "3:04:05 PM")
-	c.Check(tLong, Equals, "3:04:05 PM")
+	c.Check(tFull, Equals, "3:04:05 PM GMT+00:00")
+	c.Check(tLong, Equals, "3:04:05 PM GMT+00:00")
 	c.Check(tMedium, Equals, "3:04:05 PM")
 	c.Check(tShort, Equals, "3:04 PM")
-	c.Check(dtFull, Equals, "Monday, January 2, 2006 at 3:04:05 PM")
-	c.Check(dtLong, Equals, "January 2, 2006 at 3:04:05 PM")
+	c.Check(dtFull, Equals, "Monday, January 2, 2006 at 3:04:05 PM GMT+00:00")
+	c.Check(dtLong, Equals, "January 2, 2006 at 3:04:05 PM GMT+00:00")
 	c.Check(dtMedium, Equals, "Jan 2, 2006, 3:04:05 PM")
 	c.Check(dtShort, Equals, "1/2/06, 3:04 PM")
 

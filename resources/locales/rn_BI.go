@@ -12,7 +12,7 @@ func getLocale_rn_BI() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_root]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ",", Group: ".", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00¤", Percent: "#,##0\u00a0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00¤", CurrencyAccounting: "", Percent: "#,##0\u00a0%"},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "Idiramu ryo muri Leta Zunze Ubumwe z’Abarabu", Symbol: ""},
 				currency.AOA: cldr.Currency{DisplayName: "Ikwanza ryo muri Angola", Symbol: "Kz"},

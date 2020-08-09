@@ -12,7 +12,7 @@ func getLocale_teo_KE() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_teo]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "", Group: "", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "", Currency: "¤#,##0.00", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "", Currency: "¤#,##0.00", CurrencyAccounting: "¤#,##0.00;(¤#,##0.00)", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "Ango’otol lok’ Falme za Kiarabu", Symbol: ""},
 				currency.AOA: cldr.Currency{DisplayName: "Ango’otol lok’ Angola", Symbol: "Kz"},

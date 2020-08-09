@@ -12,7 +12,7 @@ func getLocale_lag() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_lag]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "", Group: "", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "", Currency: "¤\u00a00K", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "", Currency: "¤\u00a00K", CurrencyAccounting: "", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "Diriháamu ya Ʉtemi wa Kɨaráabu", Symbol: ""},
 				currency.AOA: cldr.Currency{DisplayName: "Kwáanza ya Angóola", Symbol: "Kz"},

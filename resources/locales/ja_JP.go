@@ -12,7 +12,7 @@ func getLocale_ja_JP() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_ja]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ".", Group: ",", Negative: "-", Percent: "%", PerMille: "‰"},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤#,##0.00", Percent: "#,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤#,##0.00", CurrencyAccounting: "¤#,##0.00;(¤#,##0.00)", Percent: "#,##0%"},
 			Currencies: cldr.Currencies{
 				currency.ADP: cldr.Currency{DisplayName: "アンドラ ペセタ", Symbol: "ADP"},
 				currency.AED: cldr.Currency{DisplayName: "アラブ首長国連邦ディルハム", Symbol: "AED"},

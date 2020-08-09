@@ -12,7 +12,7 @@ func getLocale_ff_Latn_NG() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_ff]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ",", Group: "\u00a0", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "", Currency: "#,##0.00\u00a0¤", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "", Currency: "#,##0.00\u00a0¤", CurrencyAccounting: "", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "Dirham Emiraati Araab Dentuɗi", Symbol: ""},
 				currency.AOA: cldr.Currency{DisplayName: "Kwansaa Anngolaa", Symbol: "Kz"},

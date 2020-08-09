@@ -12,7 +12,7 @@ func getLocale_nb_SJ() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_nb]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "٫", Group: "\u00a0", Negative: "\u061c−", Percent: "٪\u061c", PerMille: "؉"},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤\u00a0#,##0.00", Percent: "#,##0\u00a0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤\u00a0#,##0.00", CurrencyAccounting: "¤\u00a0#,##0.00", Percent: "#,##0\u00a0%"},
 			Currencies: cldr.Currencies{
 				currency.ADP: cldr.Currency{DisplayName: "andorranske pesetas", Symbol: "ADP"},
 				currency.AED: cldr.Currency{DisplayName: "emiratarabiske dirham", Symbol: "AED"},

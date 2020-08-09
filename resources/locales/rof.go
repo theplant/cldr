@@ -12,7 +12,7 @@ func getLocale_rof() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_rof]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "", Group: "", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "", Currency: "¤#,##0.00", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "", Currency: "¤#,##0.00", CurrencyAccounting: "", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "heleri sa Falme za Kiarabu", Symbol: ""},
 				currency.AOA: cldr.Currency{DisplayName: "heleri sa Angola", Symbol: "Kz"},

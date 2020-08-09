@@ -12,7 +12,7 @@ func getLocale_dz() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_dz]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ".", Group: ",", Negative: "-", Percent: "%", PerMille: "‰"},
-			Formats: cldr.NumberFormats{Decimal: "#,##,##0.###", Currency: "¤#,##,##0.00", Percent: "#,##,##0\u00a0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##,##0.###", Currency: "¤#,##,##0.00", CurrencyAccounting: "", Percent: "#,##,##0\u00a0%"},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "ཡུ་ནཱའི་ཊེཌ་ ཨ་རབ་ ཨེ་མེ་རེཊས་ཀྱི་དངུལ་ ཌིར་ཧཱམ", Symbol: ""},
 				currency.AFN: cldr.Currency{DisplayName: "ཨཕ་གཱན་གྱི་དངུལ་ ཨཕ་ག་ནི", Symbol: ""},

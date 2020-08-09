@@ -12,7 +12,7 @@ func getLocale_ccp_BD() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_root]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ".", Group: "", Negative: "", Percent: "%", PerMille: "‰"},
-			Formats: cldr.NumberFormats{Decimal: "#,##,##0.###", Currency: "#,##,##0.00¤", Percent: "#,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##,##0.###", Currency: "#,##,##0.00¤", CurrencyAccounting: "", Percent: "#,##0%"},
 			Currencies: cldr.Currencies{
 				currency.ADP: cldr.Currency{DisplayName: "𑄃𑄳𑄠𑄚𑄴𑄓𑄮𑄢𑄚𑄴 𑄛𑄬𑄥𑄬𑄖", Symbol: ""},
 				currency.AED: cldr.Currency{DisplayName: "𑄎𑄧𑄙 𑄃𑄢𑄧𑄝𑄴 𑄃𑄟𑄨𑄢𑄖𑄴 𑄘𑄨𑄢𑄴𑄦𑄟𑄴", Symbol: "AED"},

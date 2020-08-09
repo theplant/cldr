@@ -12,7 +12,7 @@ func getLocale_ksb() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_ksb]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "", Group: "", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "", Currency: "#,##0.00¤", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "", Currency: "#,##0.00¤", CurrencyAccounting: "", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "dilham ya Falme za Kialabu", Symbol: ""},
 				currency.AOA: cldr.Currency{DisplayName: "kwanza ya Angola", Symbol: "Kz"},

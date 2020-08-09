@@ -12,7 +12,7 @@ func getLocale_ur_PK() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_ur]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "٫", Group: "٬", Negative: "\u200e-\u200e", Percent: "%", PerMille: "‰"},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤#,##0.00", Percent: "#,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤#,##0.00", CurrencyAccounting: "", Percent: "#,##0%"},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "متحدہ عرب اماراتی درہم", Symbol: "AED"},
 				currency.AFN: cldr.Currency{DisplayName: "افغان افغانی", Symbol: "AFN"},

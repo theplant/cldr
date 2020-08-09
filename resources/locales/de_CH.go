@@ -12,7 +12,7 @@ func getLocale_de_CH() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_de]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ".", Group: "’", Negative: "-", Percent: "%", PerMille: "‰"},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤\u00a0#,##0.00;¤-#,##0.00", Percent: "#,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤\u00a0#,##0.00;¤-#,##0.00", CurrencyAccounting: "#,##0.00\u00a0¤", Percent: "#,##0%"},
 			Currencies: cldr.Currencies{
 				currency.ADP: cldr.Currency{DisplayName: "Andorranische Pesete", Symbol: "ADP"},
 				currency.AED: cldr.Currency{DisplayName: "VAE-Dirham", Symbol: "AED"},

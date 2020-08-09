@@ -12,7 +12,7 @@ func getLocale_mzn_IR() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_root]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "", Group: "", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "", Currency: "", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "", Currency: "", CurrencyAccounting: "", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "متحده عربی امارات ِدرهم", Symbol: "AED"},
 				currency.AFN: cldr.Currency{DisplayName: "افغانستون ِافغانی", Symbol: "AFN"},

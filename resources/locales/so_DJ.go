@@ -12,7 +12,7 @@ func getLocale_so_DJ() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_so]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "", Group: "", Negative: "", Percent: "", PerMille: ""},
-			Formats: cldr.NumberFormats{Decimal: "0 Kun", Currency: "¤#,##0.00", Percent: ""},
+			Formats: cldr.NumberFormats{Decimal: "0 Kun", Currency: "¤#,##0.00", CurrencyAccounting: "¤#,##0.00;(¤#,##0.00)", Percent: ""},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "Dirhamka Isutaga Imaaraatka Carabta", Symbol: ""},
 				currency.AFN: cldr.Currency{DisplayName: "Afgan Afgani", Symbol: ""},

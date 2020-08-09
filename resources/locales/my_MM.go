@@ -12,7 +12,7 @@ func getLocale_my_MM() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_my]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ".", Group: ",", Negative: "-", Percent: "%", PerMille: "‰"},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00\u00a0¤", Percent: "#,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00\u00a0¤", CurrencyAccounting: "¤\u00a0#,##0.00", Percent: "#,##0%"},
 			Currencies: cldr.Currencies{
 				currency.AED: cldr.Currency{DisplayName: "အာရပ်စော်ဘွားများ ပြည်ထောင်စု ဒါဟမ်း", Symbol: "AED"},
 				currency.AFN: cldr.Currency{DisplayName: "အာဖဂန် အာဖဂါနီ", Symbol: "AFN"},

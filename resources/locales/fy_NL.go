@@ -12,7 +12,7 @@ func getLocale_fy_NL() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_fy]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: ",", Group: ".", Negative: "-", Percent: "%", PerMille: "‰"},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤\u00a0#,##0.00;¤\u00a0#,##0.00-", Percent: "#,##0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "¤\u00a0#,##0.00;¤\u00a0#,##0.00-", CurrencyAccounting: "¤\u00a0#,##0.00;(¤\u00a0#,##0.00)", Percent: "#,##0%"},
 			Currencies: cldr.Currencies{
 				currency.ADP: cldr.Currency{DisplayName: "Andorrese peseta", Symbol: ""},
 				currency.AED: cldr.Currency{DisplayName: "Verenigde Arabyske Emiraten-dirham", Symbol: ""},

@@ -12,7 +12,7 @@ func getLocale_sv_AX() *cldr.Locale {
 		Plural:   cldr.Plural{Cardinal: LocalePlural[tag_sv]()},
 		Number: cldr.Number{
 			Symbols: cldr.Symbols{Decimal: "٫", Group: "\u00a0", Negative: "\u061c−", Percent: "٪\u061c", PerMille: "؉\u200f"},
-			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00\u00a0¤", Percent: "#,##0\u00a0%"},
+			Formats: cldr.NumberFormats{Decimal: "#,##0.###", Currency: "#,##0.00\u00a0¤", CurrencyAccounting: "#,##0.00\u00a0¤", Percent: "#,##0\u00a0%"},
 			Currencies: cldr.Currencies{
 				currency.ADP: cldr.Currency{DisplayName: "andorransk peseta", Symbol: ""},
 				currency.AED: cldr.Currency{DisplayName: "Förenade Arabemiratens dirham", Symbol: "AED"},
