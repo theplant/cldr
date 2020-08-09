@@ -8,6 +8,7 @@ import (
 
 func getLocale_{{.LocaleCode}}() *cldr.Locale {
     return &cldr.Locale {
+        Locale: "{{.LocaleCode}}",
         Calendar: {{printf "%#v" .Calendar}},
         Plural: cldr.Plural{Cardinal: LocalePlural[tag_{{.PluralLocaleCode}}]()},
         Number: cldr.Number{

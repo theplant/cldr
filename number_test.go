@@ -1,431 +1,252 @@
 package cldr_test
 
 import (
+	"fmt"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"golang.org/x/text/language"
-	. "gopkg.in/check.v1"
 
+	"github.com/razor-1/cldr"
 	"github.com/razor-1/cldr/resources/locales"
 )
 
-// passes control of tests off to go-check
-func Test(t *testing.T) { TestingT(t) }
+const (
+	USD = "USD"
+)
 
-type NumberSuite struct {
-	messagesDir       string
-	rulesDir          string
-	messagesDirStyle1 string
-	messagesDirStyle2 string
+type fmtCurrencyTest struct {
+	inCurrency string
+	inNumber   float64
+	err        error
+	cur        string
 }
 
-var _ = Suite(&NumberSuite{})
-
-func (s *NumberSuite) TestFmtCurrency(c *C) {
-	en := locales.LocaleData[language.Make("en")]()
-	cur, err := en.Number.FmtCurrency("USD", 12345.6789)
-	c.Check(err, IsNil)
-	c.Check(cur, Equals, "$12,345.68")
-
-	cur, err = en.Number.FmtCurrencyAccounting("USD", -12345.6789)
-	c.Check(err, IsNil)
-	c.Check(cur, Equals, "($12,345.68)")
-
-	cur, err = en.Number.FmtCurrency("WHAT???", 12345.6789)
-	// c.Check(err, NotNil)
-	c.Check(cur, Equals, "12,345.68")
-
-	// try some really big numbers to make sure weird floaty stuff doesn't
-	// happen
-	cur, err = en.Number.FmtCurrency("USD", 12345000000000.6789)
-	c.Check(err, IsNil)
-	c.Check(cur, Equals, "$12,345,000,000,000.68")
-
-	cur, err = en.Number.FmtCurrencyAccounting("USD", -12345000000000.6789)
-	c.Check(err, IsNil)
-	c.Check(cur, Equals, "($12,345,000,000,000.68)")
-
-	// ignore for now...
-	// // Try something that needs a partial fallback
-	// cur, err = saq.Locale.Number.FmtCurrency("USD", 12345.6789)
-	// c.Check(err, IsNil)
-	// c.Check(cur, Equals, "US$12,345.68")
-
-	// // And one more for with some unusual symbols for good measure
-	// cur, err = ar.Locale.Number.FmtCurrency("USD", -12345.6789)
-	// c.Check(err, IsNil)
-	// c.Check(cur, Equals, "US$ 12,345.68-")
-
-	// And one more for with some unusual symbols for good measure
-	cur, err = en.Number.FmtCurrency("USD", 0.0084)
-	c.Check(err, IsNil)
-	c.Check(cur, Equals, "$0.01")
+func currencyRunner(t *testing.T, tests []fmtCurrencyTest, fmtFunc func(string, float64) (string, error)) {
+	t.Helper()
+	for _, test := range tests {
+		t.Run(fmt.Sprintf("%s %f", test.inCurrency, test.inNumber), func(t *testing.T) {
+			t.Parallel()
+			cur, err := fmtFunc(test.inCurrency, test.inNumber)
+			assert.Equal(t, test.err, err)
+			assert.Equal(t, test.cur, cur)
+		})
+	}
 }
 
-func (s *NumberSuite) TestFmtCurrencyWhole(c *C) {
+func TestFmtCurrency(t *testing.T) {
 	en := locales.LocaleData[language.Make("en")]()
-	cur, err := en.Number.FmtCurrencyWhole("USD", 12345.6789)
-	c.Check(err, IsNil)
-	c.Check(cur, Equals, "$12,346")
 
-	cur, err = en.Number.FmtCurrencyWhole("USD", -12345.6789)
-	c.Check(err, IsNil)
-	c.Check(cur, Equals, "($12,346)")
+	tests := []fmtCurrencyTest{
+		{
+			inCurrency: USD,
+			inNumber:   12345.6789,
+			cur:        "$12,345.68",
+		},
+		{
+			inCurrency: "WHAT???",
+			inNumber:   12345.6789,
+			cur:        "12,345,68",
+		},
+		{
+			inCurrency: USD,
+			inNumber:   12345000000000.6789,
+			cur:        "$12,345,000,000,000.68",
+		},
+		{
+			inCurrency: USD,
+			inNumber:   0.0084,
+			cur:        "$0.01",
+		},
+	}
 
-	cur, err = en.Number.FmtCurrencyWhole("WHAT???", 12345.6789)
-	// c.Check(err, NotNil)
-	c.Check(cur, Equals, "12,346")
-
-	// try some really big numbers to make sure weird floaty stuff doesn't
-	// happen
-	cur, err = en.Number.FmtCurrencyWhole("USD", 12345000000000.6789)
-	c.Check(err, IsNil)
-	c.Check(cur, Equals, "$12,345,000,000,001")
-
-	cur, err = en.Number.FmtCurrencyWhole("USD", -12345000000000.6789)
-	c.Check(err, IsNil)
-	c.Check(cur, Equals, "($12,345,000,000,001)")
+	currencyRunner(t, tests, en.Number.FmtCurrency)
 }
 
-func (s *NumberSuite) TestFmtNumber(c *C) {
-	// check basic english
+func TestFmtCurrencyAccounting(t *testing.T) {
 	en := locales.LocaleData[language.Make("en")]()
-	num := en.Number.FmtNumber(12345.6789)
-	c.Check(num, Equals, "12,345.679")
 
-	num = en.Number.FmtNumber(-12345.6789)
-	c.Check(num, Equals, "-12,345.679")
+	tests := []fmtCurrencyTest{
+		{
+			inCurrency: USD,
+			inNumber:   12345.6789,
+			cur:        "$12,345.68",
+		},
+		{
+			inCurrency: USD,
+			inNumber:   -12345.6789,
+			cur:        "($12,345.68)",
+		},
+		{
+			inCurrency: USD,
+			inNumber:   -12345000000000.6789,
+			cur:        "($12,345,000,000,000.68)",
+		},
+	}
 
-	num = en.Number.FmtNumber(123456789)
-	c.Check(num, Equals, "123,456,789")
+	currencyRunner(t, tests, en.Number.FmtCurrencyAccounting)
 
-	hi := locales.LocaleData[language.Make("hi")]()
+	wholeTests := []fmtCurrencyTest{
+		{
+			inCurrency: USD,
+			inNumber:   12345.6789,
+			cur:        "$12,345",
+		},
+		{
+			inCurrency: USD,
+			inNumber:   -12345.6789,
+			cur:        "($12,345)",
+		},
+		{
+			inCurrency: USD,
+			inNumber:   12345000000000.6789,
+			cur:        "$12,345,000,000,001",
+		},
+		{
+			inCurrency: USD,
+			inNumber:   -12345000000000.6789,
+			cur:        "($12,345,000,000,001)",
+		},
+	}
 
+	currencyRunner(t, wholeTests, en.Number.FmtCurrencyAccountingWhole)
+}
+
+func TestFmtCurrencyWhole(t *testing.T) {
+	en := locales.LocaleData[language.Make("en")]()
+
+	tests := []fmtCurrencyTest{
+		{
+			inCurrency: USD,
+			inNumber:   12345.6789,
+			cur:        "$12,346",
+		},
+		{
+			inCurrency: USD,
+			inNumber:   -12345.6789,
+			cur:        "-$12,346",
+		},
+		{
+			inCurrency: "WHAT???",
+			inNumber:   12345.6789,
+			cur:        "12,346",
+		},
+		{
+			inCurrency: USD,
+			inNumber:   12345000000000.6789,
+			cur:        "$12,345,000,000,001",
+		},
+		{
+			inCurrency: USD,
+			inNumber:   -12345000000000.6789,
+			cur:        "-$12,345,000,000,001",
+		},
+	}
+
+	currencyRunner(t, tests, en.Number.FmtCurrencyWhole)
+}
+
+func TestFmtNumber(t *testing.T) {
+	en := locales.LocaleData[language.Make("en")]()
 	// check Hindi - different group sizes
-	num = hi.Number.FmtNumber(12345.6789)
-	c.Check(num, Equals, "12,345.679")
-
-	num = hi.Number.FmtNumber(-12345.6789)
-	c.Check(num, Equals, "-12,345.679")
-
-	num = hi.Number.FmtNumber(123456789)
-	c.Check(num, Equals, "12,34,56,789")
-
+	hi := locales.LocaleData[language.Make("hi")]()
+	// check Uzbek - something with a partial fallback
 	uz := locales.LocaleData[language.Make("uz")]()
 
-	// check Uzbek - something with a partial fallback
-	num = uz.Number.FmtNumber(12345.6789)
-	c.Check(num, Equals, "12٬345٫679")
+	tests := []struct {
+		locale *cldr.Locale
+		in     float64
+		out    string
+	}{
+		{
+			locale: en,
+			in:     12345.6789,
+			out:    "12,345.679",
+		},
+		{
+			locale: en,
+			in:     -12345.6789,
+			out:    "-12,345.679",
+		},
+		{
+			locale: en,
+			in:     123456789,
+			out:    "123,456,789",
+		},
+		{
+			locale: hi,
+			in:     12345.6789,
+			out:    "12,345.679",
+		},
+		{
+			locale: hi,
+			in:     -12345.6789,
+			out:    "-12,345.679",
+		},
+		{
+			locale: hi,
+			in:     123456789,
+			out:    "12,34,56,789",
+		},
+		{
+			locale: uz,
+			in:     12345.6789,
+			out:    "12٬345٫679",
+		},
+		{
+			locale: uz,
+			in:     -12345.6789,
+			out:    "-12٬345٫679",
+		},
+		{
+			locale: uz,
+			in:     123456789,
+			out:    "123٬456٬789",
+		},
+	}
 
-	num = uz.Number.FmtNumber(-12345.6789)
-	c.Check(num, Equals, "-12٬345٫679")
+	for _, test := range tests {
+		t.Run(fmt.Sprintf("%s %f", test.locale.Locale, test.in), func(t *testing.T) {
+			t.Parallel()
+			out := test.locale.Number.FmtNumber(test.in)
+			assert.Equal(t, test.out, out)
+		})
+	}
 
-	num = uz.Number.FmtNumber(123456789)
-	c.Check(num, Equals, "123٬456٬789")
-
-	// format := &(numberFormat{
-	// 	positivePrefix:   "p",
-	// 	positiveSuffix:   "P%",
-	// 	negativePrefix:   "n",
-	// 	negativeSuffix:   "N‰",
-	// 	multiplier:       2,
-	// 	minDecimalDigits: 2,
-	// 	maxDecimalDigits: 5,
-	// 	minIntegerDigits: 10,
-	// 	groupSizeFinal:   6,
-	// 	groupSizeMain:    3,
-	// })
-
-	// tEn.rules.Numbers.Symbols.Decimal = ".."
-	// tEn.rules.Numbers.Symbols.Group = ",,"
-	// tEn.rules.Numbers.Symbols.Negative = "--"
-	// tEn.rules.Numbers.Symbols.Percent = "%%"
-	// tEn.rules.Numbers.Symbols.Permille = "‰‰"
-
-	// // check numbers with too few integer digits & too many decimal digits
-	// num = tEn.formatNumber(format, 1.12341234)
-	// c.Check(num, Equals, "p0,,000,,000002..24682P%%")
-	// num = tEn.formatNumber(format, -1.12341234)
-	// c.Check(num, Equals, "n0,,000,,000002..24682N‰‰")
-
-	// // check numbers with more than enough integer digits  & too few decimal digits
-	// num = tEn.formatNumber(format, 1234123412341234)
-	// c.Check(num, Equals, "p2,,468,,246,,824,,682468..00P%%")
-	// num = tEn.formatNumber(format, -1234123412341234)
-	// c.Check(num, Equals, "n2,,468,,246,,824,,682468..00N‰‰")
+	assert.Equal(t, "12,346", en.Number.FmtNumberWhole(12345.6789))
+	assert.Equal(t, "-12,346", en.Number.FmtNumberWhole(-12345.6789))
 }
 
-func (s *NumberSuite) TestFmtNumberWhole(c *C) {
+func TestFmtPercent(t *testing.T) {
 	en := locales.LocaleData[language.Make("en")]()
-	num := en.Number.FmtNumberWhole(12345.6789)
-	c.Check(num, Equals, "12,346")
 
-	num = en.Number.FmtNumberWhole(-12345.6789)
-	c.Check(num, Equals, "-12,346")
+	tests := []struct {
+		in  float64
+		out string
+	}{
+		{
+			in:  0.01234,
+			out: "1%",
+		},
+		{
+			in:  0.1234,
+			out: "12%",
+		},
+		{
+			in:  1.234,
+			out: "123%",
+		},
+		{
+			in:  12.34,
+			out: "1,234%",
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(fmt.Sprintf("%f", test.in), func(t *testing.T) {
+			t.Parallel()
+			out := en.Number.FmtPercent(test.in)
+			assert.Equal(t, test.out, out)
+		})
+	}
 }
-
-func (s *NumberSuite) TestFmtPercent(c *C) {
-	en := locales.LocaleData[language.Make("en")]()
-	cur := en.Number.FmtPercent(0.01234)
-	c.Check(cur, Equals, "1%")
-
-	cur = en.Number.FmtPercent(0.1234)
-	c.Check(cur, Equals, "12%")
-
-	cur = en.Number.FmtPercent(1.234)
-	c.Check(cur, Equals, "123%")
-
-	cur = en.Number.FmtPercent(12.34)
-	c.Check(cur, Equals, "1,234%")
-}
-
-// func (s *NumberSuite) TestParseFormat(c *C) {
-// 	enLocale, _ := cldr.GetLocale("en")
-// 	format := enLocale.parseFormat("#0", true)
-// 	c.Assert(format, NotNil)
-// 	c.Check(format.groupSizeFinal, Equals, 0)
-// 	c.Check(format.groupSizeMain, Equals, 0)
-// 	c.Check(format.maxDecimalDigits, Equals, 0)
-// 	c.Check(format.minDecimalDigits, Equals, 0)
-// 	c.Check(format.minIntegerDigits, Equals, 1)
-// 	c.Check(format.multiplier, Equals, 1)
-// 	c.Check(format.negativePrefix, Equals, enLocale.Number.Symbols.Negative)
-// 	c.Check(format.negativeSuffix, Equals, "")
-// 	c.Check(format.positivePrefix, Equals, "")
-// 	c.Check(format.positiveSuffix, Equals, "")
-
-// 	format = enLocale.parseFormat("#0%", true)
-// 	c.Assert(format, NotNil)
-// 	c.Check(format.groupSizeFinal, Equals, 0)
-// 	c.Check(format.groupSizeMain, Equals, 0)
-// 	c.Check(format.maxDecimalDigits, Equals, 0)
-// 	c.Check(format.minDecimalDigits, Equals, 0)
-// 	c.Check(format.minIntegerDigits, Equals, 1)
-// 	c.Check(format.multiplier, Equals, 100)
-// 	c.Check(format.negativePrefix, Equals, enLocale.Number.Symbols.Negative)
-// 	c.Check(format.negativeSuffix, Equals, "%")
-// 	c.Check(format.positivePrefix, Equals, "")
-// 	c.Check(format.positiveSuffix, Equals, "%")
-
-// 	format = enLocale.parseFormat("#0‰", true)
-// 	c.Assert(format, NotNil)
-// 	c.Check(format.groupSizeFinal, Equals, 0)
-// 	c.Check(format.groupSizeMain, Equals, 0)
-// 	c.Check(format.maxDecimalDigits, Equals, 0)
-// 	c.Check(format.minDecimalDigits, Equals, 0)
-// 	c.Check(format.minIntegerDigits, Equals, 1)
-// 	c.Check(format.multiplier, Equals, 1000)
-// 	c.Check(format.negativePrefix, Equals, enLocale.Number.Symbols.Negative)
-// 	c.Check(format.negativeSuffix, Equals, "‰")
-// 	c.Check(format.positivePrefix, Equals, "")
-// 	c.Check(format.positiveSuffix, Equals, "‰")
-
-// 	format = enLocale.parseFormat("#0P;#0N", true)
-// 	c.Assert(format, NotNil)
-// 	c.Check(format.groupSizeFinal, Equals, 0)
-// 	c.Check(format.groupSizeMain, Equals, 0)
-// 	c.Check(format.maxDecimalDigits, Equals, 0)
-// 	c.Check(format.minDecimalDigits, Equals, 0)
-// 	c.Check(format.minIntegerDigits, Equals, 1)
-// 	c.Check(format.multiplier, Equals, 1)
-// 	c.Check(format.negativePrefix, Equals, "")
-// 	c.Check(format.negativeSuffix, Equals, "N")
-// 	c.Check(format.positivePrefix, Equals, "")
-// 	c.Check(format.positiveSuffix, Equals, "P")
-
-// 	format = enLocale.parseFormat("P#0;N#0", true)
-// 	c.Assert(format, NotNil)
-// 	c.Check(format.groupSizeFinal, Equals, 0)
-// 	c.Check(format.groupSizeMain, Equals, 0)
-// 	c.Check(format.maxDecimalDigits, Equals, 0)
-// 	c.Check(format.minDecimalDigits, Equals, 0)
-// 	c.Check(format.minIntegerDigits, Equals, 1)
-// 	c.Check(format.multiplier, Equals, 1)
-// 	c.Check(format.negativePrefix, Equals, "N")
-// 	c.Check(format.negativeSuffix, Equals, "")
-// 	c.Check(format.positivePrefix, Equals, "P")
-// 	c.Check(format.positiveSuffix, Equals, "")
-
-// 	format = enLocale.parseFormat("#00000.00000", true)
-// 	c.Assert(format, NotNil)
-// 	c.Check(format.groupSizeFinal, Equals, 0)
-// 	c.Check(format.groupSizeMain, Equals, 0)
-// 	c.Check(format.maxDecimalDigits, Equals, 5)
-// 	c.Check(format.minDecimalDigits, Equals, 5)
-// 	c.Check(format.minIntegerDigits, Equals, 5)
-// 	c.Check(format.multiplier, Equals, 1)
-// 	c.Check(format.negativePrefix, Equals, enLocale.Number.Symbols.Negative)
-// 	c.Check(format.negativeSuffix, Equals, "")
-// 	c.Check(format.positivePrefix, Equals, "")
-// 	c.Check(format.positiveSuffix, Equals, "")
-
-// 	format = enLocale.parseFormat("#0.#####", true)
-// 	c.Assert(format, NotNil)
-// 	c.Check(format.groupSizeFinal, Equals, 0)
-// 	c.Check(format.groupSizeMain, Equals, 0)
-// 	c.Check(format.maxDecimalDigits, Equals, 5)
-// 	c.Check(format.minDecimalDigits, Equals, 0)
-// 	c.Check(format.minIntegerDigits, Equals, 1)
-// 	c.Check(format.multiplier, Equals, 1)
-// 	c.Check(format.negativePrefix, Equals, enLocale.Number.Symbols.Negative)
-// 	c.Check(format.negativeSuffix, Equals, "")
-// 	c.Check(format.positivePrefix, Equals, "")
-// 	c.Check(format.positiveSuffix, Equals, "")
-
-// 	format = enLocale.parseFormat("##,#0", true)
-// 	c.Assert(format, NotNil)
-// 	c.Check(format.groupSizeFinal, Equals, 2)
-// 	c.Check(format.groupSizeMain, Equals, 2)
-// 	c.Check(format.maxDecimalDigits, Equals, 0)
-// 	c.Check(format.minDecimalDigits, Equals, 0)
-// 	c.Check(format.minIntegerDigits, Equals, 1)
-// 	c.Check(format.multiplier, Equals, 1)
-// 	c.Check(format.negativePrefix, Equals, enLocale.Number.Symbols.Negative)
-// 	c.Check(format.negativeSuffix, Equals, "")
-// 	c.Check(format.positivePrefix, Equals, "")
-// 	c.Check(format.positiveSuffix, Equals, "")
-
-// 	format = enLocale.parseFormat("##,###,#0", true)
-// 	c.Assert(format, NotNil)
-// 	c.Check(format.groupSizeFinal, Equals, 2)
-// 	c.Check(format.groupSizeMain, Equals, 3)
-// 	c.Check(format.maxDecimalDigits, Equals, 0)
-// 	c.Check(format.minDecimalDigits, Equals, 0)
-// 	c.Check(format.minIntegerDigits, Equals, 1)
-// 	c.Check(format.multiplier, Equals, 1)
-// 	c.Check(format.negativePrefix, Equals, enLocale.Number.Symbols.Negative)
-// 	c.Check(format.negativeSuffix, Equals, "")
-// 	c.Check(format.positivePrefix, Equals, "")
-// 	c.Check(format.positiveSuffix, Equals, "")
-
-// 	// test includeDecimalDigits true vs false
-// 	enDecimal := "#,##0.###"
-// 	formatWith := enLocale.parseFormat(enDecimal, true)
-// 	formatWithout := enLocale.parseFormat(enDecimal, false)
-// 	c.Assert(formatWith, NotNil)
-// 	c.Check(formatWith.maxDecimalDigits, Equals, 3)
-// 	c.Check(formatWith.minDecimalDigits, Equals, 0)
-// 	c.Assert(formatWithout, NotNil)
-// 	c.Check(formatWithout.maxDecimalDigits, Equals, 0)
-// 	c.Check(formatWithout.minDecimalDigits, Equals, 0)
-
-// 	enCurrency := "¤#,##0.00;(¤#,##0.00)"
-// 	formatWith = enLocale.parseFormat(enCurrency, true)
-// 	formatWithout = enLocale.parseFormat(enCurrency, false)
-// 	c.Assert(formatWith, NotNil)
-// 	c.Check(formatWith.maxDecimalDigits, Equals, 2)
-// 	c.Check(formatWith.minDecimalDigits, Equals, 2)
-// 	c.Assert(formatWithout, NotNil)
-// 	c.Check(formatWithout.maxDecimalDigits, Equals, 0)
-// 	c.Check(formatWithout.minDecimalDigits, Equals, 0)
-// }
-
-// func (s *NumberSuite) TestChunkString(c *C) {
-// 	str := ""
-// 	size := 0
-// 	chunks := chunkString(str, size)
-// 	c.Check(chunks, HasLen, 0)
-
-// 	str = ""
-// 	size = 1
-// 	chunks = chunkString(str, size)
-// 	c.Check(chunks, HasLen, 0)
-
-// 	str = "What noise annoys a noisy oyster?"
-// 	size = 0
-// 	chunks = chunkString(str, size)
-// 	c.Assert(chunks, HasLen, 1)
-// 	c.Check(chunks[0], Equals, str)
-
-// 	str = "What noise annoys a noisy oyster?"
-// 	size = 1
-// 	chunks = chunkString(str, size)
-// 	c.Assert(chunks, HasLen, 33)
-// 	c.Check(chunks[0], Equals, "W")
-// 	c.Check(chunks[1], Equals, "h")
-// 	c.Check(chunks[2], Equals, "a")
-
-// 	str = "What noise annoys a noisy oyster?"
-// 	size = 2
-// 	chunks = chunkString(str, size)
-// 	c.Assert(chunks, HasLen, 17)
-// 	c.Check(chunks[0], Equals, "W")
-// 	c.Check(chunks[1], Equals, "ha")
-// 	c.Check(chunks[2], Equals, "t ")
-
-// 	str = "What noise annoys a noisy oyster?"
-// 	size = 3
-// 	chunks = chunkString(str, size)
-// 	c.Assert(chunks, HasLen, 11)
-// 	c.Check(chunks[0], Equals, "Wha")
-// 	c.Check(chunks[1], Equals, "t n")
-// 	c.Check(chunks[2], Equals, "ois")
-
-// 	str = "What noise annoys a noisy oyster?"
-// 	size = 33
-// 	chunks = chunkString(str, size)
-// 	c.Assert(chunks, HasLen, 1)
-// 	c.Check(chunks[0], Equals, str)
-
-// 	str = "What noise annoys a noisy oyster?"
-// 	size = 133
-// 	chunks = chunkString(str, size)
-// 	c.Assert(chunks, HasLen, 1)
-// 	c.Check(chunks[0], Equals, str)
-// }
-
-// func (s *NumberSuite) TestNumberRound(c *C) {
-// 	num := float64(0)
-// 	dec := 0
-// 	rounded := numberRound(num, dec)
-// 	c.Check(rounded, Equals, "0")
-
-// 	num = float64(1)
-// 	dec = 1
-// 	rounded = numberRound(num, dec)
-// 	c.Check(rounded, Equals, "1")
-
-// 	// test round down
-// 	num = 1.2
-// 	dec = 0
-// 	rounded = numberRound(num, dec)
-// 	c.Check(rounded, Equals, "1")
-
-// 	// test round up
-// 	num = 1.6
-// 	dec = 0
-// 	rounded = numberRound(num, dec)
-// 	c.Check(rounded, Equals, "2")
-
-// 	num = 1.51
-// 	dec = 0
-// 	rounded = numberRound(num, dec)
-// 	c.Check(rounded, Equals, "2")
-
-// 	// test round to even
-// 	num = 1.5
-// 	dec = 0
-// 	rounded = numberRound(num, dec)
-// 	c.Check(rounded, Equals, "2")
-
-// 	num = 2.5
-// 	dec = 0
-// 	rounded = numberRound(num, dec)
-// 	c.Check(rounded, Equals, "2")
-
-// 	// a few more
-// 	num = 1.99
-// 	dec = 1
-// 	rounded = numberRound(num, dec)
-// 	c.Check(rounded, Equals, "2")
-
-// 	num = 1.23456789
-// 	dec = 2
-// 	rounded = numberRound(num, dec)
-// 	c.Check(rounded, Equals, "1.23")
-
-// 	num = 1.23456789
-// 	dec = 3
-// 	rounded = numberRound(num, dec)
-// 	c.Check(rounded, Equals, "1.235")
-// }
