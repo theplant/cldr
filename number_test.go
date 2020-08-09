@@ -1,4 +1,4 @@
-package cldr_test
+package cldr
 
 import (
 	"testing"
