@@ -12,17 +12,8 @@ cldr embeds CLDR data in pure go and it doesn't import all those locale data by 
 package main
 
 import (
-	"github.com/theplant/cldr"
-	_ "github.com/theplant/cldr/resources/locales/en"
+	"github.com/razor-1/cldr"
 )
-
-func main() {
-	cldr.Parse(
-		"en",
-		`{{p "Count" (one "{{.Count}} item") (other "{{.Count}} items")}}`,
-		map[string]int{"Count": 1},
-	) // "1 item in Your Cart"
-}
 ```
 
 If you don't like hand-importing locales, you can import `github.com/theplant/cldr/resources/locales`, which import all available locales in cldr pacakge.

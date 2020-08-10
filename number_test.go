@@ -26,7 +26,6 @@ func currencyRunner(t *testing.T, tests []fmtCurrencyTest, fmtFunc func(string, 
 	t.Helper()
 	for _, test := range tests {
 		t.Run(fmt.Sprintf("%s %f", test.inCurrency, test.inNumber), func(t *testing.T) {
-			t.Parallel()
 			cur, err := fmtFunc(test.inCurrency, test.inNumber)
 			assert.Equal(t, test.err, err)
 			assert.Equal(t, test.cur, cur)
@@ -46,7 +45,7 @@ func TestFmtCurrency(t *testing.T) {
 		{
 			inCurrency: "WHAT???",
 			inNumber:   12345.6789,
-			cur:        "12,345,68",
+			cur:        "12,345.68",
 		},
 		{
 			inCurrency: USD,
@@ -90,12 +89,12 @@ func TestFmtCurrencyAccounting(t *testing.T) {
 		{
 			inCurrency: USD,
 			inNumber:   12345.6789,
-			cur:        "$12,345",
+			cur:        "$12,346",
 		},
 		{
 			inCurrency: USD,
 			inNumber:   -12345.6789,
-			cur:        "($12,345)",
+			cur:        "($12,346)",
 		},
 		{
 			inCurrency: USD,
@@ -207,7 +206,6 @@ func TestFmtNumber(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(fmt.Sprintf("%s %f", test.locale.Locale, test.in), func(t *testing.T) {
-			t.Parallel()
 			out := test.locale.Number.FmtNumber(test.in)
 			assert.Equal(t, test.out, out)
 		})
@@ -244,7 +242,6 @@ func TestFmtPercent(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(fmt.Sprintf("%f", test.in), func(t *testing.T) {
-			t.Parallel()
 			out := en.Number.FmtPercent(test.in)
 			assert.Equal(t, test.out, out)
 		})

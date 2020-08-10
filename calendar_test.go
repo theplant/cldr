@@ -39,7 +39,6 @@ func TestFormatDateTime(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run("", func(t *testing.T) {
-			t.Parallel()
 			var tm time.Time
 			if test.inTime.IsZero() {
 				// all tests use datetime. default to it but still allow an easy override for future tests
