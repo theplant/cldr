@@ -85,12 +85,12 @@ func pluralRules(data *cldr.SupplementalData) map[string]bool {
 		PluralGroups: pluralGroupsCardinal,
 		LocaleMap:    localeMap,
 	}
-	cardinalsFile := filepath.Join(resourcesDir, localesDir, "aaa_plural_cardinals.go")
+	cardinalsFile := filepath.Join(resourcesDir, "gen_plural_cardinals.go")
 	err := executeAndWrite(pluralTemplate, cardinalData, cardinalsFile)
 	if err != nil {
 		panic(err)
 	}
-	cardinalsTestFile := filepath.Join(resourcesDir, localesDir, "aaa_plural_cardinals_test.go")
+	cardinalsTestFile := filepath.Join(resourcesDir, "gen_plural_cardinals_test.go")
 	err = executeAndWrite(pluralTestTemplate, cardinalData, cardinalsTestFile)
 	if err != nil {
 		panic(err)

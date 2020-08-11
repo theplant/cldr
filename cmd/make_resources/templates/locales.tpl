@@ -6,11 +6,10 @@ import (
     "{{.CLDRPackage}}/resources/currency"
 )
 
-func getLocale_{{.LocaleCode}}() *cldr.Locale {
+func Get_{{.LocaleCode}}() *cldr.Locale {
     return &cldr.Locale {
         Locale: "{{.LocaleCode}}",
         Calendar: {{printf "%#v" .Calendar}},
-        Plural: cldr.Plural{Cardinal: LocalePlural[tag_{{.PluralLocaleCode}}]()},
         Number: cldr.Number{
             Symbols: {{printf "%#v" .Symbols}},
             Formats: {{printf "%#v" .NumberFormats}},
