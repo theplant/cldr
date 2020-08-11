@@ -15,6 +15,7 @@ import (
 
 const (
 	resourcesDir = "resources"
+	internalDir  = "internal"
 	localesDir   = "locales"
 	currencyDir  = "currency"
 	templatesDir = "cmd/make_resources/templates"
@@ -60,7 +61,7 @@ func main() {
 
 	numbers, calendars, allLocales := processCLDR(unicodeCLDR)
 
-	path := filepath.Join(resourcesDir, localesDir)
+	path := filepath.Join(resourcesDir, internalDir, localesDir)
 	makePath(path)
 
 	currencyPath := filepath.Join(resourcesDir, currencyDir)
@@ -121,7 +122,7 @@ func main() {
 		Numbers:     numbers,
 		Tags:        allLocales,
 	}
-	allFile := filepath.Join(resourcesDir, localesDir, "aaa_locales.go")
+	allFile := filepath.Join(resourcesDir, "gen_locales.go")
 	err = executeAndWrite(filepath.Join(templatesDir, "all.tpl"), allData, allFile)
 	if err != nil {
 		panic(err)
