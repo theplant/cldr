@@ -6,7 +6,7 @@ cldr is a golang library using Common Locale Data Repository to format dates, pl
 
 # How to use
 
-cldr embeds CLDR data in pure go and it doesn't import all those locale data by default. If you are using specific locale data, you can import that package as bellow:
+cldr embeds CLDR data in pure go, but doesn't import all that data by default. If you are using specific locale data, you can import that package like this:
 
 ```go
 package main
@@ -25,9 +25,9 @@ func main() {
 }
 ```
 
-If you don't like hand-importing locales, you can import `github.com/theplant/cldr/resources/locales`, which import all available locales in cldr pacakge.
+If you don't like hand-importing locales, you can import `github.com/theplant/cldr/resources/locales`, which import all available locales in the cldr package.
 
-More API could be found [here](https://godoc.org/github.com/theplant/cldr).
+More API details can be found [here](https://godoc.org/github.com/theplant/cldr).
 
 # How to add locales
 
