@@ -8,7 +8,7 @@ import (
 	"golang.org/x/text/language"
 
 	"github.com/razor-1/cldr"
-	"github.com/razor-1/cldr/resources/locales"
+	"github.com/razor-1/cldr/resources"
 )
 
 const (
@@ -34,7 +34,7 @@ func currencyRunner(t *testing.T, tests []fmtCurrencyTest, fmtFunc func(string, 
 }
 
 func TestFmtCurrency(t *testing.T) {
-	en := locales.LocaleData[language.Make("en")]()
+	en, _ := resources.GetLocale(language.Make("en"))
 
 	tests := []fmtCurrencyTest{
 		{
@@ -63,7 +63,7 @@ func TestFmtCurrency(t *testing.T) {
 }
 
 func TestFmtCurrencyAccounting(t *testing.T) {
-	en := locales.LocaleData[language.Make("en")]()
+	en, _ := resources.GetLocale(language.Make("en"))
 
 	tests := []fmtCurrencyTest{
 		{
@@ -112,7 +112,7 @@ func TestFmtCurrencyAccounting(t *testing.T) {
 }
 
 func TestFmtCurrencyWhole(t *testing.T) {
-	en := locales.LocaleData[language.Make("en")]()
+	en, _ := resources.GetLocale(language.Make("en"))
 
 	tests := []fmtCurrencyTest{
 		{
@@ -146,11 +146,11 @@ func TestFmtCurrencyWhole(t *testing.T) {
 }
 
 func TestFmtNumber(t *testing.T) {
-	en := locales.LocaleData[language.Make("en")]()
+	en, _ := resources.GetLocale(language.Make("en"))
 	// check Hindi - different group sizes
-	hi := locales.LocaleData[language.Make("hi")]()
+	hi, _ := resources.GetLocale(language.Make("hi"))
 	// check Uzbek - something with a partial fallback
-	uz := locales.LocaleData[language.Make("uz")]()
+	uz, _ := resources.GetLocale(language.Make("uz"))
 
 	tests := []struct {
 		locale *cldr.Locale
@@ -216,7 +216,7 @@ func TestFmtNumber(t *testing.T) {
 }
 
 func TestFmtPercent(t *testing.T) {
-	en := locales.LocaleData[language.Make("en")]()
+	en, _ := resources.GetLocale(language.Make("en"))
 
 	tests := []struct {
 		in  float64
