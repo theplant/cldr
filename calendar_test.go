@@ -7,15 +7,16 @@ import (
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/text/language"
 
-	"github.com/razor-1/cldr/resources/locales"
+	"github.com/razor-1/cldr/resources"
 )
 
 const dateTimeString = "Jan 2, 2006 at 3:04:05pm"
 
 func TestFormatDateTime(t *testing.T) {
 	datetime, _ := time.Parse(dateTimeString, dateTimeString)
-	en := locales.LocaleData[language.Make("en")]()
 	ta := assert.New(t)
+	en, err := resources.GetLocale(language.Make("en"))
+	ta.NoError(err)
 
 	tests := []struct {
 		inTime  time.Time
