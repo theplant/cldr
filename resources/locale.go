@@ -12,7 +12,7 @@ func GetLocale(tag language.Tag) (*cldr.Locale, error) {
 	locFunc, ok := localeData[tag]
 	if ok {
 		loc := locFunc()
-		if plFunc, ok := cardinalPlural[tag]; ok {
+		if plFunc, ok := cardinalPluralLocales[tag]; ok {
 			loc.Plural = cldr.Plural{Cardinal: plFunc()}
 		}
 		return loc, nil
