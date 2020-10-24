@@ -10,21 +10,21 @@ import (
 )
 
 const (
-	pluralTypeOrdinal  = "ordinal"
+	//pluralTypeOrdinal  = "ordinal"
 	pluralTypeCardinal = "cardinal"
 )
 
 //pluralRules generates plural_ordinals.go and plural_cardinals.go based on the CLDR data. It returns a map of all
-//locale codes for which there are plural rules.
-func pluralRules(data *cldr.SupplementalData) map[string]bool {
-	pluralGroupsOrdinal := make([]PluralGroup, 0, 50)
+//locale codes for which there are plural rules, mapped to their function name
+func pluralRules(data *cldr.SupplementalData) map[string]string {
+	//pluralGroupsOrdinal := make([]PluralGroup, 0, 50)
 	pluralGroupsCardinal := make([]PluralGroup, 0, 50)
 	pluralLocales := make(map[string]bool, 250)
 	for _, plurals := range data.Plurals {
 		pluralGroup := new([]PluralGroup)
 		switch plurals.Type {
-		case pluralTypeOrdinal:
-			pluralGroup = &pluralGroupsOrdinal
+		//case pluralTypeOrdinal:
+		//	pluralGroup = &pluralGroupsOrdinal
 		case pluralTypeCardinal:
 			pluralGroup = &pluralGroupsCardinal
 		default:
@@ -96,20 +96,21 @@ func pluralRules(data *cldr.SupplementalData) map[string]bool {
 		panic(err)
 	}
 
-	return pluralLocales
+	return localeMap
 }
 
-//pluralLocale finds the best match for loc that exists in pluralLocales
-func pluralLocale(loc string, pluralLocales map[string]bool) string {
+//pluralLocaleFunc finds the best match for loc that exists in pluralLocales and returns the func name
+//e.g. cardinal_1
+func pluralLocale(loc string, pluralLocaleFuncs map[string]string) string {
 	tag := language.Make(loc)
 	for {
 		tagStr := tag.String()
 		if tag.IsRoot() {
 			// there is no "und" plural rule
-			return "root"
+			return pluralLocaleFuncs["root"]
 		}
-		if _, ok := pluralLocales[tagStr]; ok {
-			return tagStr
+		if plFunc, ok := pluralLocaleFuncs[tagStr]; ok {
+			return plFunc
 		}
 		tag = tag.Parent()
 	}

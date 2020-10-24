@@ -87,14 +87,15 @@ func main() {
 			localeFile := filepath.Join(path, locale+".go")
 
 			tplData := templateData{
-				LocaleCode:       locale,
-				PluralLocaleCode: pluralLocale(locale, pluralLocales),
-				CLDRPackage:      cldrPackage,
-				Symbols:          number.Symbols,
-				NumberFormats:    number.Formats,
-				Calendar:         calendars[locale],
-				Currencies:       number.Currencies,
+				LocaleCode: locale,
+				//PluralLocaleCode: pluralLocale(locale, pluralLocales),
+				CLDRPackage:   cldrPackage,
+				Symbols:       number.Symbols,
+				NumberFormats: number.Formats,
+				Calendar:      calendars[locale],
+				Currencies:    number.Currencies,
 			}
+			//fmt.Println("processing locale", locale, "plural code", tplData.PluralLocaleCode)
 			err = executeAndWrite(filepath.Join(templatesDir, "locales.tpl"), tplData, localeFile)
 			if err != nil {
 				panic(err)
@@ -112,18 +113,36 @@ func main() {
 	}
 	wg.Wait()
 
+	//create a mapping of a locale to which tag to use for plurals. this ensures that all the locales, not just the
+	//ones in the CLDR with plural rules, have them populated.
+	//without doing this, locales like en_US or fr_CA wouldn't have plural rules, since they are only attached to
+	//higher level locales like en and fr
+	plFuncs := make(map[string]string, len(allLocales))
+	for loc := range allLocales {
+		plFuncs[loc] = pluralLocale(loc, pluralLocales)
+	}
+
 	type allTemplateData struct {
-		CLDRPackage string
-		Numbers     Numbers
-		Tags        map[string]bool
+		CLDRPackage      string
+		Numbers          Numbers
+		Tags             map[string]bool
+		PluralLocaleTags map[string]string
 	}
 	allData := allTemplateData{
-		CLDRPackage: cldrPackage,
-		Numbers:     numbers,
-		Tags:        allLocales,
+		CLDRPackage:      cldrPackage,
+		Numbers:          numbers,
+		Tags:             allLocales,
+		PluralLocaleTags: plFuncs,
 	}
 	allFile := filepath.Join(resourcesDir, "gen_locales.go")
 	err = executeAndWrite(filepath.Join(templatesDir, "all.tpl"), allData, allFile)
+	if err != nil {
+		panic(err)
+	}
+
+	plLocalesFiles := filepath.Join(resourcesDir, "gen_plural_locales.go")
+	//we don't need the rest of allData, but it's convenient...
+	err = executeAndWrite(filepath.Join(templatesDir, "plural_locales.tpl"), allData, plLocalesFiles)
 	if err != nil {
 		panic(err)
 	}
