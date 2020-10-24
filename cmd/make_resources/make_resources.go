@@ -33,13 +33,12 @@ const (
 )
 
 type templateData struct {
-	LocaleCode       string
-	PluralLocaleCode string
-	CLDRPackage      string
-	Symbols          i18n.Symbols
-	NumberFormats    i18n.NumberFormats
-	Calendar         i18n.Calendar
-	Currencies       i18n.Currencies
+	LocaleCode    string
+	CLDRPackage   string
+	Symbols       i18n.Symbols
+	NumberFormats i18n.NumberFormats
+	Calendar      i18n.Calendar
+	Currencies    i18n.Currencies
 }
 
 //makePath is a helper to create a path if needed, and panic if MkdirAll encounters an error
@@ -87,15 +86,13 @@ func main() {
 			localeFile := filepath.Join(path, locale+".go")
 
 			tplData := templateData{
-				LocaleCode: locale,
-				//PluralLocaleCode: pluralLocale(locale, pluralLocales),
+				LocaleCode:    locale,
 				CLDRPackage:   cldrPackage,
 				Symbols:       number.Symbols,
 				NumberFormats: number.Formats,
 				Calendar:      calendars[locale],
 				Currencies:    number.Currencies,
 			}
-			//fmt.Println("processing locale", locale, "plural code", tplData.PluralLocaleCode)
 			err = executeAndWrite(filepath.Join(templatesDir, "locales.tpl"), tplData, localeFile)
 			if err != nil {
 				panic(err)
