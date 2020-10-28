@@ -4,6 +4,8 @@ package locales
 import (
 	"github.com/razor-1/cldr"
 	"github.com/razor-1/cldr/resources/currency"
+	"github.com/razor-1/cldr/resources/language"
+	"github.com/razor-1/cldr/resources/territory"
 )
 
 func Get_sr_Latn_BA() *cldr.Locale {
@@ -117,6 +119,41 @@ func Get_sr_Latn_BA() *cldr.Locale {
 				currency.ZAR: cldr.Currency{DisplayName: "", Symbol: "R"},
 				currency.ZMW: cldr.Currency{DisplayName: "", Symbol: "ZK"},
 			},
+		},
+		Languages: cldr.Languages{
+			language.ARN:     "mapudungun",
+			language.BE:      "bjeloruski",
+			language.BM:      "bamanankan",
+			language.BN:      "bangla",
+			language.GSW:     "švajcarski nemački",
+			language.HT:      "haićanski kreolski",
+			language.LO:      "laoški",
+			language.MOH:     "mohok",
+			language.NQO:     "n’ko",
+			language.SHI:     "južni šilha",
+			language.SI:      "sinhalski",
+			language.SW_CD:   "kisvahili",
+			language.TZM:     "centralnoatlaski tamašek",
+			language.XH:      "isikosa",
+			language.ZGH:     "standardni marokanski tamašek",
+			language.ZH_HANS: "pojednostavljeni kineski",
+			language.ZH_HANT: "tradicionalni kineski",
+			language.ZU:      "isizulu",
+		},
+		Territories: cldr.Territories{
+			territory.BY: "Bjelorusija",
+			territory.CG: "Kongo",
+			territory.CV: "Kabo Verde",
+			territory.CZ: "Češka Republika",
+			territory.DE: "Njemačka",
+			territory.KN: "Sveti Kits i Nevis",
+			territory.MO: "SAR Makao",
+			territory.PM: "Sveti Pjer i Mikelon",
+			territory.RE: "Reunion",
+			territory.UM: "Manja udaljena ostrva SAD",
+			territory.VC: "Sveti Vinsent i Grenadini",
+			territory.VG: "Britanska Djevičanska Ostrva",
+			territory.VI: "Američka Djevičanska Ostrva",
 		},
 	}
 }

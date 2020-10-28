@@ -4,6 +4,8 @@ package locales
 import (
 	"github.com/razor-1/cldr"
 	"github.com/razor-1/cldr/resources/currency"
+	"github.com/razor-1/cldr/resources/language"
+	"github.com/razor-1/cldr/resources/territory"
 )
 
 func Get_su() *cldr.Locale {
@@ -117,6 +119,47 @@ func Get_su() *cldr.Locale {
 				currency.ZAR: cldr.Currency{DisplayName: "", Symbol: "R"},
 				currency.ZMW: cldr.Currency{DisplayName: "", Symbol: "ZK"},
 			},
+		},
+		Languages: cldr.Languages{
+			language.DE:      "Jérman",
+			language.DE_AT:   "Jérman Austria",
+			language.DE_CH:   "Jérman Swiss Luhur",
+			language.EN:      "Inggris",
+			language.EN_AU:   "Inggris Australia",
+			language.EN_CA:   "Inggris Kanada",
+			language.EN_GB:   "Inggris UK",
+			language.EN_US:   "Inggris AS",
+			language.ES:      "Spanyol",
+			language.ES_419:  "Spanyol Amérika Latin",
+			language.ES_ES:   "Spanyol Éropa",
+			language.ES_MX:   "Spanyol Méksiko",
+			language.FR:      "Prancis",
+			language.FR_CA:   "Prancis Kanada",
+			language.FR_CH:   "Prancis Swiss",
+			language.IT:      "Italia",
+			language.JA:      "Jepang",
+			language.PT:      "Portugis",
+			language.PT_BR:   "Portugis Brasil",
+			language.PT_PT:   "Portugis Éropa",
+			language.RU:      "Rusia",
+			language.SU:      "Basa Sunda",
+			language.UND:     "Teu Dipikaterang",
+			language.ZH:      "Tiongkok, Mandarin",
+			language.ZH_HANS: "Tiongkok Mandarin Sederhana",
+			language.ZH_HANT: "Tiongkok Mandarin Tradisional",
+		},
+		Territories: cldr.Territories{
+			territory.BR: "Brasil",
+			territory.CN: "Tiongkok",
+			territory.DE: "Jérman",
+			territory.FR: "Prancis",
+			territory.GB: "Inggris Raya",
+			territory.IN: "India",
+			territory.IT: "Italia",
+			territory.JP: "Jepang",
+			territory.RU: "Rusia",
+			territory.US: "Amérika Sarikat",
+			territory.ZZ: "Wilayah Teu Dipikaterang",
 		},
 	}
 }

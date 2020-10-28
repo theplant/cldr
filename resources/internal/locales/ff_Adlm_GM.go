@@ -4,6 +4,8 @@ package locales
 import (
 	"github.com/razor-1/cldr"
 	"github.com/razor-1/cldr/resources/currency"
+	"github.com/razor-1/cldr/resources/language"
+	"github.com/razor-1/cldr/resources/territory"
 )
 
 func Get_ff_Adlm_GM() *cldr.Locale {
@@ -119,5 +121,7 @@ func Get_ff_Adlm_GM() *cldr.Locale {
 				currency.ZMW: cldr.Currency{DisplayName: "", Symbol: "ZK"},
 			},
 		},
+		Languages:   cldr.Languages{},
+		Territories: cldr.Territories{},
 	}
 }

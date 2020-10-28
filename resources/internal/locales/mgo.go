@@ -4,6 +4,8 @@ package locales
 import (
 	"github.com/razor-1/cldr"
 	"github.com/razor-1/cldr/resources/currency"
+	"github.com/razor-1/cldr/resources/language"
+	"github.com/razor-1/cldr/resources/territory"
 )
 
 func Get_mgo() *cldr.Locale {
@@ -117,6 +119,14 @@ func Get_mgo() *cldr.Locale {
 				currency.ZAR: cldr.Currency{DisplayName: "", Symbol: "R"},
 				currency.ZMW: cldr.Currency{DisplayName: "", Symbol: "ZK"},
 			},
+		},
+		Languages: cldr.Languages{
+			language.MGO: "metaʼ",
+			language.UND: "ngam tisɔʼ",
+		},
+		Territories: cldr.Territories{
+			territory.CM: "Kamalun",
+			territory.ZZ: "aba aben tisɔ̀",
 		},
 	}
 }

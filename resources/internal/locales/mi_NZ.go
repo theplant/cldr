@@ -4,6 +4,8 @@ package locales
 import (
 	"github.com/razor-1/cldr"
 	"github.com/razor-1/cldr/resources/currency"
+	"github.com/razor-1/cldr/resources/language"
+	"github.com/razor-1/cldr/resources/territory"
 )
 
 func Get_mi_NZ() *cldr.Locale {
@@ -117,6 +119,49 @@ func Get_mi_NZ() *cldr.Locale {
 				currency.ZAR: cldr.Currency{DisplayName: "", Symbol: "R"},
 				currency.ZMW: cldr.Currency{DisplayName: "", Symbol: "ZK"},
 			},
+		},
+		Languages: cldr.Languages{
+			language.DE:      "Tiamana",
+			language.DE_AT:   "Tiamana Atiria",
+			language.DE_CH:   "Tiamana Ōkawa Huiterangi",
+			language.EN:      "Ingarihi",
+			language.EN_AU:   "Ingarihi Ahitereiriana",
+			language.EN_CA:   "Ingarihi Kānata",
+			language.EN_GB:   "Ingarihi UK",
+			language.EN_US:   "Ingarihi US",
+			language.ES:      "Paniora",
+			language.ES_419:  "Paniora Amerika ki te Tonga",
+			language.ES_ES:   "Paniora Uropi",
+			language.ES_MX:   "Paniora Mēhikana",
+			language.FR:      "Wīwī",
+			language.FR_CA:   "Wīwī Kānata",
+			language.FR_CH:   "Wīwī Huiterangi",
+			language.IT:      "Ītariana",
+			language.JA:      "Hapanihi",
+			language.MI:      "Māori",
+			language.PT:      "Pōtikī",
+			language.PT_BR:   "Pōtikī Parahi",
+			language.PT_PT:   "Pōtikī Uropi",
+			language.RU:      "Ruhiana",
+			language.UND:     "Reo Tē Mōhiotia",
+			language.ZH:      "Hainamana Manarini",
+			language.ZH_HANS: "Hainamana Māmā",
+			language.ZH_HANT: "Hainamana Tukuiho",
+		},
+		Territories: cldr.Territories{
+			territory.BR: "Parahi",
+			territory.CN: "Haina",
+			territory.DE: "Tiamana",
+			territory.FR: "Wīwī",
+			territory.GB: "Hononga o Piritene",
+			territory.IN: "Inia",
+			territory.IT: "Itāria",
+			territory.JP: "Hapani",
+			territory.MK: "Makerōnia ki te Raki",
+			territory.NZ: "Aotearoa",
+			territory.RU: "Rūhia",
+			territory.US: "Hononga o Amerika",
+			territory.ZZ: "Rohe Tē Mōhiotia",
 		},
 	}
 }
