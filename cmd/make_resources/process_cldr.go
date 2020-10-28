@@ -14,34 +14,53 @@ const (
 	defaultGMTFormat = "GMT{0}"
 )
 
+type LocaleData struct {
+	Locales     map[string]bool
+	Numbers     Numbers
+	Calendars   Calendars
+	Languages   map[string]Languages
+	Territories map[string]Territories
+}
+
 type Numbers map[string]i18n.Number
 type Calendars map[string]i18n.Calendar
+type Languages map[string]string
+type Territories map[string]string
 
-func processCLDR(unicodeCLDR *cldr.CLDR) (Numbers, Calendars, map[string]bool) {
+func processCLDR(unicodeCLDR *cldr.CLDR) *LocaleData {
 	//size based on a check on 2020-07-25 of how many entries they ended up with: 464 numbers, 358 calendars
-	numbers := make(Numbers, 500)
-	calendars := make(Calendars, 400)
+	localeData := LocaleData{
+		Locales:     make(map[string]bool, len(unicodeCLDR.Locales())),
+		Numbers:     make(Numbers, 500),
+		Calendars:   make(Calendars, 400),
+		Languages:   make(map[string]Languages, 500),
+		Territories: make(map[string]Territories, 350),
+	}
 
 	//quick & easy way to know if a locale exists
-	allLocales := make(map[string]bool, len(unicodeCLDR.Locales()))
+	//allLocales := make(map[string]bool, len(unicodeCLDR.Locales()))
 	for _, loc := range unicodeCLDR.Locales() {
-		allLocales[loc] = true
+		localeData.Locales[loc] = true
 	}
 
-	for loc := range allLocales {
-		numbers[loc], calendars[loc] = getCLDRData(allLocales, unicodeCLDR, loc)
+	for loc := range localeData.Locales {
+		localeData.Numbers[loc], localeData.Calendars[loc], localeData.Languages[loc], localeData.Territories[loc] =
+			getCLDRData(localeData.Locales, unicodeCLDR, loc)
 	}
 
-	return numbers, calendars, allLocales
+	return &localeData
 }
 
 //getCLDRData turns CLDR data into our Number and Calendar types, recursively merging data
 //so that information from parent locales is inherited. This isn't perfect and doesn't obey all the rules described in
 //http://unicode.org/reports/tr35/#Common_Elements, but it should do a pretty good job most of the time.
-func getCLDRData(allLocales map[string]bool, unicodeCLDR *cldr.CLDR, loc string) (number i18n.Number, calendar i18n.Calendar) {
+func getCLDRData(allLocales map[string]bool, unicodeCLDR *cldr.CLDR, loc string) (number i18n.Number,
+	calendar i18n.Calendar, languages Languages, territories Territories) {
 	ldml := unicodeCLDR.RawLDML(loc)
 	number = processNumbers(ldml.Numbers)
 	calendar = processCalendar(ldml)
+	languages = getLanguages(ldml.LocaleDisplayNames)
+	territories = getTerritories(ldml.LocaleDisplayNames)
 
 	parentLoc, isRoot := findParentLocale(loc, allLocales)
 	if isRoot {
@@ -49,7 +68,8 @@ func getCLDRData(allLocales map[string]bool, unicodeCLDR *cldr.CLDR, loc string)
 		return
 	}
 
-	parentNumber, parentCalendar := getCLDRData(allLocales, unicodeCLDR, parentLoc)
+	//TODO can we check if parentLoc != loc and only do this in that case?
+	parentNumber, parentCalendar, parentLanguages, parentTerritories := getCLDRData(allLocales, unicodeCLDR, parentLoc)
 
 	//merge them
 	err := mergo.Merge(&number, parentNumber)
@@ -72,6 +92,19 @@ func getCLDRData(allLocales map[string]bool, unicodeCLDR *cldr.CLDR, loc string)
 	err = mergo.Merge(&calendar, parentCalendar)
 	if err != nil {
 		fmt.Println("Calendar merge error", err)
+	}
+
+	//merge langs and territories
+	for k, v := range parentLanguages {
+		if _, ok := languages[k]; !ok {
+			languages[k] = v
+		}
+	}
+
+	for k, v := range parentTerritories {
+		if _, ok := territories[k]; !ok {
+			territories[k] = v
+		}
 	}
 
 	return
@@ -326,4 +359,30 @@ func processCalendar(ldml *cldr.LDML) (calendar i18n.Calendar) {
 	}
 
 	return
+}
+
+func getLanguages(ldn *cldr.LocaleDisplayNames) (langs Languages) {
+	langs = make(Languages, 500)
+
+	if ldn == nil || ldn.Languages == nil {
+		return
+	}
+	for _, lang := range ldn.Languages.Language {
+		langs[lang.Type] = lang.Data()
+	}
+
+	return
+}
+
+func getTerritories(ldn *cldr.LocaleDisplayNames) (territories Territories) {
+	territories = make(Territories, 500)
+
+	if ldn == nil || ldn.Territories == nil {
+		return
+	}
+	for _, terr := range ldn.Territories.Territory {
+		territories[terr.Type] = terr.Data()
+	}
+
+	return territories
 }

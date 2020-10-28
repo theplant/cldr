@@ -5,8 +5,10 @@ import (
 	"go/format"
 	"os"
 	"path/filepath"
+	"strings"
 	"sync"
 	"text/template"
+	"unicode"
 
 	"golang.org/x/text/unicode/cldr"
 
@@ -18,6 +20,8 @@ const (
 	internalDir  = "internal"
 	localesDir   = "locales"
 	currencyDir  = "currency"
+	languageDir  = "language"
+	territoryDir = "territory"
 	templatesDir = "cmd/make_resources/templates"
 	cldrPackage  = "github.com/razor-1/cldr"
 
@@ -39,6 +43,8 @@ type templateData struct {
 	NumberFormats i18n.NumberFormats
 	Calendar      i18n.Calendar
 	Currencies    i18n.Currencies
+	Languages     Languages
+	Territories   Territories
 }
 
 //makePath is a helper to create a path if needed, and panic if MkdirAll encounters an error
@@ -58,25 +64,22 @@ func main() {
 		panic(err)
 	}
 
-	numbers, calendars, allLocales := processCLDR(unicodeCLDR)
+	localeData := processCLDR(unicodeCLDR)
 
 	path := filepath.Join(resourcesDir, internalDir, localesDir)
 	makePath(path)
 
-	currencyPath := filepath.Join(resourcesDir, currencyDir)
-	makePath(currencyPath)
-
 	pluralLocales := pluralRules(unicodeCLDR.Supplemental())
 	// some locales seem to show up in plural rules but not in common/main...keep track of everything in allLocales
 	for loc := range pluralLocales {
-		allLocales[loc] = true
+		localeData.Locales[loc] = true
 	}
 
 	var wg sync.WaitGroup
-	wg.Add(len(numbers))
+	wg.Add(len(localeData.Numbers))
 	sem := make(chan bool, 20)
-	for locale, number := range numbers {
-		allLocales[locale] = true
+	for locale, number := range localeData.Numbers {
+		localeData.Locales[locale] = true
 		sem <- true
 		go func(locale string, number i18n.Number) {
 			defer func() {
@@ -90,8 +93,10 @@ func main() {
 				CLDRPackage:   cldrPackage,
 				Symbols:       number.Symbols,
 				NumberFormats: number.Formats,
-				Calendar:      calendars[locale],
+				Calendar:      localeData.Calendars[locale],
 				Currencies:    number.Currencies,
+				Languages:     localeData.Languages[locale],
+				Territories:   localeData.Territories[locale],
 			}
 			err = executeAndWrite(filepath.Join(templatesDir, "locales.tpl"), tplData, localeFile)
 			if err != nil {
@@ -99,9 +104,28 @@ func main() {
 			}
 
 			if locale == "en" {
-				// create the currency constants. only need to do this once; picking a common locale
+				//create the currency, language and territory constants.
+				//we only need to do this once; picking a common locale (english)
+				currencyPath := filepath.Join(resourcesDir, currencyDir)
+				makePath(currencyPath)
 				currencyFile := filepath.Join(currencyPath, "currency.go")
-				err = executeAndWrite(filepath.Join(templatesDir, "currency.tpl"), number.Currencies, currencyFile)
+				err = executeAndWrite(filepath.Join(templatesDir, "currency.tpl"), tplData.Currencies, currencyFile)
+				if err != nil {
+					panic(err)
+				}
+
+				languagePath := filepath.Join(resourcesDir, languageDir)
+				makePath(languagePath)
+				languageFile := filepath.Join(languagePath, "language.go")
+				err = executeAndWrite(filepath.Join(templatesDir, "language.tpl"), tplData.Languages, languageFile)
+				if err != nil {
+					panic(err)
+				}
+
+				territoryPath := filepath.Join(resourcesDir, territoryDir)
+				makePath(territoryPath)
+				territoryFile := filepath.Join(territoryPath, "territory.go")
+				err = executeAndWrite(filepath.Join(templatesDir, "territory.tpl"), tplData.Territories, territoryFile)
 				if err != nil {
 					panic(err)
 				}
@@ -114,8 +138,8 @@ func main() {
 	//ones in the CLDR with plural rules, have them populated.
 	//without doing this, locales like en_US or fr_CA wouldn't have plural rules, since they are only attached to
 	//higher level locales like en and fr
-	plFuncs := make(map[string]string, len(allLocales))
-	for loc := range allLocales {
+	plFuncs := make(map[string]string, len(localeData.Locales))
+	for loc := range localeData.Locales {
 		plFuncs[loc] = pluralLocale(loc, pluralLocales)
 	}
 
@@ -127,8 +151,8 @@ func main() {
 	}
 	allData := allTemplateData{
 		CLDRPackage:      cldrPackage,
-		Numbers:          numbers,
-		Tags:             allLocales,
+		Numbers:          localeData.Numbers,
+		Tags:             localeData.Locales,
 		PluralLocaleTags: plFuncs,
 	}
 	allFile := filepath.Join(resourcesDir, "gen_locales.go")
@@ -145,8 +169,26 @@ func main() {
 	}
 }
 
+//upperIdentifier takes a string and does some basic things to make it a valid identifier. it doesn't do a
+//check for reserved words, invalid characters, etc. The entire string is uppercased.
+func upperIdentifier(s string) string {
+	upper := strings.ToUpper(s)
+	var first rune
+	for _, r := range upper {
+		first = r
+		break
+	}
+	if !unicode.IsLetter(first) {
+		upper = "V_" + upper
+	}
+	return upper
+}
+
 func executeAndWrite(templateFile string, data interface{}, outFileName string) error {
-	tmpl, err := template.ParseFiles(templateFile)
+	funcMap := template.FuncMap{
+		"ToUpperIdent": upperIdentifier,
+	}
+	tmpl, err := template.New(filepath.Base(templateFile)).Funcs(funcMap).ParseFiles(templateFile)
 	if err != nil {
 		return err
 	}

@@ -4,6 +4,8 @@ package locales
 import (
 	"github.com/razor-1/cldr"
 	"github.com/razor-1/cldr/resources/currency"
+	"github.com/razor-1/cldr/resources/language"
+	"github.com/razor-1/cldr/resources/territory"
 )
 
 func Get_kw_GB() *cldr.Locale {
@@ -117,6 +119,61 @@ func Get_kw_GB() *cldr.Locale {
 				currency.ZAR: cldr.Currency{DisplayName: "", Symbol: "R"},
 				currency.ZMW: cldr.Currency{DisplayName: "", Symbol: "ZK"},
 			},
+		},
+		Languages: cldr.Languages{
+			language.AR:      "Arabek",
+			language.AR_001:  "Arabek Savonek Arnowydh",
+			language.BR:      "Bretonek",
+			language.CY:      "Kembrek",
+			language.DA:      "Danek",
+			language.DE:      "Almaynek",
+			language.DE_AT:   "Almaynek (Ostri)",
+			language.DE_CH:   "Almaynek Ughel (Pow Swis)",
+			language.EL:      "Greka",
+			language.EN:      "Sowsnek",
+			language.EN_AU:   "Sowsnek (Ostrali)",
+			language.EN_CA:   "Sowsnek (Kanada)",
+			language.EN_GB:   "Sowsnek (RU)",
+			language.EN_US:   "Sowsnek (SU)",
+			language.ES:      "Spaynek",
+			language.EU:      "Baskek",
+			language.FR:      "Frenkek",
+			language.FR_CA:   "Frenkek (Kanada)",
+			language.FR_CH:   "Frenkek (Pow Swis)",
+			language.GA:      "Wordhonek",
+			language.GD:      "Godhalek Alban",
+			language.IT:      "Italek",
+			language.JA:      "Japanek",
+			language.KW:      "kernewek",
+			language.NL:      "Iseldiryek",
+			language.PT:      "Portyngalek",
+			language.PT_PT:   "Portyngalek (Ewrop)",
+			language.RO_MD:   "Moldavek",
+			language.RU:      "Russek",
+			language.YUE:     "Kantonek",
+			language.ZH:      "Chinek",
+			language.ZH_HANS: "Chinek sempelhes",
+			language.ZH_HANT: "Chinek hengovek",
+		},
+		Territories: cldr.Territories{
+			territory.V_001: "An Bys",
+			territory.V_002: "Afrika",
+			territory.V_003: "Amerika Gledh",
+			territory.V_019: "An Amerikas",
+			territory.V_142: "Asi",
+			territory.V_150: "Europa",
+			territory.BR:    "Brasil",
+			territory.CN:    "China",
+			territory.DE:    "Almayn",
+			territory.EU:    "Unyans Europek",
+			territory.FR:    "Pow Frenk",
+			territory.GB:    "Rywvaneth Unys",
+			territory.IN:    "Eynda",
+			territory.IT:    "Itali",
+			territory.JP:    "Japan",
+			territory.RU:    "Russi",
+			territory.UN:    "Kenedhlow Unys",
+			territory.US:    "Statys Unys",
 		},
 	}
 }

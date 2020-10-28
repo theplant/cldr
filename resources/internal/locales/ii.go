@@ -4,6 +4,8 @@ package locales
 import (
 	"github.com/razor-1/cldr"
 	"github.com/razor-1/cldr/resources/currency"
+	"github.com/razor-1/cldr/resources/language"
+	"github.com/razor-1/cldr/resources/territory"
 )
 
 func Get_ii() *cldr.Locale {
@@ -117,6 +119,35 @@ func Get_ii() *cldr.Locale {
 				currency.ZAR: cldr.Currency{DisplayName: "", Symbol: "R"},
 				currency.ZMW: cldr.Currency{DisplayName: "", Symbol: "ZK"},
 			},
+		},
+		Languages: cldr.Languages{
+			language.DE:      "ꄓꇩꉙ",
+			language.EN:      "ꑱꇩꉙ",
+			language.ES:      "ꑭꀠꑸꉙ",
+			language.FR:      "ꃔꇩꉙ",
+			language.II:      "ꆈꌠꉙ",
+			language.IT:      "ꑴꄊꆺꉙ",
+			language.JA:      "ꏝꀪꉙ",
+			language.PT:      "ꁍꄨꑸꉙ",
+			language.PT_BR:   "ꀠꑟꁍꄨꑸꉙ",
+			language.RU:      "ꊉꇩꉙ",
+			language.UND:     "ꅉꀋꌠꅇꂷ",
+			language.ZH:      "ꍏꇩꉙ",
+			language.ZH_HANS: "ꈝꐯꍏꇩꉙ",
+			language.ZH_HANT: "ꀎꋏꍏꇩꉙ",
+		},
+		Territories: cldr.Territories{
+			territory.BR: "ꀠꑭ",
+			territory.CN: "ꍏꇩ",
+			territory.DE: "ꄓꇩ",
+			territory.FR: "ꃔꇩ",
+			territory.GB: "ꑱꇩ",
+			territory.IN: "ꑴꄗ",
+			territory.IT: "ꑴꄊꆺ",
+			territory.JP: "ꏝꀪ",
+			territory.RU: "ꊉꇆꌦ",
+			territory.US: "ꂰꇩ",
+			territory.ZZ: "ꃅꄷꅉꀋꐚꌠ",
 		},
 	}
 }

@@ -4,6 +4,8 @@ package locales
 import (
 	"github.com/razor-1/cldr"
 	"github.com/razor-1/cldr/resources/currency"
+	"github.com/razor-1/cldr/resources/language"
+	"github.com/razor-1/cldr/resources/territory"
 )
 
 func Get_mni_Beng() *cldr.Locale {
@@ -117,6 +119,45 @@ func Get_mni_Beng() *cldr.Locale {
 				currency.ZAR: cldr.Currency{DisplayName: "", Symbol: "R"},
 				currency.ZMW: cldr.Currency{DisplayName: "", Symbol: "ZK"},
 			},
+		},
+		Languages: cldr.Languages{
+			language.DE:      "জর্মন",
+			language.DE_AT:   "ওষ্ট্রিয়ান জর্মন",
+			language.DE_CH:   "স্বিজ হায় জর্মন",
+			language.EN:      "ইংলিস",
+			language.EN_AU:   "ওষ্ট্রেলিয়ান ইংলিস",
+			language.EN_CA:   "কানাদিয়ান ইংলিস",
+			language.EN_GB:   "য়ু কে ইংলিস",
+			language.EN_US:   "য়ু এস ইংলিস",
+			language.ES:      "স্পেনিস",
+			language.ES_419:  "লেটিন অমেরিকান স্পেনিস",
+			language.FR:      "ফ্রেঞ্চ",
+			language.FR_CA:   "কানাদিয়ান ফ্রেঞ্চ",
+			language.FR_CH:   "স্বিজ ফ্রেঞ্চ",
+			language.IT:      "ইটালিয়ান",
+			language.JA:      "জাপানিজ",
+			language.MNI:     "মৈতৈলোন্",
+			language.PT:      "পোর্টুগিজ",
+			language.PT_BR:   "ব্রাজিলিয়ান পোর্টুগিজ",
+			language.PT_PT:   "য়ুরোপিয়ান পোর্টুগিজ",
+			language.RU:      "রুসিয়ান",
+			language.UND:     "মশকখংদবা লোল",
+			language.ZH:      "চাইনিজ মন্দারিন",
+			language.ZH_HANS: "সিমপ্লিফাইদ মন্দারিন চাইনিজ",
+			language.ZH_HANT: "ত্রেদিস্নেল মন্দারিন চাইনিজ",
+		},
+		Territories: cldr.Territories{
+			territory.BR: "ব্রাজিল",
+			territory.CN: "চিনা",
+			territory.DE: "জর্মনি",
+			territory.FR: "ফ্রান্স",
+			territory.GB: "য়ুনাইটেদ কিংদম",
+			territory.IN: "ইন্দিয়া",
+			territory.IT: "ইটালি",
+			territory.JP: "জাপান",
+			territory.RU: "রুসিয়া",
+			territory.US: "য়ুনাইটেদ ষ্টেটস",
+			territory.ZZ: "মশকখংদবা লমদম",
 		},
 	}
 }

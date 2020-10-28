@@ -4,6 +4,8 @@ package locales
 import (
 	"github.com/razor-1/cldr"
 	"github.com/razor-1/cldr/resources/currency"
+	"github.com/razor-1/cldr/resources/language"
+	"github.com/razor-1/cldr/resources/territory"
 )
 
 func Get_nnh_CM() *cldr.Locale {
@@ -117,6 +119,28 @@ func Get_nnh_CM() *cldr.Locale {
 				currency.ZAR: cldr.Currency{DisplayName: "", Symbol: "R"},
 				currency.ZMW: cldr.Currency{DisplayName: "", Symbol: "ZK"},
 			},
+		},
+		Languages: cldr.Languages{
+			language.BAS: "Shwóŋò pʉa mbasǎ",
+			language.BAX: "Shwóŋò pamom",
+			language.BBJ: "Shwóŋò pʉa nzsekàʼa",
+			language.BFD: "Shwóŋò pafud",
+			language.BKM: "Shwóŋò pʉ̀a njinikom",
+			language.BSS: "Shwóŋò pakɔsi",
+			language.BUM: "Shwóŋò mbulu",
+			language.BYV: "Shwóŋò ngáŋtÿɔʼ",
+			language.DE:  "nzǎmɔ̂ɔn",
+			language.EN:  "ngilísè",
+			language.EWO: "Shwóŋò pʉa Yɔɔnmendi",
+			language.FF:  "Shwóŋò menkesaŋ",
+			language.FR:  "felaŋsée",
+			language.KKJ: "Shwóŋò pʉa shÿó Bɛgtùa",
+			language.NNH: "Shwóŋò ngiembɔɔn",
+			language.YAV: "Shwóŋò pʉa shÿó Mbafìa",
+			language.YBB: "Shwóŋò Tsaŋ",
+		},
+		Territories: cldr.Territories{
+			territory.CM: "Kàmalûm",
 		},
 	}
 }

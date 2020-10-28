@@ -4,6 +4,8 @@ package locales
 import (
 	"github.com/razor-1/cldr"
 	"github.com/razor-1/cldr/resources/currency"
+	"github.com/razor-1/cldr/resources/language"
+	"github.com/razor-1/cldr/resources/territory"
 )
 
 func Get_sd_Deva() *cldr.Locale {
@@ -117,6 +119,44 @@ func Get_sd_Deva() *cldr.Locale {
 				currency.ZAR: cldr.Currency{DisplayName: "", Symbol: "R"},
 				currency.ZMW: cldr.Currency{DisplayName: "", Symbol: "ZK"},
 			},
+		},
+		Languages: cldr.Languages{
+			language.DE:      "जर्मन",
+			language.DE_AT:   "आसट्रियन जो जर्मन",
+			language.DE_CH:   "स्विसु हाई जर्मनु",
+			language.EN:      "अंगरेज़ी",
+			language.EN_AU:   "ऑसटेलियन अंगरेज़ी",
+			language.EN_CA:   "केनेडियन अंगरेज़ी",
+			language.EN_GB:   "यूके जी अंगरेज़ी",
+			language.EN_US:   "यूएस जी अंगरेज़ी",
+			language.ES:      "स्पेनिश",
+			language.ES_419:  "लैटिणु अमिरिकी स्पेन वारो",
+			language.ES_ES:   "यूरोपियन स्पेनी",
+			language.ES_MX:   "मैक्सिकन स्पेनिश",
+			language.FR:      "फ़्रांस जी ॿोली",
+			language.IT:      "इटालियनु",
+			language.JA:      "जापानीज़",
+			language.PT:      "पुर्तगीज़",
+			language.PT_PT:   ".यूरोपी पुर्तगीज़",
+			language.RU:      "रशियनु",
+			language.SD:      "सिन्धी",
+			language.UND:     "अणवाकुफु भाषा",
+			language.ZH:      "चीनी,मेंडारिन",
+			language.ZH_HANS: "सवली मेंडिरिन चीनी",
+			language.ZH_HANT: "रवायती मेंडिरिन चीनी",
+		},
+		Territories: cldr.Territories{
+			territory.BR: "ब्राजील",
+			territory.CN: "चाइना",
+			territory.DE: "जर्मनी",
+			territory.FR: "फ़्रांस",
+			territory.GB: "यूनाइटेड किंगडम",
+			territory.IN: "भारत",
+			territory.IT: "इटली",
+			territory.JP: "जापान",
+			territory.RU: "रशिया",
+			territory.US: "अमेरिका",
+			territory.ZZ: "अणवाकुफु इलाको",
 		},
 	}
 }

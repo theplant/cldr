@@ -4,6 +4,8 @@ package locales
 import (
     "{{.CLDRPackage}}"
     "{{.CLDRPackage}}/resources/currency"
+    "{{.CLDRPackage}}/resources/language"
+    "{{.CLDRPackage}}/resources/territory"
 )
 
 func Get_{{.LocaleCode}}() *cldr.Locale {
@@ -18,6 +20,16 @@ func Get_{{.LocaleCode}}() *cldr.Locale {
                 currency.{{$curCode}}: {{printf "%#v" $currency}},
                 {{end}}
             },
+        },
+        Languages: cldr.Languages{
+            {{range $lang, $locLang := .Languages -}}
+            language.{{$lang | ToUpperIdent}}: {{printf "%#v" $locLang}},
+            {{end}}
+        },
+        Territories: cldr.Territories{
+            {{range $ter, $locTer := .Territories -}}
+            territory.{{$ter | ToUpperIdent}}: {{printf "%#v" $locTer}},
+            {{end}}
         },
     }
 }

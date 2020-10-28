@@ -4,6 +4,8 @@ package locales
 import (
 	"github.com/razor-1/cldr"
 	"github.com/razor-1/cldr/resources/currency"
+	"github.com/razor-1/cldr/resources/language"
+	"github.com/razor-1/cldr/resources/territory"
 )
 
 func Get_sat() *cldr.Locale {
@@ -117,6 +119,47 @@ func Get_sat() *cldr.Locale {
 				currency.ZAR: cldr.Currency{DisplayName: "", Symbol: "R"},
 				currency.ZMW: cldr.Currency{DisplayName: "", Symbol: "ZK"},
 			},
+		},
+		Languages: cldr.Languages{
+			language.DE:      "ᱡᱟᱨᱢᱟᱱ",
+			language.DE_AT:   "ᱚᱥᱴᱨᱤᱭᱟ ᱡᱟᱨᱢᱟᱱ",
+			language.DE_CH:   "ᱥᱩᱣᱤᱥ ᱦᱟᱤ ᱡᱟᱨᱢᱟᱱ",
+			language.EN:      "ᱟᱝᱜᱽᱨᱮᱡᱤ",
+			language.EN_AU:   "ᱚᱥᱴᱨᱮᱞᱤᱭᱟᱱ ᱟᱝᱜᱽᱨᱮᱡᱤ",
+			language.EN_CA:   "ᱠᱟᱱᱟᱰᱤᱭᱟᱱ ᱟᱝᱜᱽᱨᱮᱡᱤ",
+			language.EN_GB:   "ᱭᱩᱠᱮ ᱟᱝᱜᱽᱨᱮᱡᱤ",
+			language.EN_US:   "ᱭᱩᱮᱥ ᱟᱝᱜᱽᱨᱮᱡᱤ",
+			language.ES:      "ᱮᱥᱯᱮᱱᱤᱥ",
+			language.ES_419:  "ᱞᱮᱴᱤᱱ ᱟᱢᱮᱨᱤᱠᱟᱱ ᱮᱥᱯᱮᱱᱤᱥ",
+			language.ES_ES:   "ᱨᱩᱥᱤᱭᱟᱱ ᱮᱥᱯᱮᱱᱤᱥ",
+			language.ES_MX:   "ᱢᱮᱠᱥᱤᱠᱟᱱ ᱮᱥᱯᱮᱱᱤᱥ",
+			language.FR:      "ᱯᱷᱨᱮᱧᱪ",
+			language.FR_CA:   "ᱠᱟᱱᱟᱰᱤᱭᱟᱱ ᱯᱷᱨᱮᱧᱪ",
+			language.FR_CH:   "ᱥᱩᱣᱤᱥ ᱯᱷᱨᱮᱧᱪ",
+			language.IT:      "ᱤᱴᱟᱞᱤᱟᱱ",
+			language.JA:      "ᱡᱟᱯᱟᱱᱤ",
+			language.PT:      "ᱯᱩᱨᱛᱜᱟᱞᱤ",
+			language.PT_BR:   "ᱵᱨᱟᱡᱤᱞᱤᱭᱟᱱ ᱯᱩᱨᱛᱜᱟᱞᱤ",
+			language.PT_PT:   "ᱭᱩᱨᱚᱯᱤᱭᱟᱱ ᱯᱩᱨᱛᱜᱟᱞᱤ",
+			language.RU:      "ᱨᱩᱥᱤᱭᱟᱱ",
+			language.SAT:     "ᱥᱟᱱᱛᱟᱲᱤ",
+			language.UND:     "ᱵᱟᱝ ᱩᱨᱩᱢ ᱯᱟᱹᱨᱥᱤ",
+			language.ZH:      "ᱪᱟᱭᱱᱤᱡᱽ, ᱢᱟᱱᱰᱟᱨᱤᱱ",
+			language.ZH_HANS: "ᱟᱞᱜᱟᱣᱟᱠᱟᱱ ᱢᱟᱫᱟᱨᱤᱱ ᱪᱟᱭᱱᱤᱡᱽ",
+			language.ZH_HANT: "ᱴᱨᱮᱰᱤᱥᱱᱟᱞ ᱢᱟᱫᱟᱨᱤᱱ ᱪᱟᱭᱱᱤᱡᱽ",
+		},
+		Territories: cldr.Territories{
+			territory.BR: "ᱵᱨᱟᱡᱤᱞ",
+			territory.CN: "ᱪᱤᱱ",
+			territory.DE: "ᱡᱟᱨᱢᱟᱱᱤ",
+			territory.FR: "ᱯᱷᱨᱟᱱᱥ",
+			territory.GB: "ᱭᱩᱱᱤᱭᱴᱮᱰ ᱠᱤᱝᱰᱚᱢ",
+			territory.IN: "ᱤᱱᱰᱤᱭᱟ",
+			territory.IT: "ᱤᱴᱞᱤ",
+			territory.JP: "ᱡᱟᱯᱟᱱ",
+			territory.RU: "ᱨᱩᱥ",
+			territory.US: "ᱭᱩᱱᱟᱭᱴᱮᱰ ᱮᱥᱴᱮᱴ",
+			territory.ZZ: "ᱵᱟᱝᱩᱨᱩᱢ ᱴᱚᱴᱷᱟ",
 		},
 	}
 }

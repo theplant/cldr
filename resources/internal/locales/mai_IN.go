@@ -4,6 +4,8 @@ package locales
 import (
 	"github.com/razor-1/cldr"
 	"github.com/razor-1/cldr/resources/currency"
+	"github.com/razor-1/cldr/resources/language"
+	"github.com/razor-1/cldr/resources/territory"
 )
 
 func Get_mai_IN() *cldr.Locale {
@@ -117,6 +119,47 @@ func Get_mai_IN() *cldr.Locale {
 				currency.ZAR: cldr.Currency{DisplayName: "", Symbol: "R"},
 				currency.ZMW: cldr.Currency{DisplayName: "", Symbol: "ZK"},
 			},
+		},
+		Languages: cldr.Languages{
+			language.DE:      "जर्मन",
+			language.DE_AT:   "ऑस्ट्रियाई जर्मन",
+			language.DE_CH:   "स्विस उच्च जर्मन",
+			language.EN:      "अंग्रेज़ी",
+			language.EN_AU:   "ऑस्ट्रेलियाई अंग्रेज़ी",
+			language.EN_CA:   "कनाडाई अंग्रेज़ी",
+			language.EN_GB:   "यू॰के॰ अंग्रेज़ी",
+			language.EN_US:   "अमेरिकी अंग्रेज़ी",
+			language.ES:      "स्पेनी",
+			language.ES_419:  "लैटिन अमेरिकी स्पेनिश",
+			language.ES_ES:   "यूरोपीय स्पेनिश",
+			language.ES_MX:   "मैक्सिकन स्पेनिश",
+			language.FR:      "फ़्रेंच",
+			language.FR_CA:   "कनाडाई फ़्रेंच",
+			language.FR_CH:   "स्विस फ़्रेंच",
+			language.IT:      "इतालवी",
+			language.JA:      "जापानी",
+			language.MAI:     "मैथिली",
+			language.PT:      "पुर्तगाली",
+			language.PT_BR:   "ब्राज़ीली पुर्तगाली",
+			language.PT_PT:   "यूरोपीय पुर्तगाली",
+			language.RU:      "रूसी",
+			language.UND:     "अज्ञात भाषा",
+			language.ZH:      "चीनी, मैंडेरिन",
+			language.ZH_HANS: "सरलीकृत मैंडेरिन चीनी",
+			language.ZH_HANT: "पारंपरिक मैंडेरिन चीनी",
+		},
+		Territories: cldr.Territories{
+			territory.BR: "ब्राज़ील",
+			territory.CN: "चीन",
+			territory.DE: "जर्मनी",
+			territory.FR: "फ़्रांस",
+			territory.GB: "यूनाइटेड किंगडम",
+			territory.IN: "भारत",
+			territory.IT: "इटली",
+			territory.JP: "जापान",
+			territory.RU: "रूस",
+			territory.US: "संयुक्त राज्य",
+			territory.ZZ: "अज्ञात क्षेत्र",
 		},
 	}
 }

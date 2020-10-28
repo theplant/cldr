@@ -4,6 +4,8 @@ package locales
 import (
 	"github.com/razor-1/cldr"
 	"github.com/razor-1/cldr/resources/currency"
+	"github.com/razor-1/cldr/resources/language"
+	"github.com/razor-1/cldr/resources/territory"
 )
 
 func Get_bem_ZM() *cldr.Locale {
@@ -117,6 +119,56 @@ func Get_bem_ZM() *cldr.Locale {
 				currency.ZAR: cldr.Currency{DisplayName: "", Symbol: "R"},
 				currency.ZMW: cldr.Currency{DisplayName: "", Symbol: "K"},
 			},
+		},
+		Languages: cldr.Languages{
+			language.AK:  "Ichi Akan",
+			language.AM:  "Ichi Amhari",
+			language.AR:  "Ichi Arab",
+			language.BE:  "Ichi Belarus",
+			language.BEM: "Ichibemba",
+			language.BG:  "Ichi Bulgariani",
+			language.BN:  "Ichi Bengali",
+			language.CS:  "Ichi Cheki",
+			language.DE:  "Ichi Jemani",
+			language.EL:  "Ichi Griki",
+			language.EN:  "Ichi Sungu",
+			language.ES:  "Ichi Spanishi",
+			language.FA:  "Ichi Pesia",
+			language.FR:  "Ichi Frenchi",
+			language.HA:  "Ichi Hausa",
+			language.HI:  "Ichi Hindu",
+			language.HU:  "Ichi Hangarian",
+			language.ID:  "Ichi Indonesiani",
+			language.IG:  "Ichi Ibo",
+			language.IT:  "Ichi Italiani",
+			language.JA:  "Ichi Japanisi",
+			language.JV:  "Ichi Javanisi",
+			language.KM:  "Ichi Khmer",
+			language.KO:  "Ichi Koriani",
+			language.MS:  "Ichi Maleshani",
+			language.MY:  "Ichi Burma",
+			language.NE:  "Ichi Nepali",
+			language.NL:  "Ichi Dachi",
+			language.PA:  "Ichi Punjabi",
+			language.PL:  "Ichi Polishi",
+			language.PT:  "Ichi Potogisi",
+			language.RO:  "Ichi Romaniani",
+			language.RU:  "Ichi Rusiani",
+			language.RW:  "Ichi Rwanda",
+			language.SO:  "Ichi Somalia",
+			language.SV:  "Ichi Swideni",
+			language.TA:  "Ichi Tamil",
+			language.TH:  "Ichi Thai",
+			language.TR:  "Ichi Takishi",
+			language.UK:  "Ichi Ukraniani",
+			language.UR:  "Ichi Urudu",
+			language.VI:  "Ichi Vietinamu",
+			language.YO:  "Ichi Yoruba",
+			language.ZH:  "Ichi Chainisi",
+			language.ZU:  "Ichi Zulu",
+		},
+		Territories: cldr.Territories{
+			territory.ZM: "Zambia",
 		},
 	}
 }

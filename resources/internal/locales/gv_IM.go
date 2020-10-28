@@ -4,6 +4,8 @@ package locales
 import (
 	"github.com/razor-1/cldr"
 	"github.com/razor-1/cldr/resources/currency"
+	"github.com/razor-1/cldr/resources/language"
+	"github.com/razor-1/cldr/resources/territory"
 )
 
 func Get_gv_IM() *cldr.Locale {
@@ -117,6 +119,13 @@ func Get_gv_IM() *cldr.Locale {
 				currency.ZAR: cldr.Currency{DisplayName: "", Symbol: "R"},
 				currency.ZMW: cldr.Currency{DisplayName: "", Symbol: "ZK"},
 			},
+		},
+		Languages: cldr.Languages{
+			language.GV: "Gaelg",
+		},
+		Territories: cldr.Territories{
+			territory.GB: "Rywvaneth Unys",
+			territory.IM: "Ellan Vannin",
 		},
 	}
 }

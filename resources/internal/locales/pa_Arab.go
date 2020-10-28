@@ -4,6 +4,8 @@ package locales
 import (
 	"github.com/razor-1/cldr"
 	"github.com/razor-1/cldr/resources/currency"
+	"github.com/razor-1/cldr/resources/language"
+	"github.com/razor-1/cldr/resources/territory"
 )
 
 func Get_pa_Arab() *cldr.Locale {
@@ -117,6 +119,12 @@ func Get_pa_Arab() *cldr.Locale {
 				currency.ZAR: cldr.Currency{DisplayName: "", Symbol: "R"},
 				currency.ZMW: cldr.Currency{DisplayName: "", Symbol: "ZK"},
 			},
+		},
+		Languages: cldr.Languages{
+			language.PA: "پنجابی",
+		},
+		Territories: cldr.Territories{
+			territory.PK: "پاکستان",
 		},
 	}
 }

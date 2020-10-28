@@ -4,6 +4,8 @@ package locales
 import (
 	"github.com/razor-1/cldr"
 	"github.com/razor-1/cldr/resources/currency"
+	"github.com/razor-1/cldr/resources/language"
+	"github.com/razor-1/cldr/resources/territory"
 )
 
 func Get_vo() *cldr.Locale {
@@ -117,6 +119,38 @@ func Get_vo() *cldr.Locale {
 				currency.ZAR: cldr.Currency{DisplayName: "", Symbol: "R"},
 				currency.ZMW: cldr.Currency{DisplayName: "", Symbol: "ZK"},
 			},
+		},
+		Languages: cldr.Languages{
+			language.DE: "Deutänapük",
+			language.EN: "Linglänapük",
+			language.EO: "Sperantapük",
+			language.ES: "Spanyänapük",
+			language.FR: "Fransänapük",
+			language.IT: "Litaliyänapük",
+			language.JA: "Yapänapük",
+			language.PT: "Portugänapük",
+			language.RU: "Rusänapük",
+			language.VO: "Volapük",
+			language.ZH: "Tsyinänapük",
+		},
+		Territories: cldr.Territories{
+			territory.BR: "Brasilän",
+			territory.CN: "Tsyinän",
+			territory.DE: "Deutän",
+			territory.ES: "Spanyän",
+			territory.FR: "Fransän",
+			territory.GB: "Regän Pebalöl",
+			territory.GE: "Grusiyän",
+			territory.GR: "Grikän",
+			territory.IN: "Lindän",
+			territory.IT: "Litaliyän",
+			territory.JP: "Yapän",
+			territory.MX: "Mäxikän",
+			territory.NR: "Naureän",
+			territory.PT: "Portugän",
+			territory.PW: "Palauäns",
+			territory.RU: "Rusän",
+			territory.US: "Lamerikän",
 		},
 	}
 }
