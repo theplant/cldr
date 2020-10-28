@@ -4,7 +4,7 @@ go 1.14
 
 require (
 	github.com/imdario/mergo v0.3.10
-	github.com/razor-1/cldr/resources v0.1.9
+	github.com/razor-1/cldr/resources v0.1.10
 	github.com/stretchr/testify v1.6.1
 	golang.org/x/text v0.3.3
 )
