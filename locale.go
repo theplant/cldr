@@ -4,11 +4,16 @@ package cldr
 
 import "golang.org/x/text/feature/plural"
 
+type Languages map[string]string
+type Territories map[string]string
+
 type Locale struct {
-	Locale   string
-	Number   Number
-	Calendar Calendar
-	Plural   Plural
+	Locale      string
+	Number      Number
+	Calendar    Calendar
+	Plural      Plural
+	Languages   Languages
+	Territories Territories
 }
 
 type Plural struct {
