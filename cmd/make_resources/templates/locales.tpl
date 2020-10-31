@@ -4,8 +4,8 @@ package locales
 import (
     "{{.CLDRPackage}}"
     "{{.CLDRPackage}}/resources/currency"
-    "{{.CLDRPackage}}/resources/language"
-    "{{.CLDRPackage}}/resources/territory"
+    {{if .Territories}}"{{.CLDRPackage}}/resources/territory"{{end}}
+    {{if .Languages}}"{{.CLDRPackage}}/resources/language"{{end}}
 )
 
 func Get_{{.LocaleCode}}() *cldr.Locale {
