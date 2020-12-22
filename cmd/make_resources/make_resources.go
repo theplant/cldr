@@ -47,6 +47,13 @@ type templateData struct {
 	Territories   Territories
 }
 
+type aggregateData struct {
+	Currencies  i18n.Currencies
+	Languages   Languages
+	Territories Territories
+	mutex       sync.Mutex
+}
+
 //makePath is a helper to create a path if needed, and panic if MkdirAll encounters an error
 func makePath(path string) {
 	if _, err := os.Stat(path); err != nil {
@@ -73,6 +80,15 @@ func main() {
 	// some locales seem to show up in plural rules but not in common/main...keep track of everything in allLocales
 	for loc := range pluralLocales {
 		localeData.Locales[loc] = true
+	}
+
+	//aggregate stores everything we've seen across all locales
+	//this ensures that we generate our constants packages with all needed data
+	aggregate := aggregateData{
+		Currencies:  make(i18n.Currencies, 500),
+		Languages:   make(Languages, 500),
+		Territories: make(Territories, 500),
+		mutex:       sync.Mutex{},
 	}
 
 	var wg sync.WaitGroup
@@ -103,36 +119,47 @@ func main() {
 				panic(err)
 			}
 
-			if locale == "en" {
-				//create the currency, language and territory constants.
-				//we only need to do this once; picking a common locale (english)
-				currencyPath := filepath.Join(resourcesDir, currencyDir)
-				makePath(currencyPath)
-				currencyFile := filepath.Join(currencyPath, "currency.go")
-				err = executeAndWrite(filepath.Join(templatesDir, "currency.tpl"), tplData.Currencies, currencyFile)
-				if err != nil {
-					panic(err)
-				}
-
-				languagePath := filepath.Join(resourcesDir, languageDir)
-				makePath(languagePath)
-				languageFile := filepath.Join(languagePath, "language.go")
-				err = executeAndWrite(filepath.Join(templatesDir, "language.tpl"), tplData.Languages, languageFile)
-				if err != nil {
-					panic(err)
-				}
-
-				territoryPath := filepath.Join(resourcesDir, territoryDir)
-				makePath(territoryPath)
-				territoryFile := filepath.Join(territoryPath, "territory.go")
-				err = executeAndWrite(filepath.Join(templatesDir, "territory.tpl"), tplData.Territories, territoryFile)
-				if err != nil {
-					panic(err)
-				}
+			// add this locale's info into the aggregate
+			aggregate.mutex.Lock()
+			defer aggregate.mutex.Unlock()
+			for k, v := range tplData.Currencies {
+				aggregate.Currencies[k] = v
 			}
+			for k, v := range tplData.Languages {
+				aggregate.Languages[k] = v
+			}
+			for k, v := range tplData.Territories {
+				aggregate.Territories[k] = v
+			}
+
 		}(locale, number)
 	}
 	wg.Wait()
+
+	//create the currency, language and territory constants
+	currencyPath := filepath.Join(resourcesDir, currencyDir)
+	makePath(currencyPath)
+	currencyFile := filepath.Join(currencyPath, "currency.go")
+	err = executeAndWrite(filepath.Join(templatesDir, "currency.tpl"), aggregate.Currencies, currencyFile)
+	if err != nil {
+		panic(err)
+	}
+
+	languagePath := filepath.Join(resourcesDir, languageDir)
+	makePath(languagePath)
+	languageFile := filepath.Join(languagePath, "language.go")
+	err = executeAndWrite(filepath.Join(templatesDir, "language.tpl"), aggregate.Languages, languageFile)
+	if err != nil {
+		panic(err)
+	}
+
+	territoryPath := filepath.Join(resourcesDir, territoryDir)
+	makePath(territoryPath)
+	territoryFile := filepath.Join(territoryPath, "territory.go")
+	err = executeAndWrite(filepath.Join(templatesDir, "territory.tpl"), aggregate.Territories, territoryFile)
+	if err != nil {
+		panic(err)
+	}
 
 	//create a mapping of a locale to which tag to use for plurals. this ensures that all the locales, not just the
 	//ones in the CLDR with plural rules, have them populated.

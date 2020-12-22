@@ -165,9 +165,7 @@ func processNumbers(ldmlNumbers *cldr.Numbers) (number i18n.Number) {
 			}
 		}
 	}
-	//if len(ldmlNumbers.CurrencyFormats) > 0 && len(ldmlNumbers.CurrencyFormats[0].CurrencyFormatLength) > 0 {
-	//	number.Formats.Currency = ldmlNumbers.CurrencyFormats[0].CurrencyFormatLength[0].CurrencyFormat[0].Pattern[0].Data()
-	//}
+
 	if len(ldmlNumbers.PercentFormats) > 0 && len(ldmlNumbers.PercentFormats[0].PercentFormatLength) > 0 {
 		number.Formats.Percent = ldmlNumbers.PercentFormats[0].PercentFormatLength[0].PercentFormat[0].Pattern[0].Data()
 	}

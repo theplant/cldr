@@ -44,6 +44,7 @@ const (
 	AWA     = "awa"
 	AY      = "ay"
 	AZ      = "az"
+	AZ_ARAB = "az_Arab"
 	BA      = "ba"
 	BAL     = "bal"
 	BAN     = "ban"
