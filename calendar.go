@@ -80,53 +80,65 @@ type datetimePatternComponent struct {
 	componentType int
 }
 
+//FmtDateFull returns the full date format for the calendar
 func (c Calendar) FmtDateFull(t time.Time) (string, error) {
 	return c.Format(t, c.Formats.Date.Full)
 }
 
+//FmtDateLong returns the full date format for the calendar
 func (c Calendar) FmtDateLong(t time.Time) (string, error) {
 	return c.Format(t, c.Formats.Date.Long)
 }
 
+//FmtDateMedium returns the full date format for the calendar
 func (c Calendar) FmtDateMedium(t time.Time) (string, error) {
 	return c.Format(t, c.Formats.Date.Medium)
 }
 
+//FmtDateShort returns the full date format for the calendar
 func (c Calendar) FmtDateShort(t time.Time) (string, error) {
 	return c.Format(t, c.Formats.Date.Short)
 }
 
+//FmtTimeFull returns the full date format for the calendar
 func (c Calendar) FmtTimeFull(t time.Time) (string, error) {
 	return c.Format(t, c.Formats.Time.Full)
 }
 
+//FmtTimeLong returns the full date format for the calendar
 func (c Calendar) FmtTimeLong(t time.Time) (string, error) {
 	return c.Format(t, c.Formats.Time.Long)
 }
 
+//FmtTimeMedium returns the full date format for the calendar
 func (c Calendar) FmtTimeMedium(t time.Time) (string, error) {
 	return c.Format(t, c.Formats.Time.Medium)
 }
 
+//FmtTimeShort returns the full date format for the calendar
 func (c Calendar) FmtTimeShort(t time.Time) (string, error) {
 	return c.Format(t, c.Formats.Time.Short)
 }
 
+//FmtDateTimeFull returns the full date format for the calendar
 func (c Calendar) FmtDateTimeFull(t time.Time) (string, error) {
 	pattern := getDateTimePattern(c.Formats.DateTime.Full, c.Formats.Date.Full, c.Formats.Time.Full)
 	return c.Format(t, pattern)
 }
 
+//FmtDateTimeLong returns the full date format for the calendar
 func (c Calendar) FmtDateTimeLong(t time.Time) (string, error) {
 	pattern := getDateTimePattern(c.Formats.DateTime.Long, c.Formats.Date.Long, c.Formats.Time.Long)
 	return c.Format(t, pattern)
 }
 
+//FmtDateTimeMedium returns the full date format for the calendar
 func (c Calendar) FmtDateTimeMedium(t time.Time) (string, error) {
 	pattern := getDateTimePattern(c.Formats.DateTime.Medium, c.Formats.Date.Medium, c.Formats.Time.Medium)
 	return c.Format(t, pattern)
 }
 
+//FmtDateTimeShort returns the full date format for the calendar
 func (c Calendar) FmtDateTimeShort(t time.Time) (string, error) {
 	pattern := getDateTimePattern(c.Formats.DateTime.Short, c.Formats.Date.Short, c.Formats.Time.Short)
 	return c.Format(t, pattern)

@@ -43,14 +43,14 @@ type templateData struct {
 	NumberFormats i18n.NumberFormats
 	Calendar      i18n.Calendar
 	Currencies    i18n.Currencies
-	Languages     Languages
-	Territories   Territories
+	Languages     languages
+	Territories   territories
 }
 
 type aggregateData struct {
 	Currencies  i18n.Currencies
-	Languages   Languages
-	Territories Territories
+	Languages   languages
+	Territories territories
 	mutex       sync.Mutex
 }
 
@@ -86,8 +86,8 @@ func main() {
 	//this ensures that we generate our constants packages with all needed data
 	aggregate := aggregateData{
 		Currencies:  make(i18n.Currencies, 500),
-		Languages:   make(Languages, 500),
-		Territories: make(Territories, 500),
+		Languages:   make(languages, 500),
+		Territories: make(territories, 500),
 		mutex:       sync.Mutex{},
 	}
 
@@ -172,7 +172,7 @@ func main() {
 
 	type allTemplateData struct {
 		CLDRPackage      string
-		Numbers          Numbers
+		Numbers          numbers
 		Tags             map[string]bool
 		PluralLocaleTags map[string]string
 	}

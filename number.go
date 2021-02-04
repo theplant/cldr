@@ -31,7 +31,7 @@ type numberFormat struct {
 var (
 	// prefixSuffixRegex is a regular expression that is used to parse number
 	// formats
-	prefixSuffixRegex = regexp.MustCompile(`(.*?)[#,\.0]+(.*)`)
+	prefixSuffixRegex = regexp.MustCompile(`(.*?)[#,.0]+(.*)`)
 )
 
 // FmtCurrency takes a float number and a currency key and returns a string
@@ -85,19 +85,19 @@ func (n Number) FmtCurrencyAccountingWhole(currency string, number float64) (for
 	return
 }
 
-// FormatNumber takes a float number and returns a properly formatted string
+// FmtNumber takes a float number and returns a properly formatted string
 // representation of that number according to the locale's number format.
 func (n Number) FmtNumber(number float64) string {
 	return n.formatNumber(n.parseFormat(n.Formats.Decimal, true), number)
 }
 
-// FormatNumberWhole does exactly what FormatNumber does, but it leaves off any
+// FmtNumberWhole does exactly what FormatNumber does, but it leaves off any
 // decimal places. AKA, it would return 100 rather than 100.01.
 func (n Number) FmtNumberWhole(number float64) string {
 	return n.formatNumber(n.parseFormat(n.Formats.Decimal, false), number)
 }
 
-// FormatPercent takes a float number and returns a properly formatted string
+// FmtPercent takes a float number and returns a properly formatted string
 // representation of that number as a percentage according to the locale's
 // percentage format.
 func (n Number) FmtPercent(number float64) string {
@@ -120,7 +120,7 @@ func (n Number) parseFormat(pattern string, includeDecimalDigits bool) *numberFo
 	}
 
 	// default values for negative prefix & suffix
-	format.negativePrefix = string(n.Symbols.Negative) + string(format.positivePrefix)
+	format.negativePrefix = n.Symbols.Negative + format.positivePrefix
 	format.negativeSuffix = format.positiveSuffix
 
 	// see if they are in the pattern
@@ -139,13 +139,7 @@ func (n Number) parseFormat(pattern string, includeDecimalDigits bool) *numberFo
 
 	pat := patterns[0]
 
-	if strings.Index(pat, "%") != -1 {
-		format.multiplier = 100
-	} else if strings.Index(pat, "‰") != -1 {
-		format.multiplier = 1000
-	} else {
-		format.multiplier = 1
-	}
+	format.multiplier = getFormatMultiplier(pat)
 
 	pos := strings.Index(pat, ".")
 
@@ -189,6 +183,17 @@ func (n Number) parseFormat(pattern string, includeDecimalDigits bool) *numberFo
 	}
 
 	return format
+}
+
+//getFormatMultiplier returns the multiplier to use based on the pattern
+func getFormatMultiplier(pat string) int {
+	if strings.Contains(pat, "%") {
+		return 100
+	} else if strings.Contains(pat, "‰") {
+		return 1000
+	}
+
+	return 1
 }
 
 // formatNumber takes an arbitrary numberFormat and a number and applies that
