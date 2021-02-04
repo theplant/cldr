@@ -21,7 +21,8 @@ func pluralRules(data *cldr.SupplementalData) map[string]string {
 	pluralGroupsCardinal := make([]PluralGroup, 0, 50)
 	pluralLocales := make(map[string]bool, 250)
 	for _, plurals := range data.Plurals {
-		pluralGroup := new([]PluralGroup)
+		var pluralGroup *[]PluralGroup
+		//pluralGroup := new([]PluralGroup)
 		switch plurals.Type {
 		//case pluralTypeOrdinal:
 		//	pluralGroup = &pluralGroupsOrdinal

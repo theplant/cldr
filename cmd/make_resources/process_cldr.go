@@ -14,27 +14,27 @@ const (
 	defaultGMTFormat = "GMT{0}"
 )
 
-type LocaleData struct {
+type localeData struct {
 	Locales     map[string]bool
-	Numbers     Numbers
-	Calendars   Calendars
-	Languages   map[string]Languages
-	Territories map[string]Territories
+	Numbers     numbers
+	Calendars   calendars
+	Languages   map[string]languages
+	Territories map[string]territories
 }
 
-type Numbers map[string]i18n.Number
-type Calendars map[string]i18n.Calendar
-type Languages map[string]string
-type Territories map[string]string
+type numbers map[string]i18n.Number
+type calendars map[string]i18n.Calendar
+type languages map[string]string
+type territories map[string]string
 
-func processCLDR(unicodeCLDR *cldr.CLDR) *LocaleData {
+func processCLDR(unicodeCLDR *cldr.CLDR) *localeData {
 	//size based on a check on 2020-07-25 of how many entries they ended up with: 464 numbers, 358 calendars
-	localeData := LocaleData{
+	localeData := localeData{
 		Locales:     make(map[string]bool, len(unicodeCLDR.Locales())),
-		Numbers:     make(Numbers, 500),
-		Calendars:   make(Calendars, 400),
-		Languages:   make(map[string]Languages, 500),
-		Territories: make(map[string]Territories, 350),
+		Numbers:     make(numbers, 500),
+		Calendars:   make(calendars, 400),
+		Languages:   make(map[string]languages, 500),
+		Territories: make(map[string]territories, 350),
 	}
 
 	//quick & easy way to know if a locale exists
@@ -55,7 +55,7 @@ func processCLDR(unicodeCLDR *cldr.CLDR) *LocaleData {
 //so that information from parent locales is inherited. This isn't perfect and doesn't obey all the rules described in
 //http://unicode.org/reports/tr35/#Common_Elements, but it should do a pretty good job most of the time.
 func getCLDRData(allLocales map[string]bool, unicodeCLDR *cldr.CLDR, loc string) (number i18n.Number,
-	calendar i18n.Calendar, languages Languages, territories Territories) {
+	calendar i18n.Calendar, languages languages, territories territories) {
 	ldml := unicodeCLDR.RawLDML(loc)
 	number = processNumbers(ldml.Numbers)
 	calendar = processCalendar(ldml)
@@ -130,28 +130,35 @@ func findParentLocale(loc string, allLocales map[string]bool) (parentLoc string,
 	return findParentLocale(parentLoc, allLocales)
 }
 
+func getNumberSymbols(ldmlNumbers *cldr.Numbers) (symbol i18n.Symbols) {
+	if len(ldmlNumbers.Symbols) > 0 {
+		ldmlSymbol := ldmlNumbers.Symbols[0]
+		if len(ldmlSymbol.Decimal) > 0 {
+			symbol.Decimal = ldmlSymbol.Decimal[0].Data()
+		}
+		if len(ldmlSymbol.Group) > 0 {
+			symbol.Group = ldmlSymbol.Group[0].Data()
+		}
+		if len(ldmlSymbol.MinusSign) > 0 {
+			symbol.Negative = ldmlSymbol.MinusSign[0].Data()
+		}
+		if len(ldmlSymbol.PercentSign) > 0 {
+			symbol.Percent = ldmlSymbol.PercentSign[0].Data()
+		}
+		if len(ldmlSymbol.PerMille) > 0 {
+			symbol.PerMille = ldmlSymbol.PerMille[0].Data()
+		}
+	}
+
+	return
+}
+
 func processNumbers(ldmlNumbers *cldr.Numbers) (number i18n.Number) {
 	if ldmlNumbers == nil {
 		return
 	}
-	if len(ldmlNumbers.Symbols) > 0 {
-		symbol := ldmlNumbers.Symbols[0]
-		if len(symbol.Decimal) > 0 {
-			number.Symbols.Decimal = symbol.Decimal[0].Data()
-		}
-		if len(symbol.Group) > 0 {
-			number.Symbols.Group = symbol.Group[0].Data()
-		}
-		if len(symbol.MinusSign) > 0 {
-			number.Symbols.Negative = symbol.MinusSign[0].Data()
-		}
-		if len(symbol.PercentSign) > 0 {
-			number.Symbols.Percent = symbol.PercentSign[0].Data()
-		}
-		if len(symbol.PerMille) > 0 {
-			number.Symbols.PerMille = symbol.PerMille[0].Data()
-		}
-	}
+	number.Symbols = getNumberSymbols(ldmlNumbers)
+
 	if len(ldmlNumbers.DecimalFormats) > 0 && len(ldmlNumbers.DecimalFormats[0].DecimalFormatLength) > 0 {
 		number.Formats.Decimal = ldmlNumbers.DecimalFormats[0].DecimalFormatLength[0].DecimalFormat[0].Pattern[0].Data()
 	}
@@ -187,180 +194,214 @@ func processNumbers(ldmlNumbers *cldr.Numbers) (number i18n.Number) {
 }
 
 func processCalendar(ldml *cldr.LDML) (calendar i18n.Calendar) {
-	if ldml.Dates != nil && ldml.Dates.Calendars != nil {
-		ldmlCar := ldml.Dates.Calendars.Calendar[0]
-		for _, cal := range ldml.Dates.Calendars.Calendar {
-			if cal.Type == "gregorian" {
-				ldmlCar = cal
-			}
-		}
-		if ldml.Dates.TimeZoneNames != nil {
-			gmtFormat := ldml.Dates.TimeZoneNames.GmtFormat
-			if len(gmtFormat) > 0 && gmtFormat[0].CharData != "" {
-				calendar.Formats.GMT = gmtFormat[0].CharData
-			} else {
-				calendar.Formats.GMT = defaultGMTFormat
-			}
-		}
-		if ldmlCar.DateFormats != nil {
-			for _, datefmt := range ldmlCar.DateFormats.DateFormatLength {
-				switch datefmt.Type {
-				case dateTypeFull:
-					calendar.Formats.Date.Full = datefmt.DateFormat[0].Pattern[0].Data()
-				case dateTypeLong:
-					calendar.Formats.Date.Long = datefmt.DateFormat[0].Pattern[0].Data()
-				case dateTypeMedium:
-					calendar.Formats.Date.Medium = datefmt.DateFormat[0].Pattern[0].Data()
-				case dateTypeShort:
-					calendar.Formats.Date.Short = datefmt.DateFormat[0].Pattern[0].Data()
-				}
-			}
-		}
+	if ldml.Dates == nil || ldml.Dates.Calendars == nil {
+		return
+	}
 
-		if ldmlCar.TimeFormats != nil {
-			for _, datefmt := range ldmlCar.TimeFormats.TimeFormatLength {
-				switch datefmt.Type {
-				case dateTypeFull:
-					calendar.Formats.Time.Full = datefmt.TimeFormat[0].Pattern[0].Data()
-				case dateTypeLong:
-					calendar.Formats.Time.Long = datefmt.TimeFormat[0].Pattern[0].Data()
-				case dateTypeMedium:
-					calendar.Formats.Time.Medium = datefmt.TimeFormat[0].Pattern[0].Data()
-				case dateTypeShort:
-					calendar.Formats.Time.Short = datefmt.TimeFormat[0].Pattern[0].Data()
-				}
-			}
-		}
-		if ldmlCar.DateTimeFormats != nil {
-			for _, datefmt := range ldmlCar.DateTimeFormats.DateTimeFormatLength {
-				switch datefmt.Type {
-				case dateTypeFull:
-					calendar.Formats.DateTime.Full = datefmt.DateTimeFormat[0].Pattern[0].Data()
-				case dateTypeLong:
-					calendar.Formats.DateTime.Long = datefmt.DateTimeFormat[0].Pattern[0].Data()
-				case dateTypeMedium:
-					calendar.Formats.DateTime.Medium = datefmt.DateTimeFormat[0].Pattern[0].Data()
-				case dateTypeShort:
-					calendar.Formats.DateTime.Short = datefmt.DateTimeFormat[0].Pattern[0].Data()
-				}
-			}
-		}
-		if ldmlCar.Months != nil {
-			for _, monthctx := range ldmlCar.Months.MonthContext {
-				for _, months := range monthctx.MonthWidth {
-					var i18nMonth i18n.CalendarMonthFormatNameValue
-					for _, m := range months.Month {
-						switch m.Type {
-						case "1":
-							i18nMonth.Jan = m.Data()
-						case "2":
-							i18nMonth.Feb = m.Data()
-						case "3":
-							i18nMonth.Mar = m.Data()
-						case "4":
-							i18nMonth.Apr = m.Data()
-						case "5":
-							i18nMonth.May = m.Data()
-						case "6":
-							i18nMonth.Jun = m.Data()
-						case "7":
-							i18nMonth.Jul = m.Data()
-						case "8":
-							i18nMonth.Aug = m.Data()
-						case "9":
-							i18nMonth.Sep = m.Data()
-						case "10":
-							i18nMonth.Oct = m.Data()
-						case "11":
-							i18nMonth.Nov = m.Data()
-						case "12":
-							i18nMonth.Dec = m.Data()
-						}
-					}
-					switch months.Type {
-					case typeAbbreviated:
-						calendar.FormatNames.Months.Abbreviated = i18nMonth
-					case typeNarrow:
-						calendar.FormatNames.Months.Narrow = i18nMonth
-					case typeShort:
-						calendar.FormatNames.Months.Short = i18nMonth
-					case typeWide:
-						calendar.FormatNames.Months.Wide = i18nMonth
-					}
-				}
-			}
-		}
-		if ldmlCar.Days != nil {
-			for _, dayctx := range ldmlCar.Days.DayContext {
-				for _, days := range dayctx.DayWidth {
-					var i18nDay i18n.CalendarDayFormatNameValue
-					for _, d := range days.Day {
-						switch d.Type {
-						case "sun":
-							i18nDay.Sun = d.Data()
-						case "mon":
-							i18nDay.Mon = d.Data()
-						case "tue":
-							i18nDay.Tue = d.Data()
-						case "wed":
-							i18nDay.Wed = d.Data()
-						case "thu":
-							i18nDay.Thu = d.Data()
-						case "fri":
-							i18nDay.Fri = d.Data()
-						case "sat":
-							i18nDay.Sat = d.Data()
-						}
-					}
-					switch days.Type {
-					case typeAbbreviated:
-						calendar.FormatNames.Days.Abbreviated = i18nDay
-					case typeNarrow:
-						calendar.FormatNames.Days.Narrow = i18nDay
-					case typeShort:
-						calendar.FormatNames.Days.Short = i18nDay
-					case typeWide:
-						calendar.FormatNames.Days.Wide = i18nDay
-					}
-				}
-			}
-		}
-		if ldmlCar.DayPeriods != nil {
-			for _, ctx := range ldmlCar.DayPeriods.DayPeriodContext {
-				for _, width := range ctx.DayPeriodWidth {
-					var i18nPeriod i18n.CalendarPeriodFormatNameValue
-					for _, d := range width.DayPeriod {
-						switch d.Type {
-						case "am":
-							if i18nPeriod.AM == "" {
-								i18nPeriod.AM = d.Data()
-							}
-						case "pm":
-							if i18nPeriod.PM == "" {
-								i18nPeriod.PM = d.Data()
-							}
-						}
-					}
-					switch width.Type {
-					case typeAbbreviated:
-						calendar.FormatNames.Periods.Abbreviated = i18nPeriod
-					case typeNarrow:
-						calendar.FormatNames.Periods.Narrow = i18nPeriod
-					case typeShort:
-						calendar.FormatNames.Periods.Short = i18nPeriod
-					case typeWide:
-						calendar.FormatNames.Periods.Wide = i18nPeriod
-					}
-				}
-			}
+	ldmlCar := ldml.Dates.Calendars.Calendar[0]
+	for _, cal := range ldml.Dates.Calendars.Calendar {
+		if cal.Type == "gregorian" {
+			ldmlCar = cal
 		}
 	}
+
+	if ldml.Dates.TimeZoneNames != nil {
+		gmtFormat := ldml.Dates.TimeZoneNames.GmtFormat
+		if len(gmtFormat) > 0 && gmtFormat[0].CharData != "" {
+			calendar.Formats.GMT = gmtFormat[0].CharData
+		} else {
+			calendar.Formats.GMT = defaultGMTFormat
+		}
+	}
+
+	processCalendarDateFormats(ldmlCar, &calendar)
+	processCalendarTimeFormats(ldmlCar, &calendar)
+	processCalendarMonths(ldmlCar, &calendar)
+	processCalendarDays(ldmlCar, &calendar)
+	processCalendarDayPeriods(ldmlCar, &calendar)
 
 	return
 }
 
-func getLanguages(ldn *cldr.LocaleDisplayNames) (langs Languages) {
-	langs = make(Languages, 500)
+func processCalendarDateFormats(ldmlCar *cldr.Calendar, calendar *i18n.Calendar) {
+	if ldmlCar.DateFormats != nil {
+		for _, datefmt := range ldmlCar.DateFormats.DateFormatLength {
+			switch datefmt.Type {
+			case dateTypeFull:
+				calendar.Formats.Date.Full = datefmt.DateFormat[0].Pattern[0].Data()
+			case dateTypeLong:
+				calendar.Formats.Date.Long = datefmt.DateFormat[0].Pattern[0].Data()
+			case dateTypeMedium:
+				calendar.Formats.Date.Medium = datefmt.DateFormat[0].Pattern[0].Data()
+			case dateTypeShort:
+				calendar.Formats.Date.Short = datefmt.DateFormat[0].Pattern[0].Data()
+			}
+		}
+	}
+
+	if ldmlCar.DateTimeFormats != nil {
+		for _, datefmt := range ldmlCar.DateTimeFormats.DateTimeFormatLength {
+			switch datefmt.Type {
+			case dateTypeFull:
+				calendar.Formats.DateTime.Full = datefmt.DateTimeFormat[0].Pattern[0].Data()
+			case dateTypeLong:
+				calendar.Formats.DateTime.Long = datefmt.DateTimeFormat[0].Pattern[0].Data()
+			case dateTypeMedium:
+				calendar.Formats.DateTime.Medium = datefmt.DateTimeFormat[0].Pattern[0].Data()
+			case dateTypeShort:
+				calendar.Formats.DateTime.Short = datefmt.DateTimeFormat[0].Pattern[0].Data()
+			}
+		}
+	}
+}
+
+func processCalendarTimeFormats(ldmlCar *cldr.Calendar, calendar *i18n.Calendar) {
+	if ldmlCar.TimeFormats != nil {
+		for _, datefmt := range ldmlCar.TimeFormats.TimeFormatLength {
+			switch datefmt.Type {
+			case dateTypeFull:
+				calendar.Formats.Time.Full = datefmt.TimeFormat[0].Pattern[0].Data()
+			case dateTypeLong:
+				calendar.Formats.Time.Long = datefmt.TimeFormat[0].Pattern[0].Data()
+			case dateTypeMedium:
+				calendar.Formats.Time.Medium = datefmt.TimeFormat[0].Pattern[0].Data()
+			case dateTypeShort:
+				calendar.Formats.Time.Short = datefmt.TimeFormat[0].Pattern[0].Data()
+			}
+		}
+	}
+
+}
+
+func processCalendarMonths(ldmlCar *cldr.Calendar, calendar *i18n.Calendar) {
+	if ldmlCar.Months != nil {
+		for _, monthctx := range ldmlCar.Months.MonthContext {
+			for _, months := range monthctx.MonthWidth {
+				var i18nMonth i18n.CalendarMonthFormatNameValue
+				for _, m := range months.Month {
+					setMonthName(m.Type, m.Data(), &i18nMonth)
+				}
+				switch months.Type {
+				case typeAbbreviated:
+					calendar.FormatNames.Months.Abbreviated = i18nMonth
+				case typeNarrow:
+					calendar.FormatNames.Months.Narrow = i18nMonth
+				case typeShort:
+					calendar.FormatNames.Months.Short = i18nMonth
+				case typeWide:
+					calendar.FormatNames.Months.Wide = i18nMonth
+				}
+			}
+		}
+	}
+}
+
+func setMonthName(monthNum, monthName string, i18nMonth *i18n.CalendarMonthFormatNameValue) {
+	switch monthNum {
+	case "1":
+		i18nMonth.Jan = monthName
+	case "2":
+		i18nMonth.Feb = monthName
+	case "3":
+		i18nMonth.Mar = monthName
+	case "4":
+		i18nMonth.Apr = monthName
+	case "5":
+		i18nMonth.May = monthName
+	case "6":
+		i18nMonth.Jun = monthName
+	case "7":
+		i18nMonth.Jul = monthName
+	case "8":
+		i18nMonth.Aug = monthName
+	case "9":
+		i18nMonth.Sep = monthName
+	case "10":
+		i18nMonth.Oct = monthName
+	case "11":
+		i18nMonth.Nov = monthName
+	case "12":
+		i18nMonth.Dec = monthName
+	}
+}
+
+func processCalendarDays(ldmlCar *cldr.Calendar, calendar *i18n.Calendar) {
+	if ldmlCar.Days != nil {
+		for _, dayctx := range ldmlCar.Days.DayContext {
+			for _, days := range dayctx.DayWidth {
+				var i18nDay i18n.CalendarDayFormatNameValue
+				for _, d := range days.Day {
+					setDayName(d.Type, d.Data(), &i18nDay)
+
+				}
+				switch days.Type {
+				case typeAbbreviated:
+					calendar.FormatNames.Days.Abbreviated = i18nDay
+				case typeNarrow:
+					calendar.FormatNames.Days.Narrow = i18nDay
+				case typeShort:
+					calendar.FormatNames.Days.Short = i18nDay
+				case typeWide:
+					calendar.FormatNames.Days.Wide = i18nDay
+				}
+			}
+		}
+	}
+}
+
+func setDayName(day, dayName string, i18nDay *i18n.CalendarDayFormatNameValue) {
+	switch day {
+	case "sun":
+		i18nDay.Sun = dayName
+	case "mon":
+		i18nDay.Mon = dayName
+	case "tue":
+		i18nDay.Tue = dayName
+	case "wed":
+		i18nDay.Wed = dayName
+	case "thu":
+		i18nDay.Thu = dayName
+	case "fri":
+		i18nDay.Fri = dayName
+	case "sat":
+		i18nDay.Sat = dayName
+	}
+}
+
+func processCalendarDayPeriods(ldmlCar *cldr.Calendar, calendar *i18n.Calendar) {
+	if ldmlCar.DayPeriods != nil {
+		for _, ctx := range ldmlCar.DayPeriods.DayPeriodContext {
+			for _, width := range ctx.DayPeriodWidth {
+				var i18nPeriod i18n.CalendarPeriodFormatNameValue
+				for _, d := range width.DayPeriod {
+					switch d.Type {
+					case "am":
+						if i18nPeriod.AM == "" {
+							i18nPeriod.AM = d.Data()
+						}
+					case "pm":
+						if i18nPeriod.PM == "" {
+							i18nPeriod.PM = d.Data()
+						}
+					}
+				}
+				switch width.Type {
+				case typeAbbreviated:
+					calendar.FormatNames.Periods.Abbreviated = i18nPeriod
+				case typeNarrow:
+					calendar.FormatNames.Periods.Narrow = i18nPeriod
+				case typeShort:
+					calendar.FormatNames.Periods.Short = i18nPeriod
+				case typeWide:
+					calendar.FormatNames.Periods.Wide = i18nPeriod
+				}
+			}
+		}
+	}
+}
+
+func getLanguages(ldn *cldr.LocaleDisplayNames) (langs languages) {
+	langs = make(languages, 500)
 
 	if ldn == nil || ldn.Languages == nil {
 		return
@@ -372,15 +413,15 @@ func getLanguages(ldn *cldr.LocaleDisplayNames) (langs Languages) {
 	return
 }
 
-func getTerritories(ldn *cldr.LocaleDisplayNames) (territories Territories) {
-	territories = make(Territories, 500)
+func getTerritories(ldn *cldr.LocaleDisplayNames) (terrs territories) {
+	terrs = make(territories, 500)
 
 	if ldn == nil || ldn.Territories == nil {
 		return
 	}
 	for _, terr := range ldn.Territories.Territory {
-		territories[terr.Type] = terr.Data()
+		terrs[terr.Type] = terr.Data()
 	}
 
-	return territories
+	return terrs
 }
