@@ -1,6 +1,6 @@
 package ha_Latn_GH
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var Locale = &cldr.Locale{
 	Locale: "ha_Latn_GH",

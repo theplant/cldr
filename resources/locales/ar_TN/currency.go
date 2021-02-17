@@ -1,5 +1,5 @@
 package ar_TN
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var currencies = []cldr.Currency(nil)

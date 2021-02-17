@@ -1,3 +1,3 @@
 package gv
 
-var pluralRule = "2F"
+var pluralRule = "4G"

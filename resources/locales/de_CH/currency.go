@@ -1,6 +1,6 @@
 package de_CH
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var currencies = []cldr.Currency{
 	{Currency: "BYR", DisplayName: "Weissrussischer Rubel", Symbol: ""},

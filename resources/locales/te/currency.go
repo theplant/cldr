@@ -1,6 +1,6 @@
 package te
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var currencies = []cldr.Currency{
 	{Currency: "AED", DisplayName: "యునైటెడ్ ఆరబ్ ఎమిరేట్స్ దిరామ్", Symbol: "AED"},

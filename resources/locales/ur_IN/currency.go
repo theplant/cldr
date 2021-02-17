@@ -1,6 +1,6 @@
 package ur_IN
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var currencies = []cldr.Currency{
 	{Currency: "CRC", DisplayName: "کوسٹا ریکا کولون", Symbol: ""},

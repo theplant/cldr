@@ -1,6 +1,6 @@
 package en_GB
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var currencies = []cldr.Currency{
 	{Currency: "ILR", DisplayName: "Israeli Shekel (1980–1985)", Symbol: ""},

@@ -1,6 +1,6 @@
 package en_SS
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var currencies = []cldr.Currency{
 	{Currency: "GBP", DisplayName: "", Symbol: "GB£"},

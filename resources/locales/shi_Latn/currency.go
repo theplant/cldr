@@ -1,6 +1,6 @@
 package shi_Latn
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var currencies = []cldr.Currency{
 	{Currency: "AED", DisplayName: "adrim n limarat", Symbol: ""},

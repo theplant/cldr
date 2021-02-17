@@ -1,6 +1,6 @@
 package wae
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var currencies = []cldr.Currency{
 	{Currency: "BRL", DisplayName: "Brasilianiši Real", Symbol: ""},

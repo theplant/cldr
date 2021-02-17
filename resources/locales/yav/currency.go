@@ -1,6 +1,6 @@
 package yav
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var currencies = []cldr.Currency{
 	{Currency: "AOA", DisplayName: "kuansa wu angolá", Symbol: ""},

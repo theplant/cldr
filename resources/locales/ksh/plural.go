@@ -1,3 +1,3 @@
 package ksh
 
-var pluralRule = "3H"
+var pluralRule = "3E"

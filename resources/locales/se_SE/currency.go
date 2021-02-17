@@ -1,6 +1,6 @@
 package se_SE
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var currencies = []cldr.Currency{
 	{Currency: "NOK", DisplayName: "", Symbol: "Nkr"},

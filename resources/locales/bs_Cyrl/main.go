@@ -1,6 +1,6 @@
 package bs_Cyrl
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var Locale = &cldr.Locale{
 	Locale: "bs_Cyrl",

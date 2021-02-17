@@ -1,6 +1,6 @@
 package zh_Hans_SG
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var currencies = []cldr.Currency{
 	{Currency: "ANG", DisplayName: "荷兰安的列斯盾", Symbol: ""},

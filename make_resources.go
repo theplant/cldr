@@ -11,7 +11,7 @@ import (
 	"text/template"
 
 	"github.com/kr/pretty"
-	i18n "github.com/theplant/cldr"
+	i18n "github.com/ContextLogic/cldr"
 	"golang.org/x/text/unicode/cldr"
 )
 
@@ -286,7 +286,7 @@ func main() {
 			defer func() { currencyFile.Close() }()
 
 			mainCodes, err := format.Source([]byte(fmt.Sprintf(`package %s
-			import "github.com/theplant/cldr"
+			import "github.com/ContextLogic/cldr"
 
 			var Locale = &cldr.Locale{
 				Locale: %q,
@@ -309,7 +309,7 @@ func main() {
 			fmt.Fprintf(mainFile, "%s", mainCodes)
 
 			numberCodes, err := format.Source([]byte(fmt.Sprintf(`package %s
-			import "github.com/theplant/cldr"
+			import "github.com/ContextLogic/cldr"
 
 			var (
 				symbols = %# v
@@ -322,7 +322,7 @@ func main() {
 			fmt.Fprintf(numberFile, "%s", numberCodes)
 
 			currencyCodes, err := format.Source([]byte(fmt.Sprintf(`package %s
-			import "github.com/theplant/cldr"
+			import "github.com/ContextLogic/cldr"
 
 			var currencies = %# v
 		`, locale, pretty.Formatter(number.Currencies))))
@@ -339,7 +339,7 @@ func main() {
 			defer func() { calendarFile.Close() }()
 
 			calendarCodes, err := format.Source([]byte(fmt.Sprintf(`package %s
-			import "github.com/theplant/cldr"
+			import "github.com/ContextLogic/cldr"
 
 			var calendar = %# v
 		`, locale, pretty.Formatter(calendar))))
@@ -374,7 +374,7 @@ func main() {
 	defer func() { allFile.Close() }()
 	tmpl, err := template.New("").Parse(`package locales
 		import (
-			{{range $locale, $_ := .}}_ "github.com/theplant/cldr/resources/locales/{{$locale}}"
+			{{range $locale, $_ := .}}_ "github.com/ContextLogic/cldr/resources/locales/{{$locale}}"
 		{{end}})
 	`)
 	if err != nil {

@@ -1,3 +1,3 @@
 package sk
 
-var pluralRule = "3E"
+var pluralRule = "4I"

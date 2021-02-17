@@ -1,3 +1,3 @@
 package kw
 
-var pluralRule = "3B"
+var pluralRule = "6C"

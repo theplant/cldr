@@ -1,6 +1,6 @@
 package ca_FR
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var currencies = []cldr.Currency{
 	{Currency: "FRF", DisplayName: "", Symbol: "F"},

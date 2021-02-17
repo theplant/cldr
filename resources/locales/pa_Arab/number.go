@@ -1,6 +1,6 @@
 package pa_Arab
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var (
 	symbols = cldr.Symbols{Decimal: "", Group: "", Negative: "\u200e-", Percent: "", PerMille: ""}

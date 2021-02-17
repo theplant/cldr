@@ -1,6 +1,6 @@
 package zh_Hans_HK
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var Locale = &cldr.Locale{
 	Locale: "zh_Hans_HK",

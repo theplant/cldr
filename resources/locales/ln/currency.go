@@ -1,6 +1,6 @@
 package ln
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var currencies = []cldr.Currency{
 	{Currency: "AED", DisplayName: "Dirihamɛ ya Lémila alabo", Symbol: ""},

@@ -1,6 +1,6 @@
 package ast
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var currencies = []cldr.Currency{
 	{Currency: "AED", DisplayName: "dirḥam de los Emiratos Árabes Xuníos", Symbol: "AED"},

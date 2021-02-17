@@ -1,6 +1,6 @@
 package agq
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var currencies = []cldr.Currency{
 	{Currency: "AED", DisplayName: "Dilàm è Yùnaetɛ Alab Emelɛ̀", Symbol: ""},

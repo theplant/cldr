@@ -1,6 +1,6 @@
 package fr_BI
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var currencies = []cldr.Currency{
 	{Currency: "BIF", DisplayName: "", Symbol: "FBu"},

@@ -1,6 +1,6 @@
 package nb
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var (
 	symbols = cldr.Symbols{Decimal: ",", Group: "\u00a0", Negative: "−", Percent: "%", PerMille: "‰"}

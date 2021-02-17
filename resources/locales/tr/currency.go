@@ -1,6 +1,6 @@
 package tr
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var currencies = []cldr.Currency{
 	{Currency: "ADP", DisplayName: "Andorra Pezetası", Symbol: "ADP"},

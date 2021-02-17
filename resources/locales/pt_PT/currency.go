@@ -1,6 +1,6 @@
 package pt_PT
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var currencies = []cldr.Currency{
 	{Currency: "AED", DisplayName: "Dirham dos Emirados Árabes Unidos", Symbol: ""},

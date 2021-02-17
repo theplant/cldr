@@ -1,6 +1,6 @@
 package ru_KZ
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var (
 	symbols = cldr.Symbols{}

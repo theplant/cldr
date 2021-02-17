@@ -1,6 +1,6 @@
 package fr_LU
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var Locale = &cldr.Locale{
 	Locale: "fr_LU",

@@ -1,6 +1,6 @@
 # CLDR
 
-[![GoDoc](https://godoc.org/github.com/theplant/cldr?status.svg)](http://godoc.org/github.com/theplant/cldr)
+[![GoDoc](https://godoc.org/github.com/ContextLogic/cldr?status.svg)](http://godoc.org/github.com/ContextLogic/cldr)
 
 cldr is a golang library using Common Locale Data Repository to format dates, plurals (and more in the future), inspired by [twitter-cldr-rb](https://github.com/twitter/twitter-cldr-rb) and borrowing some codes from [github.com/vube/i18n](https://github.com/vube/i18n).
 
@@ -12,8 +12,8 @@ cldr embeds CLDR data in pure go and it doesn't import all those locale data by 
 package main
 
 import (
-	"github.com/theplant/cldr"
-	_ "github.com/theplant/cldr/resources/locales/en"
+	"github.com/ContextLogic/cldr"
+	_ "github.com/ContextLogic/cldr/resources/locales/en"
 )
 
 func main() {
@@ -25,9 +25,9 @@ func main() {
 }
 ```
 
-If you don't like hand-importing locales, you can import `github.com/theplant/cldr/resources/locales`, which import all available locales in cldr pacakge.
+If you don't like hand-importing locales, you can import `github.com/ContextLogic/cldr/resources/locales`, which import all available locales in cldr pacakge.
 
-More API could be found [here](https://godoc.org/github.com/theplant/cldr).
+More API could be found [here](https://godoc.org/github.com/ContextLogic/cldr).
 
 # How to add locales
 
@@ -41,12 +41,12 @@ cldr.RegisterLocale(Locale{...})
 // solution 1
 // using the same locale name
 
-import _ github.com/theplant/cldr/resources/locales/en
+import _ github.com/ContextLogic/cldr/resources/locales/en
 cldr.RegisterLocale(Locale{Locale: "en"})
 
 // solution 2
 // update the exported locale directly
 
-import github.com/theplant/cldr/resources/locales/en
+import github.com/ContextLogic/cldr/resources/locales/en
 en.Locale.PluralRule = "2A"
 ```

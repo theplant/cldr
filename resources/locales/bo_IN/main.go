@@ -1,6 +1,6 @@
 package bo_IN
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var Locale = &cldr.Locale{
 	Locale: "bo_IN",

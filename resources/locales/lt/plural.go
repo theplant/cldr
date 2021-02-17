@@ -1,3 +1,3 @@
 package lt
 
-var pluralRule = "3D"
+var pluralRule = "4H"

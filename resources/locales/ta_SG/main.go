@@ -1,6 +1,6 @@
 package ta_SG
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var Locale = &cldr.Locale{
 	Locale: "ta_SG",

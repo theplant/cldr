@@ -1,6 +1,6 @@
 package smn
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var currencies = []cldr.Currency{
 	{Currency: "DKK", DisplayName: "Tanska ruvnâ", Symbol: ""},

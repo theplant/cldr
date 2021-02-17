@@ -1,3 +1,3 @@
 package sr
 
-var pluralRule = "4B"
+var pluralRule = "3H"

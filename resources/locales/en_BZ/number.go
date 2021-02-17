@@ -1,6 +1,6 @@
 package en_BZ
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var (
 	symbols = cldr.Symbols{}

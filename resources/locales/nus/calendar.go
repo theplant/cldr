@@ -1,6 +1,6 @@
 package nus
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var calendar = cldr.Calendar{
 	Formats: cldr.CalendarFormats{

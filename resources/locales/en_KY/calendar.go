@@ -1,5 +1,5 @@
 package en_KY
 
-import "github.com/theplant/cldr"
+import "github.com/ContextLogic/cldr"
 
 var calendar = cldr.Calendar{}
