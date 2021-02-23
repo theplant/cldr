@@ -88,7 +88,7 @@ type CalendarPeriodFormatNameValue struct {
 
 var locales = map[string]*Locale{}
 
-// TODO: can override paritally instead of replace it as a whole for existed locales
+// TODO: can override partially instead of replace it as a whole for existed locales
 func RegisterLocale(loc *Locale) {
 	old, ok := locales[loc.Locale]
 	if ok {

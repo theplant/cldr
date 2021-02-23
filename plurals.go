@@ -3,6 +3,7 @@ package cldr
 import (
 	"fmt"
 	"math"
+	"strings"
 )
 
 type PluralRule string
@@ -59,10 +60,21 @@ func RegisterPluralRule(locale string, ruler PluralRuler) {
 	pluralRules[locale] = ruler
 }
 
+func formatLocale(locale string) string {
+	strs := strings.Split(locale, "-")
+	if len(strs) == 2 {
+		return strs[0]
+	}
+	return locale
+}
+
 func FindRule(locale string, count NumberValue) (rule PluralRule) {
 	l, ok := GetLocale(locale)
 	if !ok {
-		return PluralRuleOther
+		l, ok = GetLocale(formatLocale(locale))
+		if !ok {
+			return PluralRuleOther
+		}
 	}
 	ruler, ok := pluralRules[l.PluralRule]
 	if !ok {
