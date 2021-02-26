@@ -1,3 +1,3 @@
 package gl
 
-var pluralRule = "2A"
+var pluralRule = "2F"

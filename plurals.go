@@ -32,6 +32,7 @@ var pluralRules = map[string]PluralRuler{
 	"2C": PluralRulerFunc(pluralRule2C),
 	"2D": PluralRulerFunc(pluralRule2D),
 	"2E": PluralRulerFunc(pluralRule2E),
+	"2F": PluralRulerFunc(pluralRule2F),
 	"3A": PluralRulerFunc(pluralRule3A),
 	"3B": PluralRulerFunc(pluralRule3B),
 	"3C": PluralRulerFunc(pluralRule3C),
@@ -149,6 +150,7 @@ var pluralForms = map[string] string {
 	"2C": "nplurals=2; plural=(n > 1);",
 	"2D": "nplurals=2; plural=(n%10 != 1 || n%100 == 11);",
 	"2E": "nplurals=2; plural=(n > 2 && (11 > n || n > 99));",
+	"2F": "nplurals=2; plural=(n != 1);",
 	"3A": "nplurals=3; plural=(n%10 == 0 || (11 <= n%100 && n%100 <= 19)) ? 0 : (n%10 == 1 && n%100 != 11) ? 1 : 2;",
 	"3B": "nplurals=3; plural=(n == 1) ? 0 : (n == 2) ? 1 : 2;",
 	"3C": "nplurals=3; plural=(n == 1) ? 0 : (n == 0 || (2 <= n%100 && n%100 <= 19)) ? 1 : 2;",
@@ -256,8 +258,8 @@ func pluralRule1(n NumberValue) PluralRule {
 //
 // This Plural Rule contains 2 forms:
 //     - one:
-//         - rule:     is 1
-//         - examples: 1
+//         - rule:     is 1 in value
+//         - examples: 1, 1.0, 1.00000, ...
 //     - other:
 //         - rule:     everything else
 //         - examples: 0, 0.5, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, …
@@ -266,41 +268,24 @@ func pluralRule1(n NumberValue) PluralRule {
 //     - af:  Afrikaans
 //     - an:  Aragonese
 //     - asa: Asu
-//     - ast: Asturian
 //     - bem: Bemba
 //     - bez: Bena
 //     - bg:  Bulgarian
-//     - bn:  Bengali
 //     - brx: Bodo
-//     - ca:  Catalan
 //     - cgg: Chiga
 //     - chr: Cherokee
 //     - ckb: Sorani Kurdish
-//     - da:  Danish
-//     - de:  German
-//     - doi: Dogri
 //     - dv:  Divehi
 //     - ee:  Ewe
 //     - el:  Greek
-//     - en:  English
 //     - eo:  Esperanto
 //     - es:  Spanish
-//     - et:  Estonian
 //     - eu:  Basque
-//     - fi:  Finnish
 //     - fo:  Faroese
 //     - fur: Friulian
-//     - fy:  Western Frisian
-//     - gl:  Galician
 //     - gsw: Swiss German
-//     - gu:  Gujarati
 //     - ha:  Hausa
 //     - haw: Hawaiian
-//     - hne: Chhattisgarhi
-//     - hy:  Armenian
-//     - ia:  Interlingua
-//     - is:  Icelandic
-//     - it:  Italian
 //     - jgo: Ngomba
 //     - jmc: Machame
 //     - kaj: Jju
@@ -313,20 +298,15 @@ func pluralRule1(n NumberValue) PluralRule {
 //     - ku:  Kurdish
 //     - ky:  Kirghiz
 //     - lb:  Luxembourgish
-//     - lg:  Ganda
-//     - mai: Maithili
 //     - mas: Masai
 //     - mgo: Meta'
 //     - ml:  Malayalam
 //     - mn:  Mongolian
-//     - mni: Manipuri
 //     - mr:  Marathi
 //     - nah: Nahuatl
-//     - nap: Neapolitan
 //     - nb:  Norwegian Bokmål
 //     - nd:  North Ndebele
 //     - ne:  Nepali
-//     - nl:  Dutch
 //     - nn:  Norwegian Nynorsk
 //     - nnh: Ngiemboon
 //     - no:  Norwegian
@@ -336,21 +316,17 @@ func pluralRule1(n NumberValue) PluralRule {
 //     - om:  Oromo
 //     - or:  Oriya
 //     - os:  Ossetic
-//     - pa:  Punjabi
 //     - pap: Papiamento
 //     - pms: Piemontese
 //     - ps:  Pashto
-//     - pt:  Portuguese
 //     - rof: Rombo
 //     - rm:  Romansh
 //     - rw:  Kinyarwanda
 //     - rwk: Rwa
 //     - saq: Samburu
-//     - sat: Santali
 //     - sco: Scots
 //     - sd:  Sindhi
 //     - seh: Sena
-//     - si:  Sinhala
 //     - sn:  Shona
 //     - so:  Somali
 //     - son: Songhai
@@ -358,8 +334,6 @@ func pluralRule1(n NumberValue) PluralRule {
 //     - ss:  Swati
 //     - ssy: Saho
 //     - st:  Southern Sotho
-//     - sv:  Swedish
-//     - sw:  Swahili
 //     - syr: Syriac
 //     - ta:  Tamil
 //     - te:  Telugu
@@ -368,20 +342,15 @@ func pluralRule1(n NumberValue) PluralRule {
 //     - tk:  Turkmen
 //     - tn:  Tswana
 //     - ts:  Tsonga
-//     - ur:  Urdu
 //     - ve:  Venda
 //     - vo:  Volapük
 //     - vun: Vunjo
 //     - wae: Walser
 //     - xh:  Xhosa
 //     - xog: Soga
-//     - zu:  Zulu
 func pluralRule2A(n NumberValue) PluralRule {
-	// isInt := isInt(n)
-	i := int64(math.Abs(toFloat64(n)))
-
 	switch {
-	case isInt(n) && i == 1:
+	case toFloat64(n) == float64(1):
 		return PluralRuleOne
 	}
 	return PluralRuleOther
@@ -518,6 +487,52 @@ func pluralRule2E(n NumberValue) PluralRule {
 		return PluralRuleOne
 	}
 
+	return PluralRuleOther
+}
+
+// pluralRule2F:
+// Logic for calculating the nth plural for English or languages who share the same rules as English
+//
+// Plural Forms Rules Documented here:
+// https://unicode-org.github.io/cldr-staging/charts/37/supplemental/language_plural_rules.html
+//
+// This Plural Rule contains 2 forms:
+//     - one:
+//         - rule:     is 1 without decimal points
+//         - examples: 1
+//     - other:
+//         - rule:     everything else
+//         - examples: 0, 0.5, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, …
+//
+// Languages:
+//     - ast: Asturian
+//     - ca:  Catalan
+//     - de:  German
+//     - doi: Dogri
+//     - en:  English
+//     - et:  Estonian
+//     - fi:  Finnish
+//     - fy:  Western Frisian
+//     - gl:  Galician
+//     - hne: Chhattisgarhi
+//     - ia:  Interlingua
+//     - it:  Italian
+//     - lg:  Ganda
+//     - mai: Maithili
+//     - mni: Manipuri
+//     - nap: Neapolitan
+//     - nl:  Dutch
+//     - sv:  Swedish
+//     - sw:  Swahili
+//     - ur:  Urdu
+func pluralRule2F(n NumberValue) PluralRule {
+	// isInt := isInt(n)
+	i := int64(math.Abs(toFloat64(n)))
+
+	switch {
+	case isInt(n) && i == 1:
+		return PluralRuleOne
+	}
 	return PluralRuleOther
 }
 

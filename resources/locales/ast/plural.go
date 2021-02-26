@@ -1,3 +1,3 @@
 package ast
 
-var pluralRule = "2A"
+var pluralRule = "2F"
