@@ -155,6 +155,7 @@ func Get_zgh() *cldr.Locale {
 				currency.ZWR: cldr.Currency{DisplayName: "ⴰⴷⵓⵍⴰⵔ ⵏ ⵣⵉⵎⴱⴰⴱⵡⵉ (2008)", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AK:  "ⵜⴰⴽⴰⵏⵜ",
 			language.AM:  "ⵜⴰⵎⵀⴰⵔⵉⵜ",

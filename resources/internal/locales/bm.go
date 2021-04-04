@@ -154,6 +154,7 @@ func Get_bm() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "zimbabuwe Dolar", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AK: "akankan",
 			language.AM: "amarikikan",

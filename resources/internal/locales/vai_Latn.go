@@ -152,6 +152,7 @@ func Get_vai_Latn() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "Zimbhabhuwe Dala", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AK:  "Akaŋ",
 			language.AM:  "Amihári",

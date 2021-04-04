@@ -179,6 +179,7 @@ func Get_ig() *cldr.Locale {
 				currency.ZMW: cldr.Currency{DisplayName: "Ego Kwacha Obodo Zambia", Symbol: "ZK"},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AK:      "Akan",
 			language.AM:      "Amariikị",

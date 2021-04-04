@@ -154,6 +154,7 @@ func Get_mfe() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "dolar zimbawe", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AK:  "akan",
 			language.AM:  "amarik",

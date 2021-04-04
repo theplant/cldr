@@ -203,6 +203,7 @@ func Get_my_MM() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "ဇင်ဘာဘွေ ဒေါ်လာ", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}၊ {1}", KeyTypePattern: "{0}၊ {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "အာဖာ",
 			language.AB:      "အဘ်ခါဇီရာ",

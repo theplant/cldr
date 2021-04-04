@@ -180,6 +180,7 @@ func Get_ff_Adlm() *cldr.Locale {
 				currency.ZMW: cldr.Currency{DisplayName: "𞤑𞤢𞤱𞤢𞤧𞤢 𞤟𞤢𞤥𞤦𞤭𞤲𞤳𞤮", Symbol: "ZK"},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}⹁ {1}", KeyTypePattern: "{0}\u202f: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "𞤢𞤬𞤢𞥄𞤪𞤫",
 			language.AF:      "𞤀𞤬𞤪𞤭𞤳𞤢𞤲𞤪𞤫",

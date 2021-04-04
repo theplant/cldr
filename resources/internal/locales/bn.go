@@ -292,6 +292,7 @@ func Get_bn() *cldr.Locale {
 				currency.ZWR: cldr.Currency{DisplayName: "জিম্বাবুয়ে ডলার (২০০৮)", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "আফার",
 			language.AB:      "আবখাজিয়ান",

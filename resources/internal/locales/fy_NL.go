@@ -314,6 +314,7 @@ func Get_fy_NL() *cldr.Locale {
 				currency.ZWR: cldr.Currency{DisplayName: "Simbabwaanske dollar (2008)", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "Afar",
 			language.AB:      "Abchazysk",

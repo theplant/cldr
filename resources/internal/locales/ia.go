@@ -165,6 +165,7 @@ func Get_ia() *cldr.Locale {
 				currency.ZMW: cldr.Currency{DisplayName: "kwacha zambian", Symbol: "ZK"},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "afar",
 			language.AB:      "abkhazo",

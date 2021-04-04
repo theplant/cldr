@@ -153,6 +153,7 @@ func Get_ff() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "Dolaar Simbaabuwe", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AK: "Akaan",
 			language.AM: "Amarik",

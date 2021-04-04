@@ -20,6 +20,7 @@ type localeData struct {
 	Calendars   calendars
 	Languages   map[string]languages
 	Territories map[string]territories
+	DisplayPattern map[string]i18n.LocaleDisplayPattern
 }
 
 type numbers map[string]i18n.Number
@@ -35,17 +36,17 @@ func processCLDR(unicodeCLDR *cldr.CLDR) *localeData {
 		Calendars:   make(calendars, 400),
 		Languages:   make(map[string]languages, 500),
 		Territories: make(map[string]territories, 350),
+		DisplayPattern: make(map[string]i18n.LocaleDisplayPattern, 500),
 	}
 
 	//quick & easy way to know if a locale exists
-	//allLocales := make(map[string]bool, len(unicodeCLDR.Locales()))
 	for _, loc := range unicodeCLDR.Locales() {
 		localeData.Locales[loc] = true
 	}
 
 	for loc := range localeData.Locales {
-		localeData.Numbers[loc], localeData.Calendars[loc], localeData.Languages[loc], localeData.Territories[loc] =
-			getCLDRData(localeData.Locales, unicodeCLDR, loc)
+		localeData.Numbers[loc], localeData.Calendars[loc], localeData.Languages[loc],
+		localeData.Territories[loc], localeData.DisplayPattern[loc] = getCLDRData(localeData.Locales, unicodeCLDR, loc)
 	}
 
 	return &localeData
@@ -55,12 +56,13 @@ func processCLDR(unicodeCLDR *cldr.CLDR) *localeData {
 //so that information from parent locales is inherited. This isn't perfect and doesn't obey all the rules described in
 //http://unicode.org/reports/tr35/#Common_Elements, but it should do a pretty good job most of the time.
 func getCLDRData(allLocales map[string]bool, unicodeCLDR *cldr.CLDR, loc string) (number i18n.Number,
-	calendar i18n.Calendar, languages languages, territories territories) {
+	calendar i18n.Calendar, languages languages, territories territories, pattern i18n.LocaleDisplayPattern) {
 	ldml := unicodeCLDR.RawLDML(loc)
 	number = processNumbers(ldml.Numbers)
 	calendar = processCalendar(ldml)
 	languages = getLanguages(ldml.LocaleDisplayNames)
 	territories = getTerritories(ldml.LocaleDisplayNames)
+	pattern = getDisplayPattern(ldml.LocaleDisplayNames)
 
 	parentLoc, isRoot := findParentLocale(loc, allLocales)
 	if isRoot {
@@ -69,7 +71,8 @@ func getCLDRData(allLocales map[string]bool, unicodeCLDR *cldr.CLDR, loc string)
 	}
 
 	//TODO can we check if parentLoc != loc and only do this in that case?
-	parentNumber, parentCalendar, parentLanguages, parentTerritories := getCLDRData(allLocales, unicodeCLDR, parentLoc)
+	parentNumber, parentCalendar, parentLanguages, parentTerritories, parentPattern :=
+		getCLDRData(allLocales, unicodeCLDR, parentLoc)
 
 	//merge them
 	err := mergo.Merge(&number, parentNumber)
@@ -105,6 +108,11 @@ func getCLDRData(allLocales map[string]bool, unicodeCLDR *cldr.CLDR, loc string)
 		if _, ok := territories[k]; !ok {
 			territories[k] = v
 		}
+	}
+
+	err = mergo.Merge(&pattern, parentPattern)
+	if err != nil {
+		fmt.Println("pattern merge error", err)
 	}
 
 	return
@@ -424,4 +432,23 @@ func getTerritories(ldn *cldr.LocaleDisplayNames) (terrs territories) {
 	}
 
 	return terrs
+}
+
+func getDisplayPattern(ldn *cldr.LocaleDisplayNames) (pattern i18n.LocaleDisplayPattern) {
+	if ldn == nil || ldn.LocaleDisplayPattern == nil {
+		return
+	}
+	ldp := ldn.LocaleDisplayPattern
+
+	if len(ldp.LocalePattern) > 0 {
+		pattern.Pattern = ldp.LocalePattern[0].Data()
+	}
+	if len(ldp.LocaleSeparator) > 0 {
+		pattern.Separator = ldp.LocaleSeparator[0].Data()
+	}
+	if len(ldp.LocaleKeyTypePattern) > 0 {
+		pattern.KeyTypePattern = ldp.LocaleKeyTypePattern[0].Data()
+	}
+
+	return
 }

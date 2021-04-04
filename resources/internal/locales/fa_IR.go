@@ -252,6 +252,7 @@ func Get_fa_IR() *cldr.Locale {
 				currency.ZWR: cldr.Currency{DisplayName: "دلار زیمبابوه (۲۰۰۸)", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}، {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "آفاری",
 			language.AB:      "آبخازی",

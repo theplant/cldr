@@ -154,6 +154,7 @@ func Get_ewo_CM() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "Dolár yá Zimbabwé", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AK:  "Ǹkɔ́bɔ akán",
 			language.AM:  "Ǹkɔ́bɔ amária",

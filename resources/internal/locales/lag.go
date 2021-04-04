@@ -153,6 +153,7 @@ func Get_lag() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "Dóola ya Simbáabwe", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AK:  "Kɨakáani",
 			language.AM:  "Kɨmʉháari",

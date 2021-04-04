@@ -249,6 +249,7 @@ func Get_is() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "Simbabveskur dalur", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "afár",
 			language.AB:      "abkasíska",

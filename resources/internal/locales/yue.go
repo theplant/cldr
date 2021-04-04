@@ -320,6 +320,7 @@ func Get_yue() *cldr.Locale {
 				currency.ZWR: cldr.Currency{DisplayName: "辛巴威元 (2008)", Symbol: "ZWR"},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}，{1}", KeyTypePattern: "{0}：{1}"},
 		Languages: cldr.Languages{
 			language.AA:      "阿法文",
 			language.AB:      "阿布哈茲文",

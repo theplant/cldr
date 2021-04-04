@@ -191,6 +191,7 @@ func Get_so_ET() *cldr.Locale {
 				currency.ZMW: cldr.Currency{DisplayName: "Kawajada Sambiya", Symbol: "ZK"},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AF:      "Afrikaanka",
 			language.AGQ:     "Ageem",

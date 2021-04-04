@@ -45,6 +45,7 @@ type templateData struct {
 	Currencies    i18n.Currencies
 	Languages     languages
 	Territories   territories
+	LocaleDisplayPattern i18n.LocaleDisplayPattern
 }
 
 type aggregateData struct {
@@ -113,6 +114,7 @@ func main() {
 				Currencies:    number.Currencies,
 				Languages:     localeData.Languages[locale],
 				Territories:   localeData.Territories[locale],
+				LocaleDisplayPattern: localeData.DisplayPattern[locale],
 			}
 			err = executeAndWrite(filepath.Join(templatesDir, "locales.tpl"), tplData, localeFile)
 			if err != nil {

@@ -183,6 +183,7 @@ func Get_km() *cldr.Locale {
 				currency.ZMW: cldr.Currency{DisplayName: "ក្វាចាហ្សំប៊ី", Symbol: "ZMW"},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}៖ {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "អាហ្វារ",
 			language.AB:      "អាប់ខាហ៊្សាន",

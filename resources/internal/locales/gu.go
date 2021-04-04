@@ -184,6 +184,7 @@ func Get_gu() *cldr.Locale {
 				currency.ZMW: cldr.Currency{DisplayName: "ઝામ્બિયન ક્વાચા", Symbol: "ZMW"},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "અફાર",
 			language.AB:      "અબખાજિયન",

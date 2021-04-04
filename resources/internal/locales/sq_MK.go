@@ -182,6 +182,7 @@ func Get_sq_MK() *cldr.Locale {
 				currency.ZMW: cldr.Currency{DisplayName: "Kuaça e Zambikut", Symbol: "ZMW"},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "afarisht",
 			language.AB:      "abkazisht",

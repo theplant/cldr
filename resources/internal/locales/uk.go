@@ -298,6 +298,7 @@ func Get_uk() *cldr.Locale {
 				currency.ZWR: cldr.Currency{DisplayName: "зімбабвійський долар (2008)", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "афарська",
 			language.AB:      "абхазька",
