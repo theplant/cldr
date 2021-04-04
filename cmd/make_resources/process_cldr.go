@@ -15,11 +15,11 @@ const (
 )
 
 type localeData struct {
-	Locales     map[string]bool
-	Numbers     numbers
-	Calendars   calendars
-	Languages   map[string]languages
-	Territories map[string]territories
+	Locales        map[string]bool
+	Numbers        numbers
+	Calendars      calendars
+	Languages      map[string]languages
+	Territories    map[string]territories
 	DisplayPattern map[string]i18n.LocaleDisplayPattern
 }
 
@@ -31,11 +31,11 @@ type territories map[string]string
 func processCLDR(unicodeCLDR *cldr.CLDR) *localeData {
 	//size based on a check on 2020-07-25 of how many entries they ended up with: 464 numbers, 358 calendars
 	localeData := localeData{
-		Locales:     make(map[string]bool, len(unicodeCLDR.Locales())),
-		Numbers:     make(numbers, 500),
-		Calendars:   make(calendars, 400),
-		Languages:   make(map[string]languages, 500),
-		Territories: make(map[string]territories, 350),
+		Locales:        make(map[string]bool, len(unicodeCLDR.Locales())),
+		Numbers:        make(numbers, 500),
+		Calendars:      make(calendars, 400),
+		Languages:      make(map[string]languages, 500),
+		Territories:    make(map[string]territories, 350),
 		DisplayPattern: make(map[string]i18n.LocaleDisplayPattern, 500),
 	}
 
@@ -46,7 +46,7 @@ func processCLDR(unicodeCLDR *cldr.CLDR) *localeData {
 
 	for loc := range localeData.Locales {
 		localeData.Numbers[loc], localeData.Calendars[loc], localeData.Languages[loc],
-		localeData.Territories[loc], localeData.DisplayPattern[loc] = getCLDRData(localeData.Locales, unicodeCLDR, loc)
+			localeData.Territories[loc], localeData.DisplayPattern[loc] = getCLDRData(localeData.Locales, unicodeCLDR, loc)
 	}
 
 	return &localeData
@@ -428,6 +428,9 @@ func getTerritories(ldn *cldr.LocaleDisplayNames) (terrs territories) {
 		return
 	}
 	for _, terr := range ldn.Territories.Territory {
+		if terr.Alt != "" {
+			continue
+		}
 		terrs[terr.Type] = terr.Data()
 	}
 
