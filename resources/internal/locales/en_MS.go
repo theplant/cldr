@@ -321,6 +321,7 @@ func Get_en_MS() *cldr.Locale {
 				currency.ZWR: cldr.Currency{DisplayName: "Zimbabwean Dollar (2008)", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "Afar",
 			language.AB:      "Abkhazian",

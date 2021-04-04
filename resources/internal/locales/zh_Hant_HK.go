@@ -151,6 +151,7 @@ func Get_zh_Hant_HK() *cldr.Locale {
 				currency.ZMW: cldr.Currency{DisplayName: "贊比亞克瓦查", Symbol: "ZK"},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "阿法爾文",
 			language.AZ:      "阿塞拜疆文",

@@ -188,6 +188,7 @@ func Get_yo_BJ() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "Dɔla ti Orílɛ́ède Siibabuwe", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AF:      "Èdè Afrikani",
 			language.AGQ:     "Ágɛ̀ɛ̀mù",

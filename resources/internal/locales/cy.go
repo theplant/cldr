@@ -297,6 +297,7 @@ func Get_cy() *cldr.Locale {
 				currency.ZWR: cldr.Currency{DisplayName: "Doler Zimbabwe (2008)", Symbol: "ZWR"},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "Affareg",
 			language.AB:      "Abchaseg",

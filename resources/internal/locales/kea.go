@@ -185,6 +185,7 @@ func Get_kea() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "Dola di Zimbabue (1980–2008)", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AB:      "abkáziu",
 			language.AF:      "afrikaner",

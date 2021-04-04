@@ -304,6 +304,7 @@ func Get_ga_GB() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "Dollar Siombábach (1980–2008)", Symbol: "ZWD"},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "Afáiris",
 			language.AB:      "Abcáisis",

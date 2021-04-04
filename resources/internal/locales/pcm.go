@@ -179,6 +179,7 @@ func Get_pcm() *cldr.Locale {
 				currency.ZMW: cldr.Currency{DisplayName: "Zámbiá Kwácha", Symbol: "ZMW"},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AF:      "Áfríkaans Lángwej",
 			language.AGQ:     "Aghẹ́m Lángwej",

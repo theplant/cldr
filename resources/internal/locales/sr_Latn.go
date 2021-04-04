@@ -317,6 +317,7 @@ func Get_sr_Latn() *cldr.Locale {
 				currency.ZWR: cldr.Currency{DisplayName: "Zimbabveanski dolar (2008)", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "afarski",
 			language.AB:      "abhaski",

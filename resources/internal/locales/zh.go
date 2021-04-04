@@ -321,6 +321,7 @@ func Get_zh() *cldr.Locale {
 				currency.ZWR: cldr.Currency{DisplayName: "津巴布韦元 (2008)", Symbol: "ZWR"},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0}（{1}）", Separator: "{0}，{1}", KeyTypePattern: "{0}：{1}"},
 		Languages: cldr.Languages{
 			language.AA:      "阿法尔语",
 			language.AB:      "阿布哈西亚语",

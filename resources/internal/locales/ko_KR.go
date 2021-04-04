@@ -310,6 +310,7 @@ func Get_ko_KR() *cldr.Locale {
 				currency.ZWR: cldr.Currency{DisplayName: "짐바브웨 달러 (2008)", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0}({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "아파르어",
 			language.AB:      "압카즈어",

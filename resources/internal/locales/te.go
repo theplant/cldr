@@ -188,6 +188,7 @@ func Get_te() *cldr.Locale {
 				currency.ZMW: cldr.Currency{DisplayName: "జాంబియన్ క్వాచా", Symbol: "ZMW"},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "అఫార్",
 			language.AB:      "అబ్ఖాజియన్",

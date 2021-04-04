@@ -312,6 +312,7 @@ func Get_ee() *cldr.Locale {
 				currency.ZWR: cldr.Currency{DisplayName: "zimbabwega dollar (2008)", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AB:      "abkhaziagbe",
 			language.ADY:     "adyghegbe",

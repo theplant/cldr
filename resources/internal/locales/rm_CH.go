@@ -312,6 +312,7 @@ func Get_rm_CH() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "dollar dal Simbabwe", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "afar",
 			language.AB:      "abchasian",

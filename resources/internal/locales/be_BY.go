@@ -182,6 +182,7 @@ func Get_be_BY() *cldr.Locale {
 				currency.ZMW: cldr.Currency{DisplayName: "замбійская квача", Symbol: "ZMW"},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "афарская",
 			language.AB:      "абхазская",

@@ -21,6 +21,7 @@ func Get_{{.LocaleCode}}() *cldr.Locale {
                 {{end}}
             },
         },
+        Display: {{printf "%#v" .LocaleDisplayPattern}},
         Languages: cldr.Languages{
             {{range $lang, $locLang := .Languages -}}
             language.{{$lang | ToUpperIdent}}: {{printf "%#v" $locLang}},

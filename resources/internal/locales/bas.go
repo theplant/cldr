@@ -154,6 +154,7 @@ func Get_bas() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "Dɔ̀lâr sìmbàbwê", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AK:  "Hɔp u akan",
 			language.AM:  "Hɔp u amhārìk",

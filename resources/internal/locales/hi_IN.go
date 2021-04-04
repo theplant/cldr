@@ -205,6 +205,7 @@ func Get_hi_IN() *cldr.Locale {
 				currency.ZMW: cldr.Currency{DisplayName: "ज़ाम्बियन क्वाचा", Symbol: "ZMW"},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "अफ़ार",
 			language.AB:      "अब्ख़ाज़ियन",
