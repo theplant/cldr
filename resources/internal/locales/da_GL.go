@@ -310,6 +310,7 @@ func Get_da_GL() *cldr.Locale {
 				currency.ZWR: cldr.Currency{DisplayName: "Zimbabwisk dollar (2008)", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "afar",
 			language.AB:      "abkhasisk",

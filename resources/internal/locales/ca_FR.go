@@ -317,6 +317,7 @@ func Get_ca_FR() *cldr.Locale {
 				currency.ZWR: cldr.Currency{DisplayName: "dòlar zimbabuès (2008)", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "àfar",
 			language.AB:      "abkhaz",

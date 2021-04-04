@@ -285,6 +285,7 @@ func Get_ccp_IN() *cldr.Locale {
 				currency.ZWR: cldr.Currency{DisplayName: "𑄎𑄨𑄟𑄴𑄝𑄝𑄪𑄠𑄬 𑄓𑄧𑄣𑄢𑄴 (𑄸𑄶𑄶𑄾)", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "𑄃𑄜𑄢𑄴",
 			language.AB:      "𑄃𑄝𑄴𑄈𑄎𑄨𑄠𑄚𑄴",

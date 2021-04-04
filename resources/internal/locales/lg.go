@@ -154,6 +154,7 @@ func Get_lg() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "Doola ey’eZimbabwe", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AK: "Lu-akaani",
 			language.AM: "Lu-amhariki",

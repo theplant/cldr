@@ -154,6 +154,7 @@ func Get_sn_ZW() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "Dora re Zimbabwe", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AK: "chiAkani",
 			language.AM: "chiAmaric",

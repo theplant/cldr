@@ -292,6 +292,7 @@ func Get_brx_IN() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "ज़ीम्बाबवेई डॉलर", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0},{1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AB:      "अब्खाज़ियन्",
 			language.ACE:     "अचेहनी",

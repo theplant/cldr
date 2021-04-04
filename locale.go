@@ -18,6 +18,14 @@ type Locale struct {
 	Plural      Plural
 	Languages   Languages
 	Territories Territories
+	Display LocaleDisplayPattern
+}
+
+//LocaleDisplayPattern indicates how to display locales, e.g. Language (Region), using placeholders {0} ({1})
+type LocaleDisplayPattern struct {
+	Pattern string
+	Separator string
+	KeyTypePattern string
 }
 
 //Plural contains both cardinal and ordinal plural data from the CLDR

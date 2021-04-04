@@ -264,6 +264,7 @@ func Get_ka() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "ზიმბაბვეს დოლარი", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "აფარი",
 			language.AB:      "აფხაზური",

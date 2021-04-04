@@ -319,6 +319,7 @@ func Get_ug_CN() *cldr.Locale {
 				currency.ZWR: cldr.Currency{DisplayName: "زىمبابۋې دوللىرى (2008)", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}، {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "ئافارچە",
 			language.AB:      "ئابخازچە",

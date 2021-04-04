@@ -270,6 +270,7 @@ func Get_ro() *cldr.Locale {
 				currency.ZWR: cldr.Currency{DisplayName: "dolar Zimbabwe (2008)", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "afar",
 			language.AB:      "abhază",

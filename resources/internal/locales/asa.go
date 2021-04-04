@@ -154,6 +154,7 @@ func Get_asa() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "dola ya Dhimbabwe", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AK:  "Kiakan",
 			language.AM:  "Kiamhari",

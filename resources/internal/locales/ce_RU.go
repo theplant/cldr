@@ -181,6 +181,7 @@ func Get_ce_RU() *cldr.Locale {
 				currency.ZMW: cldr.Currency{DisplayName: "Замбин квача", Symbol: "ZMW"},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "афарийн",
 			language.AB:      "абхазхойн",

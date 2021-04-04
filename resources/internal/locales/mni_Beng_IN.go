@@ -120,6 +120,7 @@ func Get_mni_Beng_IN() *cldr.Locale {
 				currency.ZMW: cldr.Currency{DisplayName: "", Symbol: "ZK"},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.DE:      "জর্মন",
 			language.DE_AT:   "ওষ্ট্রিয়ান জর্মন",

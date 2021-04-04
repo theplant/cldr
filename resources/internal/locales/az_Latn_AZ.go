@@ -287,6 +287,7 @@ func Get_az_Latn_AZ() *cldr.Locale {
 				currency.ZWR: cldr.Currency{DisplayName: "Zimbabve Dolları (2008)", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "afar",
 			language.AB:      "abxaz",

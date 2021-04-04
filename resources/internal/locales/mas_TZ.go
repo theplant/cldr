@@ -153,6 +153,7 @@ func Get_mas_TZ() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "Iropiyianí e Simbabwe", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AK:  "nkʉtʉ́k ɔ́ɔ̄ lAkan",
 			language.AM:  "nkʉtʉ́k ɔ́ɔ̄ lAmhari",

@@ -320,6 +320,7 @@ func Get_hr() *cldr.Locale {
 				currency.ZWR: cldr.Currency{DisplayName: "zimbabveanski dolar (2008)", Symbol: "ZWR"},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "afarski",
 			language.AB:      "abhaski",

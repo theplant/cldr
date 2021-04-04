@@ -247,6 +247,7 @@ func Get_mk() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "Зимбабвиски долар", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "афарски",
 			language.AB:      "апхаски",

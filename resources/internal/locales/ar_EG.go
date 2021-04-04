@@ -277,6 +277,7 @@ func Get_ar_EG() *cldr.Locale {
 				currency.ZWL: cldr.Currency{DisplayName: "دولار زمبابوي 2009", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}، {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "الأفارية",
 			language.AB:      "الأبخازية",

@@ -155,6 +155,7 @@ func Get_seh() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "Dólar do Zimbábue", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AK:  "akan",
 			language.AM:  "amárico",

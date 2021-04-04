@@ -296,6 +296,7 @@ func Get_ml_IN() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "സിംബാബ്\u200cവെ ഡോളർ", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "അഫാർ",
 			language.AB:      "അബ്\u200cഖാസിയൻ",

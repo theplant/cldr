@@ -153,6 +153,7 @@ func Get_bez() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "Lupila lwa Huzimbabwe", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AK:  "Hiakan",
 			language.AM:  "Hiamhari",

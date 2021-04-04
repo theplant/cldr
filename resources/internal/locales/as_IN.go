@@ -182,6 +182,7 @@ func Get_as_IN() *cldr.Locale {
 				currency.ZMW: cldr.Currency{DisplayName: "জাম্বিয়ান কোৱাচা", Symbol: "ZMW"},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "আফাৰ",
 			language.AB:      "আবখাজিয়ান",

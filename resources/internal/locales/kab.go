@@ -311,6 +311,7 @@ func Get_kab() *cldr.Locale {
 				currency.ZWR: cldr.Currency{DisplayName: "Adular n zimbabwi (2008)", Symbol: "ZWR"},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "Tafarit",
 			language.AB:      "Tabxazit",

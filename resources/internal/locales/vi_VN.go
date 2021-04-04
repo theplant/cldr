@@ -313,6 +313,7 @@ func Get_vi_VN() *cldr.Locale {
 				currency.ZWR: cldr.Currency{DisplayName: "Đồng Đô la Zimbabwe (2008)", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "Tiếng Afar",
 			language.AB:      "Tiếng Abkhazia",

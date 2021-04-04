@@ -289,6 +289,7 @@ func Get_bg_BG() *cldr.Locale {
 				currency.ZWL: cldr.Currency{DisplayName: "Зимбабвийски долар (2009)", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "афарски",
 			language.AB:      "абхазки",

@@ -181,6 +181,7 @@ func Get_or() *cldr.Locale {
 				currency.ZMW: cldr.Currency{DisplayName: "ଜାମ୍ବୀୟ କ୍ୱାଚା", Symbol: "ZMW"},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "ଅଫାର୍",
 			language.AB:      "ଆବ୍ଖାଜିଆନ୍",

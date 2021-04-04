@@ -154,6 +154,7 @@ func Get_nmg() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "Dɔ́llɔ Zimbabwǝ (1980–2008)", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}: {1}"},
 		Languages: cldr.Languages{
 			language.AK:  "Kiɛl akan",
 			language.AM:  "Kiɛl amaria",

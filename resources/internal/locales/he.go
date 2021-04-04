@@ -250,6 +250,7 @@ func Get_he() *cldr.Locale {
 				currency.ZWD: cldr.Currency{DisplayName: "דולר זימבבואי", Symbol: ""},
 			},
 		},
+		Display: cldr.LocaleDisplayPattern{Pattern: "{0} ({1})", Separator: "{0}, {1}", KeyTypePattern: "{0}:\u200f {1}"},
 		Languages: cldr.Languages{
 			language.AA:      "אפארית",
 			language.AB:      "אבחזית",
