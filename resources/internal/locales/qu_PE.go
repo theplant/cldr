@@ -482,7 +482,7 @@ func Get_qu_PE() *cldr.Locale {
 			territory.CW: "Curazao",
 			territory.CX: "Isla Christmas",
 			territory.CY: "Chipre",
-			territory.CZ: "República Checa",
+			territory.CZ: "Chequia",
 			territory.DE: "Alemania",
 			territory.DG: "Diego García",
 			territory.DJ: "Yibuti",

@@ -352,7 +352,6 @@ func Get_vai() *cldr.Locale {
 			territory.ML: "ꕮꔷ",
 			territory.MM: "ꕆꕩꘋꕮ",
 			territory.MN: "ꗞꖐꔷꕩ",
-			territory.MO: "ꕮꗛꖺ",
 			territory.MP: "ꗛꔤ ꕪꘋꗒ ꕮꔸꕩꕯ ꔳꘋꗣ",
 			territory.MQ: "ꕮꔳꕇꕃ",
 			territory.MR: "ꗞꔓꔎꕇꕰ",
