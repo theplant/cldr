@@ -206,7 +206,7 @@ func Get_sah_RU() *cldr.Locale {
 			territory.RU:    "Арассыыйа",
 			territory.SD:    "Судаан",
 			territory.SE:    "Швеция",
-			territory.US:    "АХШ",
+			territory.US:    "Америка Холбоһуктаах Штааттара",
 		},
 	}
 }

@@ -500,7 +500,7 @@ func Get_se() *cldr.Locale {
 			territory.TZ:    "Tanzánia",
 			territory.UA:    "Ukraina",
 			territory.UG:    "Uganda",
-			territory.US:    "USA",
+			territory.US:    "Amerihká ovttastuvvan stáhtat",
 			territory.UY:    "Uruguay",
 			territory.UZ:    "Usbekistan",
 			territory.VA:    "Vatikána",

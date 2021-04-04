@@ -4,7 +4,7 @@ go 1.15
 
 require (
 	github.com/imdario/mergo v0.3.12
-	github.com/razor-1/cldr/resources v0.1.13
+	github.com/razor-1/cldr/resources v0.1.14
 	github.com/stretchr/testify v1.7.0
 	golang.org/x/text v0.3.6
 )

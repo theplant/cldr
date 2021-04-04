@@ -405,7 +405,7 @@ func Get_kl() *cldr.Locale {
 			territory.TZ:    "Tanzania",
 			territory.UA:    "Ukraina",
 			territory.UG:    "Uganda",
-			territory.US:    "USA",
+			territory.US:    "Naalagaaffeqatigiit",
 			territory.UY:    "Uruguay",
 			territory.UZ:    "Uzbekistani",
 			territory.VA:    "Vatikani",
